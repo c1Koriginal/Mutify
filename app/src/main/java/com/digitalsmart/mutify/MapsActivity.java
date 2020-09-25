@@ -14,7 +14,6 @@ import no.danielzeller.blurbehindlib.BlurBehindLayout;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private BlurBehindLayout blurLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        blurLayout = findViewById(R.id.blurLayout);
+        BlurBehindLayout blurLayout = findViewById(R.id.blurLayout);
         blurLayout.setViewBehind(findViewById(R.id.map));
     }
 
