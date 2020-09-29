@@ -6,11 +6,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,7 +29,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Location currentLocation;
-    private Marker marker;
+    private Marker currentMarker;
+    private RecyclerView locationList;
+    private UserDataManager userDataManager;
     private static final int FINE_LOCATION_CODE = 15;
     private static final int COARSE_LOCATION_CODE = 16;
     private static final int INTERNET_CODE = 17;
@@ -70,31 +75,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         blurLayout.setViewBehind(findViewById(R.id.map));
 
 
+
+        //initialize locationManager to constantly listen for user's location change
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
 
+        //initialize view model
+        userDataManager = new UserDataManager();
+        locationList = findViewById(R.id.recyclerview);
+        locationList.setLayoutManager(new LinearLayoutManager(this));
+
+        //todo remove this
+        //populating user location list with dummy data
+        userDataManager.generateDummyData();
+
+        //accessing data using UserDataManager
+        locationList.setAdapter(userDataManager.getAdapter());
+    }
+
+
+    //todo remove this
+    public void dummyButtonClicked(View view)
+    {
+        //add current location to the user location list
+        userDataManager.add(new UserLocation("Current Location", currentMarker));
     }
 
 
 
 
-
-
+    //LocationListener interface implementation
+    //this method is repeatedly called whenever the user's location is updated
     @Override
     public void onLocationChanged(@NonNull Location location)
     {
+        //store the user's current location and convert to LatLng
         currentLocation = location;
         LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        if (marker != null)
+
+        //add marker on the map
+        if (currentMarker != null)
         {
-            //refresh marker
-            marker.remove();
-            marker = mMap.addMarker(new MarkerOptions().position(current).title("You are here."));
+            //refresh existing marker
+            currentMarker.remove();
+            currentMarker = mMap.addMarker(new MarkerOptions().position(current).title("You are here."));
+            //do not call moveCamera method here
         }
         else {
-            //initialize marker and zoom in the camera
-            marker = mMap.addMarker(new MarkerOptions().position(current).title("You are here."));
+            //initialize marker and zoom in the camera if there is no existing marker
+            currentMarker = mMap.addMarker(new MarkerOptions().position(current).title("You are here."));
+            //avoid calling moveCamera repeatedly
+            //only move the camera when the app launches
+            // or when displaying detailed information of certain user-saved location
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 15));
         }
     }

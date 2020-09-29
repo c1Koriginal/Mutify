@@ -6,7 +6,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:fitsSystemWindows="true"
         app:umanoPanelHeight="80dp"
-        app:umanoShadowHeight="4dp"
+        app:umanoShadowHeight="100dp"
         app:umanoParallaxOffset="400dp"
         app:umanoOverlay="true"
         app:umanoScrollableView="@id/recyclerview"
@@ -53,7 +53,7 @@
 
 
 
-                    <!--search button, currently has no function-->
+                    <!--todo search button, currently has no function-->
                     <androidx.appcompat.widget.AppCompatImageButton
                             android:layout_width="40dp"
                             android:layout_height="40dp"
@@ -65,7 +65,7 @@
                             android:layout_marginStart="10dp"/>
 
 
-                    <!--add search box here-->
+                    <!--todo add search box here-->
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -101,38 +101,71 @@
                 android:layout_height="match_parent">
 
 
-
-
-            <!--add buttons, titles, anything here-->
-
-
-            <!--when adding views in the drawer, set top margin to at least 50dp. Otherwise the view will be clipped-->
-            <!--this is a dummy TextView, change this to anything-->
-            <androidx.appcompat.widget.AppCompatTextView
+            <!--this is the drawer handle, must be the same height as "app:umanoPanelHeight" defined at the top-->
+            <!--holds anything view that will be displayed on the drawer when the drawer is closed-->
+            <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Slide up to open"
-                    android:textSize="20dp"
-                    android:layout_marginTop="50dp"
-                    android:gravity="center"
+                    android:layout_height="80dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/recyclerview"/>
+                    android:translationZ="0dp">
+
+            <!--todo add buttons, titles, anything here-->
+            <!--todo this is a dummy TextView, remove this-->
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/dummyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Slide up to open"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <!--todo this is a dummy button, it will add a dummy item to the recyclerview when clicked-->
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dummyButton"
+                    android:text="Add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/dummyText"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textAlignment="center"
+                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    android:onClick="dummyButtonClicked"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+
+            <!--the is the drawer content, hosts everything that will be displayed when the drawer is open-->
+            <!--hosts the user's list of saved locations-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="80dp"
+                    android:translationZ="0dp">
 
             <!--this is the recyclerview that will hold the list of locations the user has saved-->
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 
 
 

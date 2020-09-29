@@ -910,6 +910,8 @@ id dimensions
 id direct
 id disableHome
 id drawer
+id dummyButton
+id dummyText
 id edit_query
 id end
 id end_padder
@@ -942,6 +944,7 @@ id line1
 id line3
 id listMode
 id list_item
+id location
 id manually
 id map
 id media_actions
@@ -1092,6 +1095,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+layout userlocation_list_item
 mipmap ic_launcher
 mipmap ic_launcher_round
 raw gauss_2_pass_horizontal
