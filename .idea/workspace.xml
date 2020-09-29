@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a63ba670-a0f6-4e99-8daf-40fa1a13f8e6" name="Default Changelist" comment="Setup bottom drawer, get current location of the user" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="QV71145S1T" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="valueResourceFile" />
+        <option value="resourceFile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Yifei" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\IntelliJ IDEA Community Edition 2020.2.1\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1hzdE5sDthLhIDUYyurs3Aeeuqr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\valkr\IdeaProjects\DigitalSmartMutify\app\src\main\res\drawable" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Mutify.app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="Mutify.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <Java />
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a63ba670-a0f6-4e99-8daf-40fa1a13f8e6" name="Default Changelist" comment="" />
+      <created>1601017741285</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601017741285</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Added Google maps support and simple home page layout">
+      <created>1601024731711</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601024731711</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added Google maps support and simple home page layout">
+      <created>1601024757616</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1601024757616</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Google maps support and simple home page layout">
+      <created>1601025044352</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1601025044352</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added Google maps support and simple home page layout">
+      <created>1601028123643</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1601028123643</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Setup bottom drawer, get current location of the user">
+      <created>1601343080522</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1601343080522</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Google maps support and simple home page layout" />
+    <MESSAGE value="Setup bottom drawer, get current location of the user" />
+    <option name="LAST_COMMIT_MESSAGE" value="Setup bottom drawer, get current location of the user" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="830" y="263" key="#com.intellij.ide.util.MemberChooser" timestamp="1601340034340">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="830" y="263" key="#com.intellij.ide.util.MemberChooser/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601340034340" />
+    <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1601336587172">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601336587172" />
+    <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601021910138">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601021910138" />
+    <state x="605" y="311" key="AndroidCreateResourceFileDialog" timestamp="1601022461313">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="605" y="311" key="AndroidCreateResourceFileDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601022461313" />
+    <state x="805" y="311" key="FileChooserDialogImpl" timestamp="1601024271914">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="805" y="311" key="FileChooserDialogImpl/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601024271914" />
+    <state x="903" y="454" width="582" height="203" key="Github.ShareDialog" timestamp="1601024292771">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="903" y="454" width="582" height="203" key="Github.ShareDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601024292771" />
+    <state width="2005" height="263" key="GridCell.Tab.0.bottom" timestamp="1601340413168">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="263" key="GridCell.Tab.0.bottom/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601340413168" />
+    <state width="2005" height="263" key="GridCell.Tab.0.center" timestamp="1601340413168">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="263" key="GridCell.Tab.0.center/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601340413168" />
+    <state width="2005" height="263" key="GridCell.Tab.0.left" timestamp="1601340413168">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="263" key="GridCell.Tab.0.left/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601340413168" />
+    <state width="2005" height="263" key="GridCell.Tab.0.right" timestamp="1601340413168">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="263" key="GridCell.Tab.0.right/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601340413168" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1601343097827">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601343097827" />
+    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601343450356">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601343450356" />
+    <state x="855" y="347" width="841" height="572" key="svn.repositoryBrowser" timestamp="1601024282690">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="855" y="347" width="841" height="572" key="svn.repositoryBrowser/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601024282690" />
+    <state x="1109" y="407" width="551" height="452" key="svn4idea.import.options" timestamp="1601024281222">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="1109" y="407" width="551" height="452" key="svn4idea.import.options/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601024281222" />
+  </component>
+</project>

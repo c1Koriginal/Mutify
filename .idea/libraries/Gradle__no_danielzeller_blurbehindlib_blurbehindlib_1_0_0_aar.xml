@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: no.danielzeller.blurbehindlib:blurbehindlib:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7411b534e77032ee71aca107a7481710/jetified-blurbehindlib-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7411b534e77032ee71aca107a7481710/jetified-blurbehindlib-1.0.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/no.danielzeller.blurbehindlib/blurbehindlib/1.0.0/a4a7eda64a6e9e78d690ef0bf7b1a48460937944/blurbehindlib-1.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/no.danielzeller.blurbehindlib/blurbehindlib/1.0.0/27b9dd2310329ca9c04298bb993f1f8b8914726f/blurbehindlib-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
