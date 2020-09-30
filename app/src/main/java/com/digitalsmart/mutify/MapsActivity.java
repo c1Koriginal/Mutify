@@ -32,6 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker currentMarker;
     private RecyclerView locationList;
     private UserDataManager userDataManager;
+    private BlurBehindLayout blurBar;
     private static final int FINE_LOCATION_CODE = 15;
     private static final int COARSE_LOCATION_CODE = 16;
     private static final int INTERNET_CODE = 17;
@@ -71,8 +72,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //setup blur for search bar
-        BlurBehindLayout blurLayout = findViewById(R.id.searchbar);
-        blurLayout.setViewBehind(findViewById(R.id.map));
+        //call disable() when the search bar is no longer visible
+        //call enable() to re-enable blur
+        blurBar = findViewById(R.id.searchbar);
+        blurBar.setViewBehind(findViewById(R.id.map));
 
 
 
@@ -143,5 +146,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        blurBar.disable();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        blurBar.enable();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        blurBar.enable();
     }
 }
