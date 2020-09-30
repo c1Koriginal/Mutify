@@ -910,6 +910,7 @@ id dimensions
 id direct
 id disableHome
 id drawer
+id drawerhandle
 id dummyButton
 id dummyText
 id edit_query

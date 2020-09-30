@@ -30,7 +30,7 @@ import static com.sothree.slidinguppanel.SlidingUpPanelLayout.*;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
-    private GoogleMap mMap;
+    private GoogleMap map;
     private SlidingUpPanelLayout drawer;
     private LocationManager locationManager;
     private Location currentLocation;
@@ -133,17 +133,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 //refresh existing marker
                 currentMarker.remove();
-                currentMarker = mMap.addMarker(new MarkerOptions().position(current).title("You are here."));
+                currentMarker = map.addMarker(new MarkerOptions().position(current).title("You are here."));
                 //do not call moveCamera method here
             }
         }
         else {
             //initialize marker and zoom in the camera if there is no existing marker
-            currentMarker = mMap.addMarker(new MarkerOptions().position(current).title("You are here."));
+            currentMarker = map.addMarker(new MarkerOptions().position(current).title("You are here."));
             //avoid calling moveCamera repeatedly
             //only move the camera when the app launches
             // or when displaying detailed information of certain user-saved location
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(current, 15));
         }
     }
 
@@ -157,7 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        map = googleMap;
     }
 
     @Override
