@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.util.Log;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -21,12 +22,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import no.danielzeller.blurbehindlib.BlurBehindLayout;
+
+import static com.sothree.slidinguppanel.SlidingUpPanelLayout.*;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
+    private SlidingUpPanelLayout drawer;
     private LocationManager locationManager;
     private Location currentLocation;
     private Marker currentMarker;
@@ -77,6 +82,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         blurBar = findViewById(R.id.searchbar);
         blurBar.setViewBehind(findViewById(R.id.map));
 
+        drawer = findViewById(R.id.drawer);
+
 
 
         //initialize locationManager to constantly listen for user's location change
@@ -95,6 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //accessing data using UserDataManager
         locationList.setAdapter(userDataManager.getAdapter());
+
     }
 
 
@@ -120,10 +128,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //add marker on the map
         if (currentMarker != null)
         {
-            //refresh existing marker
-            currentMarker.remove();
-            currentMarker = mMap.addMarker(new MarkerOptions().position(current).title("You are here."));
-            //do not call moveCamera method here
+            //only update the map marker if the map is visible
+            if (drawer.getPanelState() == PanelState.COLLAPSED)
+            {
+                //refresh existing marker
+                currentMarker.remove();
+                currentMarker = mMap.addMarker(new MarkerOptions().position(current).title("You are here."));
+                //do not call moveCamera method here
+            }
         }
         else {
             //initialize marker and zoom in the camera if there is no existing marker
@@ -131,7 +143,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //avoid calling moveCamera repeatedly
             //only move the camera when the app launches
             // or when displaying detailed information of certain user-saved location
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 15));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16));
         }
     }
 

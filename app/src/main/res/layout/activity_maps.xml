@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer"
         android:fitsSystemWindows="true"
         app:umanoPanelHeight="80dp"
         app:umanoShadowHeight="100dp"
@@ -92,7 +93,7 @@
 
     <!--Bottom drawer, slide up to show the recyclerview-->
     <androidx.cardview.widget.CardView
-            android:id="@+id/drawer"
+            android:id="@+id/drawerhandle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|top">
