@@ -128,7 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //populating user location list with dummy data
         userDataManager.generateDummyData();
 
-        //accessing data using UserDataManager
+        //accessing the recyclerview adapter via UserDataManager
         locationList.setAdapter(userDataManager.getAdapter());
 
     }
