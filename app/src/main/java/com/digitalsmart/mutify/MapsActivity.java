@@ -2,13 +2,18 @@ package com.digitalsmart.mutify;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -53,6 +58,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //check if location service is currently enabled
+    //call this method after initializing locationManager
+    public Boolean isLocationEnabled(Context context)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+        {
+            return locationManager.isLocationEnabled();
+        } else
+        {
+            int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
+                    Settings.Secure.LOCATION_MODE_OFF);
+            return  (mode != Settings.Secure.LOCATION_MODE_OFF);
+
+        }
+    }
+
 
 
     @Override
@@ -65,6 +86,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, COARSE_LOCATION_CODE);
         checkPermission(Manifest.permission.INTERNET, INTERNET_CODE);
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if(!isLocationEnabled(this))
+        {
+            //todo ask the user to turn on location service in Settings
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
 
 
         setContentView(R.layout.activity_maps);
@@ -87,7 +115,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //initialize locationManager to constantly listen for user's location change
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
 
@@ -104,6 +132,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationList.setAdapter(userDataManager.getAdapter());
 
     }
+
+
+
 
 
     //todo remove this
