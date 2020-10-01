@@ -89,7 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if(!isLocationEnabled(this))
         {
-            //todo ask the user to turn on location service in Settings
+            //todo: ask the user to turn on location service in Settings
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }
@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationList = findViewById(R.id.recyclerview);
         locationList.setLayoutManager(new LinearLayoutManager(this));
 
-        //todo remove this
+        //todo: remove this
         //populating user location list with dummy data
         userDataManager.generateDummyData();
 
@@ -137,7 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-    //todo remove this
+    //todo: remove this
     public void dummyButtonClicked(View view)
     {
         //add current location to the user location list

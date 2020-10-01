@@ -4,12 +4,12 @@ package com.digitalsmart.mutify;
 import com.google.android.gms.maps.model.Marker;
 
 //class defining UserLocation object
-//todo add more data to store in this class
+//todo: add more data to store in this class
 public class UserLocation
 {
     private String name;
     private Marker marker;
-    //todo add time, date, and time duration
+    //todo: add time, date, and time duration
 
     public UserLocation(Marker marker)
     {
@@ -32,7 +32,7 @@ public class UserLocation
         return this.name;
     }
 
-    //todo remove this method
+    //todo: remove this method
     public String getLocation()
     {
         if (marker != null)

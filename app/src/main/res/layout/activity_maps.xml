@@ -47,29 +47,14 @@
                     app:updateMode="continuously"
                     app:useTextureView="false"
                     app:blurTextureScale="0.4">
-                <androidx.constraintlayout.widget.ConstraintLayout
+
+                <!--todo: implement search location here-->
+                <androidx.appcompat.widget.SearchView
                         android:layout_width="match_parent"
+                        android:background="#99FFFFFF"
                         android:layout_height="match_parent"
-                        android:background="#99FFFFFF">
-
-
-
-                    <!--todo search button, currently has no function-->
-                    <androidx.appcompat.widget.AppCompatImageButton
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:background="#00FFFFFF"
-                            android:src="@drawable/search_icon"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginStart="10dp"/>
-
-
-                    <!--todo add search box here-->
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:searchIcon="@drawable/search_icon"
+                        app:searchHintIcon="@drawable/search_icon"/>
             </no.danielzeller.blurbehindlib.BlurBehindLayout>
         </androidx.cardview.widget.CardView>
 
@@ -103,7 +88,7 @@
 
 
             <!--this is the drawer handle, must be the same height as "app:umanoPanelHeight" defined at the top-->
-            <!--holds anything view that will be displayed on the drawer when the drawer is closed-->
+            <!--holds everything that will be displayed on the drawer when the drawer is closed-->
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -112,8 +97,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:translationZ="0dp">
 
-            <!--todo add buttons, titles, anything here-->
-            <!--todo this is a dummy TextView, remove this-->
+            <!--todo: add buttons, titles, anything here-->
+            <!--todo: this is a dummy TextView, remove this-->
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/dummyText"
                     android:layout_width="wrap_content"
@@ -126,7 +111,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-            <!--todo this is a dummy button, it will add a dummy item to the recyclerview when clicked-->
+            <!--todo: this is a dummy button, it will add a dummy item to the recyclerview when clicked-->
             <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/dummyButton"
                     android:text="Add"

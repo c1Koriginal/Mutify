@@ -30,14 +30,14 @@ public class UserDataManager
     //call this method to retrieve the location list from a local file or a database
     public void getUserData()
     {
-        //todo get saved locations here
+        //todo: get saved locations here
     }
 
     //call this method to save the list to a local file or a database
     public void updateUserData()
     {
         adapter.notifyDataSetChanged();
-        //todo update current save of user data
+        //todo: update current save of user data
     }
 
     //call this method to add a location to the list
@@ -45,7 +45,7 @@ public class UserDataManager
     {
         locations.add(location);
         updateUserData();
-        //todo scroll the recyclerview to the new item added
+        //todo: scroll the recyclerview to the new item added
     }
 
     //call this method to remove saved location from the list
@@ -92,7 +92,7 @@ public class UserDataManager
             LocationViewHolder locationViewHolder = (LocationViewHolder)holder;
             locationViewHolder.name.setText(l.getName());
 
-            //todo remove this line
+            //todo: remove this line
             //currently displaying location information as a string
             locationViewHolder.location.setText(l.getLocation());
         }
@@ -108,14 +108,14 @@ public class UserDataManager
 
             private final TextView name;
 
-            //todo remove this line once this TextView is replaced, see userlocation_list_item.xml
+            //todo: remove this line once this TextView is replaced, see userlocation_list_item.xml
             private final TextView location;
             public LocationViewHolder(View itemView)
             {
                 super(itemView);
                 name = itemView.findViewById(R.id.text);
 
-                //todo remove this line once the TextView is replaced
+                //todo: remove this line once the TextView is replaced
                 location = itemView.findViewById(R.id.location);
             }
         }

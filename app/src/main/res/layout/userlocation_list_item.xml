@@ -15,7 +15,7 @@
 
 
 
-        <!--todo edit this page to change the ItemView layout-->
+        <!--todo: edit this page to change the ItemView layout-->
 
 
 
@@ -31,7 +31,7 @@
                 android:layout_marginBottom="5dp"
                 android:textSize="20sp"/>
 
-        <!--todo replace this TextView to display more meaningful data-->
+        <!--todo: replace this TextView to display more meaningful data-->
         <!--displays the location info of the UserLocation object-->
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/location"
