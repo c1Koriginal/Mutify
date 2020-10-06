@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 //ViewModel class for managing user data in a singleton manner
