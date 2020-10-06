@@ -12,6 +12,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
@@ -49,19 +50,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-    //check and request permission
-    private void checkPermission(String permission, int requestCode)
+    //check permission, returns true if permission is granted
+    private boolean checkPermission(String permission, int requestCode)
     {
-        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED)
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    //request permission
+    private void requestPermission(String permission, int requestCode)
+    {
+        ActivityCompat.requestPermissions(this, new String[] { permission }, requestCode);
+    }
+
+    //check the permission passed in, and request if permission is not granted
+    private void checkAndRequest(String permission, int requestCode)
+    {
+        if(!checkPermission(permission, requestCode))
         {
-            ActivityCompat.requestPermissions(this, new String[] { permission }, requestCode);
+            requestPermission(permission, requestCode);
         }
     }
 
+
     //check if location service is currently enabled
-    //call this method after initializing locationManager
     public Boolean isLocationEnabled(Context context)
     {
+        if (locationManager == null)
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
         {
             return locationManager.isLocationEnabled();
@@ -74,6 +91,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //double check location permission before initializing locationManager
+    private void initializeLocationManager()
+    {
+        //initialize locationManager to constantly listen for user's location change
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, FINE_LOCATION_CODE)&&
+                checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, COARSE_LOCATION_CODE)&&
+                checkPermission(Manifest.permission.INTERNET, INTERNET_CODE))
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        else
+            Toast.makeText(getApplicationContext(),
+                    "Mutify requires permission to access your location in order to work properly.",
+                    Toast.LENGTH_LONG)
+                    .show();
+    }
+
 
 
     @Override
@@ -82,11 +114,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
 
         //check and request location permissions
-        checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, FINE_LOCATION_CODE);
-        checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, COARSE_LOCATION_CODE);
-        checkPermission(Manifest.permission.INTERNET, INTERNET_CODE);
+        checkAndRequest(Manifest.permission.ACCESS_FINE_LOCATION, FINE_LOCATION_CODE);
+        checkAndRequest(Manifest.permission.ACCESS_COARSE_LOCATION, COARSE_LOCATION_CODE);
+        checkAndRequest(Manifest.permission.INTERNET, INTERNET_CODE);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if(!isLocationEnabled(this))
         {
             //todo: ask the user to turn on location service in Settings
@@ -105,7 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //setup blur for search bar
-        //call disable() when the search bar is no longer visible
+        //call disable() when the search bar is no longer visible on the screen
         //call enable() to re-enable blur
         blurBar = findViewById(R.id.searchbar);
         blurBar.setViewBehind(findViewById(R.id.map));
@@ -113,11 +144,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         drawer = findViewById(R.id.drawer);
 
 
-
-        //initialize locationManager to constantly listen for user's location change
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
+        initializeLocationManager();
 
         //initialize view model
         userDataManager = new UserDataManager();
@@ -178,6 +205,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //invoked when the user turns off location service while the app is running
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+        if(!isLocationEnabled(this))
+        {
+            Toast.makeText(getApplicationContext(),
+                    "Please turn on location service for Mutify to work properly. ",
+                    Toast.LENGTH_LONG)
+                    .show();
+
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+    }
+
+    //invoked when the user turns on location service while the app is running
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+        if(isLocationEnabled(this))
+        {
+            initializeLocationManager();
+        }
+        else
+            Toast.makeText(getApplicationContext(), "Please turn on location service for Mutify to work properly. ", Toast.LENGTH_LONG).show();
+
+    }
 
     /**
      * Manipulates the map once available.
@@ -200,12 +253,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onResume() {
         super.onResume();
+        initializeLocationManager();
         blurBar.enable();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        initializeLocationManager();
         blurBar.enable();
     }
+
 }
