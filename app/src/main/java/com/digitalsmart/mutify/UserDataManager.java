@@ -71,8 +71,6 @@ public class UserDataManager
     }
 
 
-
-
     //custom adapter for the list
     private class LocationsAdapter extends Adapter
     {
