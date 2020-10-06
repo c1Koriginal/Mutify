@@ -65,11 +65,11 @@ public class UserLocation
 
     public String getLocality()
     {
-        return locality;
+        return this.locality;
     }
 
     public String getCountry()
     {
-        return country;
+        return this.country;
     }
 }
