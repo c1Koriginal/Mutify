@@ -49,65 +49,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int INTERNET_CODE = 17;
 
 
-
-    //check permission, returns true if permission is granted
-    private boolean checkPermission(String permission, int requestCode)
-    {
-        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    //request permission
-    private void requestPermission(String permission, int requestCode)
-    {
-        ActivityCompat.requestPermissions(this, new String[] { permission }, requestCode);
-    }
-
-    //check the permission passed in, and request if permission is not granted
-    private void checkAndRequest(String permission, int requestCode)
-    {
-        if(!checkPermission(permission, requestCode))
-        {
-            requestPermission(permission, requestCode);
-        }
-    }
-
-
-    //check if location service is currently enabled
-    public Boolean isLocationEnabled(Context context)
-    {
-        if (locationManager == null)
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
-        {
-            return locationManager.isLocationEnabled();
-        } else
-        {
-            int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
-                    Settings.Secure.LOCATION_MODE_OFF);
-            return  (mode != Settings.Secure.LOCATION_MODE_OFF);
-
-        }
-    }
-
-    //double check location permission before initializing locationManager
-    private void initializeLocationManager()
-    {
-        //initialize locationManager to constantly listen for user's location change
-        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, FINE_LOCATION_CODE)&&
-                checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, COARSE_LOCATION_CODE)&&
-                checkPermission(Manifest.permission.INTERNET, INTERNET_CODE))
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        else
-            Toast.makeText(getApplicationContext(),
-                    "Mutify requires permission to access your location in order to work properly.",
-                    Toast.LENGTH_LONG)
-                    .show();
-    }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -171,8 +112,60 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         userDataManager.add(new UserLocation("Current Location", currentMarker));
     }
 
+    //check permission, returns true if permission is granted
+    private boolean checkPermission(String permission, int requestCode)
+    {
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    //request permission
+    private void requestPermission(String permission, int requestCode)
+    {
+        ActivityCompat.requestPermissions(this, new String[] { permission }, requestCode);
+    }
+
+    //check the permission passed in, and request if permission is not granted
+    private void checkAndRequest(String permission, int requestCode)
+    {
+        if(!checkPermission(permission, requestCode))
+        {
+            requestPermission(permission, requestCode);
+        }
+    }
+
+    //check if location service is currently enabled
+    public Boolean isLocationEnabled(Context context)
+    {
+        if (locationManager == null)
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+        {
+            return locationManager.isLocationEnabled();
+        } else
+        {
+            int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
+                    Settings.Secure.LOCATION_MODE_OFF);
+            return  (mode != Settings.Secure.LOCATION_MODE_OFF);
+
+        }
+    }
+
+    //double check location permission before initializing locationManager
+    private void initializeLocationManager()
+    {
+        //initialize locationManager to constantly listen for user's location change
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, FINE_LOCATION_CODE)&&
+                checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, COARSE_LOCATION_CODE)&&
+                checkPermission(Manifest.permission.INTERNET, INTERNET_CODE))
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        else
+            Toast.makeText(getApplicationContext(),
+                    "Mutify requires permission to access your location in order to work properly.",
+                    Toast.LENGTH_LONG)
+                    .show();
+    }
 
     //LocationListener interface implementation
     //this method is repeatedly called whenever the user's location is updated
@@ -207,7 +200,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //invoked when the user turns off location service while the app is running
     @Override
-    public void onProviderDisabled(@NonNull String provider) {
+    public void onProviderDisabled(@NonNull String provider)
+    {
         if(!isLocationEnabled(this))
         {
             Toast.makeText(getApplicationContext(),
@@ -222,7 +216,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //invoked when the user turns on location service while the app is running
     @Override
-    public void onProviderEnabled(@NonNull String provider) {
+    public void onProviderEnabled(@NonNull String provider)
+    {
         if(isLocationEnabled(this))
         {
             initializeLocationManager();
@@ -240,25 +235,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)
+    {
         map = googleMap;
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
         blurBar.disable();
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         initializeLocationManager();
         blurBar.enable();
     }
 
     @Override
-    protected void onRestart() {
+    protected void onRestart()
+    {
         super.onRestart();
         initializeLocationManager();
         blurBar.enable();
