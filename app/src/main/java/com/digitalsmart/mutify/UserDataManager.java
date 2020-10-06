@@ -63,7 +63,7 @@ public class UserDataManager
     //generate dummy data for test purpose
     public void generateDummyData()
     {
-        for (int i = 1; i <= 10; i++)
+        for (int i = 1; i <= 5; i++)
         {
             locations.add(new UserLocation("Location " + i));
         }
@@ -90,7 +90,7 @@ public class UserDataManager
 
             //todo: remove this line
             //currently displaying location information as a string
-            locationViewHolder.location.setText(l.getLocation());
+            locationViewHolder.location.setText(l.getCountry() + " " + l.getLocality());
         }
 
         @Override

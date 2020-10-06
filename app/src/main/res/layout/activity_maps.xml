@@ -6,13 +6,14 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/drawer"
         android:fitsSystemWindows="true"
-        app:umanoPanelHeight="80dp"
-        app:umanoShadowHeight="100dp"
-        app:umanoParallaxOffset="400dp"
+        app:umanoPanelHeight="100dp"
         app:umanoOverlay="true"
+        app:umanoShadowHeight="0dp"
+        app:umanoFadeColor="#B3000000"
         app:umanoScrollableView="@id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:umanoClipPanel="false"
         android:gravity="bottom"
         tools:context=".MapsActivity">
 
@@ -23,6 +24,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/background_behind"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
         <ImageView
@@ -83,6 +90,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -90,82 +100,181 @@
 
 
     <!--Bottom drawer, slide up to show the recyclerview-->
-    <androidx.cardview.widget.CardView
-            android:id="@+id/drawerhandle"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/drawer_handle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#00FFFFFF"
             android:gravity="center|top">
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
 
-            <!--this is the drawer handle, must be the same height as "app:umanoPanelHeight" defined at the top-->
-            <!--holds everything that will be displayed on the drawer when the drawer is closed-->
+
+
+            <!--holds everything that will be displayed on the drawer when the drawer is closed (collapsed)-->
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="100dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:translationZ="0dp">
 
-            <!--todo: add buttons, titles, anything here-->
-            <!--todo: this is a dummy TextView, remove this-->
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/dummyText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Slide up to open"
-                    android:textSize="20sp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center_horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
 
-            <!--todo: this is a dummy button, it will add a dummy item to the recyclerview when clicked-->
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/dummyButton"
-                    android:text="Add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/dummyText"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textAlignment="center"
-                    android:textSize="15sp"
-                    android:layout_marginStart="10dp"
-                    android:onClick="dummyButtonClicked"/>
+                <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintWidth_percent="0.45"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        app:cardElevation="5dp"
+                        android:clickable="true"
+                        android:onClick="addButtonClicked">
+
+                    <!--todo: add some style to this TextView-->
+                    <TextView android:layout_width="wrap_content"
+                              android:text="Add"
+                              android:layout_gravity="center"
+                              android:textSize="20sp"
+                              android:textAlignment="center"
+                              android:layout_height="wrap_content"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        app:layout_constraintWidth_percent="0.45"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:cardElevation="5dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:clickable="true"
+                        android:onClick="menuButtonClicked">
+
+                    <!--todo: add some style to this TextView-->
+                    <TextView android:layout_width="wrap_content"
+                              android:text="Menu"
+                              android:layout_gravity="center"
+                              android:textSize="20sp"
+                              android:textAlignment="center"
+                              android:layout_height="wrap_content"/>
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
-            <!--the is the drawer content, hosts everything that will be displayed when the drawer is open-->
+            <!--the is the drawer content, hosts everything that will be displayed when the drawer is open (expanded)-->
             <!--hosts the user's list of saved locations-->
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.digitalsmart.mutify.HomePager
+                    android:id="@+id/home_pager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="80dp"
-                    android:translationZ="0dp">
+                    android:layout_marginTop="100dp">
 
-            <!--this is the recyclerview that will hold the list of locations the user has saved-->
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:clipToPadding="false"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/add_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <androidx.cardview.widget.CardView
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="10dp"
+                            app:cardCornerRadius="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        <!--todo: edit all the views under this ViewGroup-->
+                        <!--todo: re-organize the views below to display meaningful information-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <!--todo: dummy TextView, change this-->
+                            <TextView
+                                android:id="@+id/add_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:layout_marginVertical="20dp"
+                                android:layout_marginHorizontal="20dp"
+                                android:textSize="40sp"/>
+
+                            <!--todo: dummy TextView, change this-->
+                            <TextView
+                                android:id="@+id/add_country"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/add_name"
+                                android:layout_marginVertical="20dp"
+                                android:layout_marginHorizontal="20dp"
+                                android:textSize="40sp"/>
+
+                            <!--todo: dummy TextView, change this-->
+                            <TextView
+                                android:id="@+id/add_locality"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/add_country"
+                                android:layout_marginVertical="20dp"
+                                android:layout_marginHorizontal="20dp"
+                                android:textSize="40sp"/>
+
+                            <!--todo: dummy button, change this-->
+                            <Button
+                                android:id="@+id/add_confirm_button"
+                                android:text="Add"
+                                android:layout_width="100dp"
+                                android:layout_height="60dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginVertical="20dp"
+                                android:layout_marginHorizontal="20dp"
+                                android:onClick="confirmButtonClicked"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/list_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <!--this is the recyclerview that will hold the list of locations the user has saved-->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginBottom="10dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.digitalsmart.mutify.HomePager>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
 
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

@@ -8,6 +8,7 @@ import android.location.*;
 import android.os.Build;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import mumayank.com.airlocationlibrary.AirLocation;
 import no.danielzeller.blurbehindlib.BlurBehindLayout;
 import java.io.IOException;
@@ -29,6 +31,10 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
+
+
+
+    private SlidingUpPanelLayout drawer;
     private GoogleMap map;
     private LocationManager locationManager;
     private Location currentLocation;
@@ -40,9 +46,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private UserLocation markerUserLocation;
 
 
+
     private static final int FINE_LOCATION_CODE = 15;
     private static final int COARSE_LOCATION_CODE = 16;
     private static final int INTERNET_CODE = 17;
+
+    //HomePager populates a traditional ViewPager with ViewGroups (eg. ConstraintLayout) instead of Fragments
+    public static HomePager homePager;
 
 
     @Override
@@ -57,7 +67,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if(!isLocationEnabled(this))
         {
-            //todo: ask the user to turn on location service in Settings
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }
@@ -77,6 +86,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //call enable() to re-enable blur
         blurBar = findViewById(R.id.searchbar);
         blurBar.setViewBehind(findViewById(R.id.map));
+        drawer = findViewById(R.id.drawer);
+        homePager = findViewById(R.id.home_pager);
+        homePager.setAdapter(new SectionsPagerAdapter());
+
 
 
         initializeLocationManager();
@@ -100,13 +113,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+    //open the bottom drawer and slide to the RecyclerView page
+    public void menuButtonClicked(View view)
+    {
+        //add the current marker location to the list
+        drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+        homePager.setCurrentItem(1,true);
+    }
 
+    //todo: change this after modifying activity_maps.xml
+    //open the bottom drawer and slide to the edit page
+    public void addButtonClicked(View view)
+    {
 
-    //todo: remove this
-    public void dummyButtonClicked(View view)
+        //test methods to display the location info of the current marker location
+        drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+        homePager.setCurrentItem(0,true);
+        TextView name = findViewById(R.id.add_name);
+        TextView country = findViewById(R.id.add_country);
+        TextView locality = findViewById(R.id.add_locality);
+
+        name.setText(markerUserLocation.getName());
+        country.setText(markerUserLocation.getCountry());
+        locality.setText(markerUserLocation.getLocality());
+    }
+
+    //todo: change this, this is a dummy method to add the current marker location to the list
+    public void confirmButtonClicked(View view)
     {
         //add the current marker location to the list
         userDataManager.add(markerUserLocation);
+        homePager.setCurrentItem(1, true);
     }
 
     //check permission, returns true if permission is granted
@@ -195,6 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(isLocationEnabled(this))
         {
             initializeLocationManager();
+            getCurrentLocation();
         }
         else
             Toast.makeText(getApplicationContext(), "Please turn on location service for Mutify to work properly. ", Toast.LENGTH_LONG).show();
@@ -238,8 +276,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         blurBar.enable();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        blurBar.disable();
+    }
 
-
+    //this method stores the location specified by the center of the camera in markerLocation
     private void configureCameraIdle() {
         onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
             @Override
@@ -250,24 +293,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 markerLocation = new Location("Camera Location");
                 markerLocation.setLatitude(latLng.latitude);
                 markerLocation.setLongitude(latLng.longitude);
+                List<Address> addressList = null;
                 try {
-                    List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                    if (addressList != null && addressList.size() > 0) {
-                        markerUserLocation = new UserLocation("Marker", addressList);
-                    }
-
+                    addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                if (addressList != null && addressList.size() > 0) {
+                        markerUserLocation = new UserLocation("Marker Location", addressList);
+                }
+
+
 
             }
         };
     }
 
 
+    //call this method to manually get the user's current location
     private void getCurrentLocation() {
-        // Fetch location simply like this whenever you need
-        // todo do something
         AirLocation airLocation = new AirLocation(this, true, true, new AirLocation.Callbacks() {
             @Override
             public void onSuccess(@NonNull Location location) {
@@ -278,9 +322,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onFailed(@NonNull AirLocation.LocationFailedEnum locationFailedEnum) {
-                // todo do something
+                // todo: handle failure to obtain location data
             }
         });
-
     }
 }

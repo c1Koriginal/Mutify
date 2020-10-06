@@ -34,11 +34,27 @@ public class UserLocation
         this.location = location;
     }
 
+    //this constructor initializes the address information
+    //pass in the address list obtained from Geocoder
     public UserLocation(String name, List<Address> addressList)
     {
-        if (addressList != null && addressList.size() > 0)
+        this.name = name;
+        updateAddressInfo(addressList);
+    }
+
+    public void setAddressList(List<Address> addressList)
+    {
+        this.addressList = addressList;
+        updateAddressInfo(addressList);
+    }
+
+    private void updateAddressInfo(List<Address> l)
+    {
+        this.addressList = l;
+        if (addressList != null && addressList.size() > 0) {
             locality = addressList.get(0).getAddressLine(0);
             country = addressList.get(0).getCountryName();
+        }
     }
 
     public String getName()
@@ -46,9 +62,14 @@ public class UserLocation
         return this.name;
     }
 
-    //todo: remove this method
-    public String getLocation()
+
+    public String getLocality()
     {
-        return locality + " " + country;
+        return locality;
+    }
+
+    public String getCountry()
+    {
+        return country;
     }
 }

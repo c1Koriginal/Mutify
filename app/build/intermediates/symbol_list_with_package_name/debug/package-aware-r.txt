@@ -2112,6 +2112,11 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_confirm_button
+id add_country
+id add_locality
+id add_name
+id add_page
 id adjust_height
 id adjust_width
 id alertTitle
@@ -2127,6 +2132,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id background_behind
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -2190,10 +2196,8 @@ id dragRight
 id dragStart
 id dragUp
 id drawer
-id drawerhandle
+id drawer_handle
 id dropdown_menu
-id dummyButton
-id dummyText
 id easeIn
 id easeInOut
 id easeOut
@@ -2227,6 +2231,7 @@ id hidden
 id hideable
 id home
 id homeAsUp
+id home_pager
 id honorRequest
 id hybrid
 id icon
@@ -2252,6 +2257,7 @@ id line3
 id linear
 id listMode
 id list_item
+id list_page
 id location
 id manually
 id map
@@ -2673,6 +2679,7 @@ string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string google_maps_key
+string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
