@@ -48,6 +48,10 @@
         "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable_marker.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable\\marker.xml"
+    },
+    {
         "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },

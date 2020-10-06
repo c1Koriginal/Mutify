@@ -4,9 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.location.*;
 import android.os.Build;
 import android.provider.Settings;
 import android.view.View;
@@ -23,24 +21,25 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import mumayank.com.airlocationlibrary.AirLocation;
 import no.danielzeller.blurbehindlib.BlurBehindLayout;
-
-import static com.sothree.slidinguppanel.SlidingUpPanelLayout.*;
+import java.io.IOException;
+import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap map;
-    private SlidingUpPanelLayout drawer;
     private LocationManager locationManager;
     private Location currentLocation;
-    private Marker currentMarker;
-    private RecyclerView locationList;
+    private Location markerLocation;
     private UserDataManager userDataManager;
     private BlurBehindLayout blurBar;
+    private GoogleMap.OnCameraIdleListener onCameraIdleListener;
+    private LatLng current;
+    private UserLocation markerUserLocation;
+
+
     private static final int FINE_LOCATION_CODE = 15;
     private static final int COARSE_LOCATION_CODE = 16;
     private static final int INTERNET_CODE = 17;
@@ -79,14 +78,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         blurBar = findViewById(R.id.searchbar);
         blurBar.setViewBehind(findViewById(R.id.map));
 
-        drawer = findViewById(R.id.drawer);
-
 
         initializeLocationManager();
 
         //initialize view model
         userDataManager = new UserDataManager();
-        locationList = findViewById(R.id.recyclerview);
+        RecyclerView locationList = findViewById(R.id.recyclerview);
         locationList.setLayoutManager(new LinearLayoutManager(this));
 
         //todo: remove this
@@ -95,6 +92,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //accessing the recyclerview adapter via UserDataManager
         locationList.setAdapter(userDataManager.getAdapter());
+
+        configureCameraIdle();
+        getCurrentLocation();
 
     }
 
@@ -105,12 +105,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //todo: remove this
     public void dummyButtonClicked(View view)
     {
-        //add current location to the user location list
-        userDataManager.add(new UserLocation("Current Location", currentMarker));
+        //add the current marker location to the list
+        userDataManager.add(markerUserLocation);
     }
 
     //check permission, returns true if permission is granted
-    private boolean checkPermission(String permission, int requestCode)
+    private boolean checkPermission(String permission)
     {
         return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
     }
@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //check the permission passed in, and request if permission is not granted
     private void checkAndRequest(String permission, int requestCode)
     {
-        if(!checkPermission(permission, requestCode))
+        if(!checkPermission(permission))
         {
             requestPermission(permission, requestCode);
         }
@@ -153,9 +153,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void initializeLocationManager()
     {
         //initialize locationManager to constantly listen for user's location change
-        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, FINE_LOCATION_CODE)&&
-                checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, COARSE_LOCATION_CODE)&&
-                checkPermission(Manifest.permission.INTERNET, INTERNET_CODE))
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)&&
+                checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)&&
+                checkPermission(Manifest.permission.INTERNET))
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         else
             Toast.makeText(getApplicationContext(),
@@ -170,29 +170,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(@NonNull Location location)
     {
         //store the user's current location and convert to LatLng
-        currentLocation = location;
-        LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-
-        //add marker on the map
-        if (currentMarker != null)
-        {
-            //only update the map marker if the map is visible
-            if (drawer.getPanelState() == PanelState.COLLAPSED)
-            {
-                //refresh existing marker
-                currentMarker.remove();
-                currentMarker = map.addMarker(new MarkerOptions().position(current).title("You are here."));
-                //do not call moveCamera method here
-            }
-        }
-        else {
-            //initialize marker and zoom in the camera if there is no existing marker
-            currentMarker = map.addMarker(new MarkerOptions().position(current).title("You are here."));
-            //avoid calling moveCamera repeatedly
-            //only move the camera when the app launches
-            // or when displaying detailed information of certain user-saved location
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(current, 15));
-        }
     }
 
     //invoked when the user turns off location service while the app is running
@@ -235,6 +212,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap)
     {
         map = googleMap;
+        map.setOnCameraIdleListener(onCameraIdleListener);
     }
 
     @Override
@@ -260,4 +238,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         blurBar.enable();
     }
 
+
+
+    private void configureCameraIdle() {
+        onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
+
+                LatLng latLng = map.getCameraPosition().target;
+                Geocoder geocoder = new Geocoder(MapsActivity.this);
+                markerLocation = new Location("Camera Location");
+                markerLocation.setLatitude(latLng.latitude);
+                markerLocation.setLongitude(latLng.longitude);
+                try {
+                    List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    if (addressList != null && addressList.size() > 0) {
+                        markerUserLocation = new UserLocation("Marker", addressList);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+    }
+
+
+    private void getCurrentLocation() {
+        // Fetch location simply like this whenever you need
+        // todo do something
+        AirLocation airLocation = new AirLocation(this, true, true, new AirLocation.Callbacks() {
+            @Override
+            public void onSuccess(@NonNull Location location) {
+                currentLocation = location;
+                current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(current, 15));
+            }
+
+            @Override
+            public void onFailed(@NonNull AirLocation.LocationFailedEnum locationFailedEnum) {
+                // todo do something
+            }
+        });
+
+    }
 }

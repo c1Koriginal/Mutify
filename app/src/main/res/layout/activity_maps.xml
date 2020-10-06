@@ -25,6 +25,19 @@
             android:layout_height="match_parent">
 
 
+        <ImageView
+                android:src="@drawable/marker"
+                android:paddingBottom="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:translationZ="100dp"
+        />
+
+
 
 
         <!--this CardView hosts the search bar, add the actual search bar inside the ConstraintLayout below-->

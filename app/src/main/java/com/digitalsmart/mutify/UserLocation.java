@@ -1,19 +1,26 @@
 package com.digitalsmart.mutify;
 
 
+import android.location.Address;
+import android.location.Location;
 import com.google.android.gms.maps.model.Marker;
+
+import java.util.List;
 
 //class defining UserLocation object
 //todo: add more data to store in this class
 public class UserLocation
 {
     private String name;
-    private Marker marker;
+    private Location location;
+    private String locality;
+    private String country;
+    private List<Address> addressList;
     //todo: add time, date, and time duration
 
-    public UserLocation(Marker marker)
+    public UserLocation(Location location)
     {
-        this.marker = marker;
+        this.location = location;
     }
 
     public UserLocation(String name)
@@ -21,10 +28,17 @@ public class UserLocation
         this.name = name;
     }
 
-    public UserLocation(String name, Marker marker)
+    public UserLocation(String name, Location location)
     {
         this.name = name;
-        this.marker = marker;
+        this.location = location;
+    }
+
+    public UserLocation(String name, List<Address> addressList)
+    {
+        if (addressList != null && addressList.size() > 0)
+            locality = addressList.get(0).getAddressLine(0);
+            country = addressList.get(0).getCountryName();
     }
 
     public String getName()
@@ -35,9 +49,6 @@ public class UserLocation
     //todo: remove this method
     public String getLocation()
     {
-        if (marker != null)
-            return marker.getPosition().toString();
-        else
-            return "no location info";
+        return locality + " " + country;
     }
 }
