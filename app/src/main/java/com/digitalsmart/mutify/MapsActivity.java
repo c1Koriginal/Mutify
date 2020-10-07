@@ -29,11 +29,8 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
-
-
-
-
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener
+{
     private SlidingUpPanelLayout drawer;
     private GoogleMap map;
     private LocationManager locationManager;
@@ -41,6 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location markerLocation;
     private UserDataManager userDataManager;
     private BlurBehindLayout blurBar;
+    private BlurBehindLayout blurBackground;
     private GoogleMap.OnCameraIdleListener onCameraIdleListener;
     private LatLng current;
     private UserLocation markerUserLocation;
@@ -81,14 +79,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-        //setup blur for search bar
-        //call disable() when the search bar is no longer visible on the screen
-        //call enable() to re-enable blur
+        //setup blur for search bar and background
+        //call disable() on blurBar when the search bar is no longer visible on the screen
+        //call enable() on blurBar to re-enable blur
         blurBar = findViewById(R.id.searchbar);
         blurBar.setViewBehind(findViewById(R.id.map));
         drawer = findViewById(R.id.drawer);
         homePager = findViewById(R.id.home_pager);
         homePager.setAdapter(new SectionsPagerAdapter());
+        blurBackground = findViewById(R.id.blur_background);
+        drawer.addPanelSlideListener(new BlurController(findViewById(R.id.map), blurBackground));
+
 
 
 
@@ -258,6 +259,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         super.onPause();
         blurBar.disable();
+        blurBackground.disable();
     }
 
     @Override
@@ -280,6 +282,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onStop() {
         super.onStop();
         blurBar.disable();
+        blurBackground.disable();
     }
 
     //this method stores the location specified by the center of the camera in markerLocation

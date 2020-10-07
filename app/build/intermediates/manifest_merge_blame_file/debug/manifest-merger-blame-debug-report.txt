@@ -24,18 +24,18 @@
 18    <uses-permission android:name="android.permission.INTERNET" />
 18-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:12:5-67
 18-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:12:22-64
-19    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-19-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f26e20509147c4af9f740c1840f34ebc\jetified-places-2.4.0\AndroidManifest.xml:10:5-76
-19-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f26e20509147c4af9f740c1840f34ebc\jetified-places-2.4.0\AndroidManifest.xml:10:22-73
-20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-20-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:11:5-79
-20-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:11:22-76
-21    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-21-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:13:5-81
-21-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:13:22-78
-22    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-22-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:14:5-76
-22-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:14:22-73
+19    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+19-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:11:5-79
+19-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:11:22-76
+20    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+20-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:13:5-81
+20-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:13:22-78
+21    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+21-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:14:5-76
+21-->[com.github.mumayank:AirLocation:1.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\e1ac28a4b6dea51e3c367dfe4b17d91a\jetified-AirLocation-1.2\AndroidManifest.xml:14:22-73
+22    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+22-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f26e20509147c4af9f740c1840f34ebc\jetified-places-2.4.0\AndroidManifest.xml:10:5-76
+22-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f26e20509147c4af9f740c1840f34ebc\jetified-places-2.4.0\AndroidManifest.xml:10:22-73
 23
 24    <uses-feature
 24-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\555c0689c20d680c47d61a559d6b0403\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
