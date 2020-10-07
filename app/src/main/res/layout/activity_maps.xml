@@ -9,7 +9,7 @@
         app:umanoPanelHeight="100dp"
         app:umanoOverlay="true"
         app:umanoShadowHeight="0dp"
-        app:umanoFadeColor="#D3000000"
+        app:umanoFadeColor="#B3000000"
         app:umanoScrollableView="@id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:translationZ="100dp"
                 android:alpha="0"
-                app:blurRadius="20.0"
+                app:blurRadius="50.0"
                 app:updateMode="manually"
                 app:useTextureView="false"
                 app:blurTextureScale="0.1"
@@ -43,6 +43,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -57,7 +58,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:translationZ="100dp"
-        />
+                android:contentDescription="@string/map_marker"/>
 
 
 
@@ -70,18 +71,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:translationZ="100dp"
+                app:cardElevation="5dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="40dp"
-                card_view:cardCornerRadius="25dp">
-            <no.danielzeller.blurbehindlib.BlurBehindLayout
-                    android:id="@+id/searchbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:blurRadius="80.0"
-                    app:updateMode="continuously"
-                    app:useTextureView="false"
-                    app:blurTextureScale="0.4">
+                card_view:cardCornerRadius="10dp">
+
 
                 <!--todo: implement search location here-->
                 <androidx.appcompat.widget.SearchView
@@ -90,7 +85,7 @@
                         android:layout_height="match_parent"
                         app:searchIcon="@drawable/search_icon"
                         app:searchHintIcon="@drawable/search_icon"/>
-            </no.danielzeller.blurbehindlib.BlurBehindLayout>
+
         </androidx.cardview.widget.CardView>
 
 

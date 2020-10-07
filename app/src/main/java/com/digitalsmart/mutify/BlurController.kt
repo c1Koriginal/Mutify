@@ -16,7 +16,8 @@ class BlurController(view: View?, private val blurLayout: BlurBehindLayout) : Sl
         }
     }
 
-    override fun onPanelStateChanged(view: View, panelState: PanelState, panelState1: PanelState) {}
+    override fun onPanelStateChanged(view: View, panelState: PanelState, panelState1: PanelState) {
+    }
 
     init {
         blurLayout.viewBehind = view

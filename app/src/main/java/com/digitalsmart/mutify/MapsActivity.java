@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.*;
 import android.os.Build;
+import android.os.SystemClock;
 import android.provider.Settings;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +39,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location currentLocation;
     private Location markerLocation;
     private UserDataManager userDataManager;
-    private BlurBehindLayout blurBar;
     private BlurBehindLayout blurBackground;
+    private BlurController blurController;
     private GoogleMap.OnCameraIdleListener onCameraIdleListener;
     private LatLng current;
     private UserLocation markerUserLocation;
@@ -79,21 +81,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-        //setup blur for search bar and background
-        //call disable() on blurBar when the search bar is no longer visible on the screen
-        //call enable() on blurBar to re-enable blur
-        blurBar = findViewById(R.id.searchbar);
-        blurBar.setViewBehind(findViewById(R.id.map));
+        //set up blur
         drawer = findViewById(R.id.drawer);
         homePager = findViewById(R.id.home_pager);
         homePager.setAdapter(new SectionsPagerAdapter());
         blurBackground = findViewById(R.id.blur_background);
-        drawer.addPanelSlideListener(new BlurController(findViewById(R.id.map), blurBackground));
+        blurController = new BlurController(findViewById(R.id.background), blurBackground);
+        drawer.addPanelSlideListener(blurController);
 
 
 
 
         initializeLocationManager();
+
 
         //initialize view model
         userDataManager = new UserDataManager();
@@ -134,9 +134,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         TextView country = findViewById(R.id.add_country);
         TextView locality = findViewById(R.id.add_locality);
 
-        name.setText(markerUserLocation.getName());
-        country.setText(markerUserLocation.getCountry());
-        locality.setText(markerUserLocation.getLocality());
+        if (markerUserLocation != null) {
+            name.setText(markerUserLocation.getName());
+            country.setText(markerUserLocation.getCountry());
+            locality.setText(markerUserLocation.getLocality());
+        }
     }
 
     //todo: change this, this is a dummy method to add the current marker location to the list
@@ -258,7 +260,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onPause()
     {
         super.onPause();
-        blurBar.disable();
         blurBackground.disable();
     }
 
@@ -267,7 +268,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         super.onResume();
         initializeLocationManager();
-        blurBar.enable();
     }
 
     @Override
@@ -275,13 +275,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         super.onRestart();
         initializeLocationManager();
-        blurBar.enable();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        blurBar.disable();
         blurBackground.disable();
     }
 

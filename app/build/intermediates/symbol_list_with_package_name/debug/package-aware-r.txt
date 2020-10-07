@@ -2133,6 +2133,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id background
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -2373,7 +2374,6 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
-id searchbar
 id select_dialog_listview
 id selected
 id shortcut
@@ -2684,6 +2684,7 @@ string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string map_marker
 string material_slider_range_end
 string material_slider_range_start
 string mtrl_badge_numberless_content_description
