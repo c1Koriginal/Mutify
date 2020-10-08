@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
@@ -70,7 +69,7 @@ public class UserDataManager
     }
 
     //custom adapter for the list
-    private class LocationsAdapter extends Adapter
+    private class LocationsAdapter extends RecyclerView.Adapter
     {
         @NonNull
         @NotNull

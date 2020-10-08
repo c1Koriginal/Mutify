@@ -62,7 +62,6 @@ public class UserLocation
         return this.name;
     }
 
-
     public String getLocality()
     {
         return this.locality;

@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.*;
 import android.os.Build;
-import android.os.SystemClock;
 import android.provider.Settings;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +31,12 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener
 {
+    private static final int FINE_LOCATION_CODE = 15;
+    private static final int COARSE_LOCATION_CODE = 16;
+    private static final int INTERNET_CODE = 17;
+
+
+
     private SlidingUpPanelLayout drawer;
     private GoogleMap map;
     private LocationManager locationManager;
@@ -40,19 +44,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location markerLocation;
     private UserDataManager userDataManager;
     private BlurBehindLayout blurBackground;
-    private BlurController blurController;
     private GoogleMap.OnCameraIdleListener onCameraIdleListener;
     private LatLng current;
     private UserLocation markerUserLocation;
 
 
-
-    private static final int FINE_LOCATION_CODE = 15;
-    private static final int COARSE_LOCATION_CODE = 16;
-    private static final int INTERNET_CODE = 17;
-
     //HomePager populates a traditional ViewPager with ViewGroups (eg. ConstraintLayout) instead of Fragments
     public static HomePager homePager;
+
+
 
 
     @Override
@@ -71,7 +71,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivity(intent);
         }
 
-
         setContentView(R.layout.activity_maps);
 
 
@@ -86,9 +85,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         homePager = findViewById(R.id.home_pager);
         homePager.setAdapter(new SectionsPagerAdapter());
         blurBackground = findViewById(R.id.blur_background);
-        blurController = new BlurController(findViewById(R.id.background), blurBackground);
+        BlurController blurController = new BlurController(findViewById(R.id.background), blurBackground);
         drawer.addPanelSlideListener(blurController);
-
 
 
 
@@ -108,7 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationList.setAdapter(userDataManager.getAdapter());
 
         configureCameraIdle();
-        getCurrentLocation();
+        getCurrentLocation(null);
 
     }
 
@@ -134,7 +132,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         TextView country = findViewById(R.id.add_country);
         TextView locality = findViewById(R.id.add_locality);
 
-        if (markerUserLocation != null) {
+        if (markerUserLocation != null)
+        {
             name.setText(markerUserLocation.getName());
             country.setText(markerUserLocation.getCountry());
             locality.setText(markerUserLocation.getLocality());
@@ -176,16 +175,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (locationManager == null)
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
         {
             return locationManager.isLocationEnabled();
-        } else
+        }
+        else
         {
             int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
                     Settings.Secure.LOCATION_MODE_OFF);
             return  (mode != Settings.Secure.LOCATION_MODE_OFF);
-
         }
     }
 
@@ -196,6 +194,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)&&
                 checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)&&
                 checkPermission(Manifest.permission.INTERNET))
+            //todo: pass in different values to change the update frequency of the user's current location
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         else
             Toast.makeText(getApplicationContext(),
@@ -205,11 +204,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //LocationListener interface implementation
-    //this method is repeatedly called whenever the user's location is updated
+    //this method is repeatedly called whenever the user's current location is updated
     @Override
     public void onLocationChanged(@NonNull Location location)
     {
-        //store the user's current location and convert to LatLng
+        //do nothing
+        //add any code here to handle user's current location from automatic update
     }
 
     //invoked when the user turns off location service while the app is running
@@ -235,11 +235,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(isLocationEnabled(this))
         {
             initializeLocationManager();
-            getCurrentLocation();
+            getCurrentLocation(null);
         }
         else
-            Toast.makeText(getApplicationContext(), "Please turn on location service for Mutify to work properly. ", Toast.LENGTH_LONG).show();
-
+            Toast.makeText(getApplicationContext(),
+                    "Please turn on location service for Mutify to work properly. ",
+                    Toast.LENGTH_LONG)
+                    .show();
     }
 
     /**
@@ -278,52 +280,61 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop()
+    {
         super.onStop();
         blurBackground.disable();
     }
 
     //this method stores the location specified by the center of the camera in markerLocation
-    private void configureCameraIdle() {
-        onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
+    private void configureCameraIdle()
+    {
+        onCameraIdleListener = new GoogleMap.OnCameraIdleListener()
+        {
             @Override
             public void onCameraIdle() {
-
                 LatLng latLng = map.getCameraPosition().target;
                 Geocoder geocoder = new Geocoder(MapsActivity.this);
                 markerLocation = new Location("Camera Location");
                 markerLocation.setLatitude(latLng.latitude);
                 markerLocation.setLongitude(latLng.longitude);
                 List<Address> addressList = null;
-                try {
+                try
+                {
                     addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     e.printStackTrace();
                 }
-                if (addressList != null && addressList.size() > 0) {
-                        markerUserLocation = new UserLocation("Marker Location", addressList);
+                if (addressList != null && addressList.size() > 0)
+                {
+                    markerUserLocation = new UserLocation("Marker Location", addressList);
                 }
-
-
-
             }
         };
     }
 
-
+    //todo: add a new "locate" button that calls this method to reset the user's marker location
     //call this method to manually get the user's current location
-    private void getCurrentLocation() {
-        AirLocation airLocation = new AirLocation(this, true, true, new AirLocation.Callbacks() {
+    private void getCurrentLocation(View view)
+    {
+        AirLocation airLocation = new AirLocation(this, true, true, new AirLocation.Callbacks()
+        {
             @Override
-            public void onSuccess(@NonNull Location location) {
+            public void onSuccess(@NonNull Location location)
+            {
                 currentLocation = location;
                 current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(current, 15));
             }
-
             @Override
-            public void onFailed(@NonNull AirLocation.LocationFailedEnum locationFailedEnum) {
-                // todo: handle failure to obtain location data
+            public void onFailed(@NonNull AirLocation.LocationFailedEnum locationFailedEnum)
+            {
+                Toast.makeText(getApplicationContext(),
+                        "Failed to retrieve location information.",
+                        Toast.LENGTH_LONG)
+                        .show();
             }
         });
     }

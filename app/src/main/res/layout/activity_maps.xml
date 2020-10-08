@@ -18,14 +18,12 @@
         tools:context=".MapsActivity">
 
 
-
-
-    <!--hosts the MapView and search bar-->
+    <!--hosts the Google Maps fragment and search bar-->
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
+        <!--blur the entire background when the drawer is open-->
         <no.danielzeller.blurbehindlib.BlurBehindLayout
                 android:id="@+id/blur_background"
                 android:layout_width="match_parent"
@@ -41,13 +39,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
-
+        <!--all child views (search bar, Google Map, map marker) will be blurred-->
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
+        <!--map marker-->
         <ImageView
                 android:src="@drawable/marker"
                 android:paddingBottom="40dp"
@@ -61,9 +59,7 @@
                 android:contentDescription="@string/map_marker"/>
 
 
-
-
-        <!--this CardView hosts the search bar, add the actual search bar inside the ConstraintLayout below-->
+        <!--this CardView hosts the search bar-->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -77,15 +73,13 @@
                 android:layout_marginTop="40dp"
                 card_view:cardCornerRadius="10dp">
 
-
-                <!--todo: implement search location here-->
+                <!--todo: implement search here-->
                 <androidx.appcompat.widget.SearchView
                         android:layout_width="match_parent"
                         android:background="#99FFFFFF"
                         android:layout_height="match_parent"
                         app:searchIcon="@drawable/search_icon"
                         app:searchHintIcon="@drawable/search_icon"/>
-
         </androidx.cardview.widget.CardView>
 
 
@@ -100,8 +94,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,7 +101,7 @@
 
 
 
-    <!--Bottom drawer, slide up to show the recyclerview-->
+    <!--Bottom drawer, consists of drawer handle and drawer content-->
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/drawer_handle"
             android:layout_width="match_parent"
@@ -118,6 +110,7 @@
             android:gravity="center|top">
 
 
+            <!--drawer handle-->
             <!--holds everything that will be displayed on the drawer when the drawer is closed (collapsed)-->
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -127,7 +120,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:translationZ="0dp">
 
-
+                <!--left "Add" button-->
                 <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="80dp"
@@ -150,6 +143,8 @@
                               android:layout_height="wrap_content"/>
                 </androidx.cardview.widget.CardView>
 
+
+                <!--right "Menu" button-->
                 <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="80dp"
@@ -171,14 +166,13 @@
                               android:textAlignment="center"
                               android:layout_height="wrap_content"/>
                 </androidx.cardview.widget.CardView>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
-            <!--the is the drawer content, hosts everything that will be displayed when the drawer is open (expanded)-->
-            <!--hosts the user's list of saved locations-->
+            <!--drawer content-->
+            <!--hosts everything that will be displayed when the drawer is open (expanded)-->
             <com.digitalsmart.mutify.HomePager
                     android:id="@+id/home_pager"
                     android:layout_width="match_parent"
@@ -186,24 +180,23 @@
                     android:layout_marginTop="100dp">
 
 
-
+                <!--open this page when the user clicks "Add" button-->
+                <!--display the current marker information and extra edit options-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/add_page"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-
                     <androidx.cardview.widget.CardView
                             android:layout_marginHorizontal="10dp"
                             android:layout_marginVertical="10dp"
-                            android:paddingVertical="10dp"
-                            android:paddingHorizontal="10dp"
                             app:cardBackgroundColor="#9CFFFFFF"
                             app:cardElevation="0dp"
                             app:cardCornerRadius="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                        <!--todo: edit all the views under this ViewGroup-->
+
+                        <!--todo: edit all the views under the CardView-->
                         <!--todo: re-organize the views below to display meaningful information-->
                         <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -260,18 +253,21 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-
+                <!--open this page when the user clicks "Menu" button-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/list_page"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                    <!--this is the recyclerview that will hold the list of locations the user has saved-->
+                    <!--todo: design idea: add an extra section here to display recommended locations-->
+                    <!--todo: add a toggle for each recommendation and user-saved locations to enable/disable routine-->
+
+
+                    <!--display the list of user-saved locations (routines)-->
                     <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerview"
                             android:layout_width="match_parent"
@@ -283,10 +279,6 @@
                             android:layout_marginBottom="10dp"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             </com.digitalsmart.mutify.HomePager>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
