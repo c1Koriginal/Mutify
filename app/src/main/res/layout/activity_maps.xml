@@ -136,7 +136,7 @@
 
                     <!--todo: add some style to this TextView-->
                     <TextView android:layout_width="wrap_content"
-                              android:text="Add"
+                              android:text="@string/confirm_add_location"
                               android:layout_gravity="center"
                               android:textSize="20sp"
                               android:textAlignment="center"
@@ -160,7 +160,7 @@
 
                     <!--todo: add some style to this TextView-->
                     <TextView android:layout_width="wrap_content"
-                              android:text="Menu"
+                              android:text="@string/saved_locations"
                               android:layout_gravity="center"
                               android:textSize="20sp"
                               android:textAlignment="center"
@@ -241,7 +241,7 @@
                             <!--todo: dummy button, change this-->
                             <Button
                                 android:id="@+id/add_confirm_button"
-                                android:text="Add"
+                                android:text="@string/add_new_location"
                                 android:layout_width="100dp"
                                 android:layout_height="60dp"
                                 app:layout_constraintStart_toStartOf="parent"
