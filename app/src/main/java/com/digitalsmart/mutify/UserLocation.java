@@ -3,7 +3,6 @@ package com.digitalsmart.mutify;
 
 import android.location.Address;
 import android.location.Location;
-import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
 
