@@ -73,11 +73,11 @@
 46             You can define the keys for the debug and release targets in src/debug/ and src/release/.
 47        -->
 48        <meta-data
-48-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:30:9-32:58
+48-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:30:9-32:55
 49            android:name="com.google.android.geo.API_KEY"
 49-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:31:17-62
-50            android:value="@string/google_maps_key" />
-50-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:32:17-56
+50            android:value="@string/maps_api_key" />
+50-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:32:17-53
 51
 52        <activity
 52-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:34:9-42:20

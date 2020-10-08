@@ -151,9 +151,9 @@ MERGED from [com.android.volley:volley:1.1.1] C:\Users\valkr\.gradle\caches\tran
 	android:theme
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:20:13-44
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:30:9-32:58
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:30:9-32:55
 	android:value
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:32:17-56
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:32:17-53
 	android:name
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:31:17-62
 activity#com.digitalsmart.mutify.MapsActivity
