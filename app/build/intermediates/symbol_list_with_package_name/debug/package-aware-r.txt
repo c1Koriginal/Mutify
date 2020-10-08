@@ -2679,12 +2679,12 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
-string google_maps_key
 string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
 string map_marker
+string maps_api_key
 string material_slider_range_end
 string material_slider_range_start
 string mtrl_badge_numberless_content_description
