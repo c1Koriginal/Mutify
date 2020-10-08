@@ -2649,6 +2649,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string add_new_location
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -2675,6 +2676,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string confirm_add_location
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
@@ -2736,6 +2738,7 @@ string places_cancel
 string places_powered_by_google
 string places_search_error
 string places_try_again
+string saved_locations
 string search_menu_title
 string status_bar_notification_info_overflow
 string title_activity_maps

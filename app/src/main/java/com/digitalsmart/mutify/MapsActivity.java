@@ -244,6 +244,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .show();
     }
 
+    //no need to add code here, but this method has to be overridden in order to support Android 8.0
+    //otherwise it will cause runtime exception
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras)
+    {
+        //do nothing
+    }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
