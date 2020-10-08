@@ -198,7 +198,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         else
             Toast.makeText(getApplicationContext(),
-                    "Mutify requires permission to access your location in order to work properly.",
+                    R.string.notify_permission,
                     Toast.LENGTH_LONG)
                     .show();
     }
@@ -219,7 +219,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(!isLocationEnabled(this))
         {
             Toast.makeText(getApplicationContext(),
-                    "Please turn on location service for Mutify to work properly. ",
+                    R.string.notify_location_service,
                     Toast.LENGTH_LONG)
                     .show();
 
@@ -239,7 +239,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         else
             Toast.makeText(getApplicationContext(),
-                    "Please turn on location service for Mutify to work properly. ",
+                    R.string.notify_location_service,
                     Toast.LENGTH_LONG)
                     .show();
     }

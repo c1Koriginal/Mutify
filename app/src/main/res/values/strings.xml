@@ -4,4 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="map_marker">Map Marker</string>
+    <string name="notify_location_service">\"Please turn on location service for Mutify to work properly. \"</string>
+    <string name="notify_permission">Mutify requires permission to access your location in order to work properly.
+    </string>
 </resources>
