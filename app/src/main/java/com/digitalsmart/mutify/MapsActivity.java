@@ -241,6 +241,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //call this method to manually get the user's current location
     public void getCurrentLocation(View view)
     {
+        if (fusedLocationProviderClient != null)
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
