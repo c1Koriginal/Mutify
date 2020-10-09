@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import no.danielzeller.blurbehindlib.BlurBehindLayout;
 import org.jetbrains.annotations.NotNull;
@@ -211,24 +212,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //enable the app to retrieve the marker's location
     public void configureCameraIdle()
     {
-        GoogleMap.OnCameraIdleListener onCameraIdleListener = () -> {
-            LatLng latLng = map.getCameraPosition().target;
-            Geocoder geocoder = new Geocoder(this);
-            markerLocation = new Location("Camera Location");
-            markerLocation.setLatitude(latLng.latitude);
-            markerLocation.setLongitude(latLng.longitude);
-            List<Address> addressList = null;
-            try
-            {
-                addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            if (addressList != null && addressList.size() > 0)
-            {
-                markerUserLocation = new UserLocation("Marker Location", addressList);
+        GoogleMap.OnCameraIdleListener onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
+                LatLng latLng = map.getCameraPosition().target;
+                Geocoder geocoder = new Geocoder(MapsActivity.this);
+                markerLocation = new Location("Camera Location");
+                markerLocation.setLatitude(latLng.latitude);
+                markerLocation.setLongitude(latLng.longitude);
+                List<Address> addressList = null;
+                try {
+                    addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (addressList != null && addressList.size() > 0) {
+                    markerUserLocation = new UserLocation("Marker Location", addressList);
+                }
             }
         };
 
@@ -238,13 +238,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //call this method to manually get the user's current location
     public void getCurrentLocation(View view)
     {
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, location -> {
-            // Got last known location. In some rare situations this can be null.
-            if (location != null)
-            {
-                currentLocation = location;
-                currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                // Got last known location. In some rare situations this can be null.
+                if (location != null) {
+                    currentLocation = location;
+                    currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+                }
             }
         });
     }
