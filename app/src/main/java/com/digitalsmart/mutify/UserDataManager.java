@@ -85,11 +85,14 @@ public class UserDataManager
         {
             UserLocation l = locations.get(position);
             LocationViewHolder locationViewHolder = (LocationViewHolder)holder;
-            locationViewHolder.name.setText(l.getName());
 
-            //todo: remove this line
-            //currently displaying location information as a string
-            locationViewHolder.location.setText(l.getCountry() + " " + l.getLocality());
+            if (l != null) {
+                locationViewHolder.name.setText(l.getName());
+
+                //todo: remove this line
+                //currently displaying location information as a string
+                locationViewHolder.location.setText(l.getCountry() + " " + l.getLocality());
+            }
         }
 
         @Override
