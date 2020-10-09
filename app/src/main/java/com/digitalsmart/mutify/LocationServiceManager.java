@@ -25,6 +25,7 @@ import java.util.List;
 
 
 //todo: research on FusedLocation ***
+//manages all location related operations, including permission requests
 public class LocationServiceManager implements OnMapReadyCallback, LocationListener
 {
 
