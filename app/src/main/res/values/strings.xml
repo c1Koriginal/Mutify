@@ -8,4 +8,5 @@
     <string name="add_new_location">Add</string>
     <string name="saved_locations">Menu</string>
     <string name="confirm_add_location">Add</string>
+    <string name="reset_camera">Reset Camera</string>
 </resources>

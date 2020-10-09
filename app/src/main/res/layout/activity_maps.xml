@@ -46,17 +46,57 @@
                 android:layout_height="match_parent">
 
         <!--map marker-->
-        <ImageView
-                android:src="@drawable/marker"
-                android:paddingBottom="40dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:translationZ="100dp"
-                android:contentDescription="@string/map_marker"/>
+            <ImageView
+                    android:src="@drawable/marker"
+                    android:paddingBottom="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:translationZ="100dp"
+                    android:contentDescription="@string/map_marker"/>
+
+
+            <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginVertical="120dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:translationZ="50dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <!--todo: restyle this button-->
+                    <ImageButton
+                            android:background="#00000000"
+                            android:src="@drawable/location_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:onClick="getCurrentLocation"
+                            android:contentDescription="@string/reset_camera"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
 
 
         <!--this CardView hosts the search bar-->
