@@ -1,4 +1,4 @@
-package com.digitalsmart.mutify
+package com.digitalsmart.mutify.util
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.digitalsmart.mutify.MapsActivity
+import com.digitalsmart.mutify.R
 
 //HomePager populates a traditional ViewPager with ViewGroups (eg. ConstraintLayout) instead of Fragments
 class HomePager(context: Context?, attrs: AttributeSet?) : ViewPager(context!!, attrs)

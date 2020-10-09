@@ -1,4 +1,4 @@
-package com.digitalsmart.mutify
+package com.digitalsmart.mutify.util
 
 import android.view.View
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
