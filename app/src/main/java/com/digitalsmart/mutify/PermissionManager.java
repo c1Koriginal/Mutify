@@ -18,6 +18,7 @@ public class PermissionManager
 {
     private final MapsActivity mapsActivity;
     private LocationManager locationManager;
+    private int requestCount = 0;
 
 
     private static final int COARSE_LOCATION_REQUEST_CODE = 1023;
@@ -83,54 +84,62 @@ public class PermissionManager
                     .show();
     }
 
+    //todo: request count >= 4 condition is never met, need fix
     //listen for permission request result
-    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull int[] grantResults)
+    public int onRequestPermissionsResult(int requestCode, @NonNull @NotNull int[] grantResults)
     {
+        if (requestCount >= 4)
+            return 0;
         switch (requestCode) {
             case FINE_LOCATION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    System.exit(0);
+                    requestCount++;
+                    return 1;
                 }
             case COARSE_LOCATION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    System.exit(0);
+                    requestCount++;
+                    return 1;
                 }
             case BACKGROUND_LOCATION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    System.exit(0);
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED  && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    requestCount++;
+                    return 2;
                 }
+            default:
+                return 0;
         }
     }
 
     //check and ask for permissions
     public void checkPermission()
     {
-        if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            Toast.makeText(mapsActivity.getApplicationContext(),
-                    R.string.notify_permission,
-                    Toast.LENGTH_LONG)
-                    .show();
-            mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, FINE_LOCATION_REQUEST_CODE);
-        }
-        if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            Toast.makeText(mapsActivity.getApplicationContext(),
-                    R.string.notify_permission,
-                    Toast.LENGTH_LONG)
-                    .show();
-            mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION }, COARSE_LOCATION_REQUEST_CODE);
-        }
-        if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            Toast.makeText(mapsActivity.getApplicationContext(),
-                    R.string.notify_permission,
-                    Toast.LENGTH_LONG)
-                    .show();
-            mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_REQUEST_CODE);
-        }
+            if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(mapsActivity.getApplicationContext(),
+                        R.string.notify_permission,
+                        Toast.LENGTH_SHORT)
+                        .show();
+                mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, FINE_LOCATION_REQUEST_CODE);
+            }
+            if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(mapsActivity.getApplicationContext(),
+                        R.string.notify_permission,
+                        Toast.LENGTH_SHORT)
+                        .show();
+                mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION }, COARSE_LOCATION_REQUEST_CODE);
+            }
+            if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            {
+                Toast.makeText(mapsActivity.getApplicationContext(),
+                        R.string.notify_permission,
+                        Toast.LENGTH_SHORT)
+                        .show();
+                mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_REQUEST_CODE);
+            }
     }
 }

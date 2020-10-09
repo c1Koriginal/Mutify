@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -208,8 +209,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults)
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionManager.onRequestPermissionsResult(requestCode, grantResults);
-        getCurrentLocation(null);
+        int result = permissionManager.onRequestPermissionsResult(requestCode, grantResults);
+        if (result == 0)
+        {
+            getCurrentLocation(null);
+            return;
+        }
+        if (result == 1)
+        {
+            Toast.makeText(this.getApplicationContext(),
+                    R.string.notify_permission,
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
+        if (result == 2)
+        {
+            Toast.makeText(this.getApplicationContext(),
+                    "Mutify needs to access your location in the background, please allow access location all the time.",
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     //enable the app to retrieve the marker's location
