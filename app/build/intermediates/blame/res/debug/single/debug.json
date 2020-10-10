@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
-    },
-    {
         "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable_location_icon.xml.flat",
         "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable\\location_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
         "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",

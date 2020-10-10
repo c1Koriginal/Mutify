@@ -48,24 +48,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationProviderClient;
-
-
-    private PermissionManager permissionManager;
-    private UserDataManager userDataManager;
-
     //HomePager populates a traditional ViewPager with ViewGroups (eg. ConstraintLayout) instead of Fragments
     public static HomePager homePager;
+    private PermissionManager permissionManager;
+
+
+
+    private final UserDataManager userDataManager = new UserDataManager();
+
+
     private SpringAnimation dragSpring;
     private SpringAnimation settleSpring;
 
-
-    //initialize Google Maps
-    @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
-        map = googleMap;
-        configureCameraIdle();
-    }
 
 
     @Override
@@ -74,29 +68,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        //check permission
         permissionManager = new PermissionManager(this);
         permissionManager.checkPermission();
 
-
-        //set up blur
-        drawer = findViewById(R.id.drawer);
-        homePager = findViewById(R.id.home_pager);
-        homePager.setAdapter(new SectionsPagerAdapter());
-        blurBackground = findViewById(R.id.blur_background);
-        ImageView marker = findViewById(R.id.marker_sprite);
-        CardView addTile = findViewById(R.id.add_tile);
-        CardView menuTile = findViewById(R.id.menu_tile);
-        BlurController blurController = new BlurController(findViewById(R.id.background), blurBackground, addTile, menuTile, homePager);
-        drawer.addPanelSlideListener(blurController);
-        homePager.addOnPageChangeListener(blurController);
+        initializeComponents();
 
 
         //initialize view model
-        userDataManager = new UserDataManager();
         RecyclerView locationList = findViewById(R.id.recyclerview);
         locationList.setLayoutManager(new LinearLayoutManager(this));
 
 
+        //initialize Google Maps fragment
         SupportMapFragment mapFragment = (SupportMapFragment) this.getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
@@ -108,22 +92,78 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //accessing the recyclerview adapter via UserDataManager
         locationList.setAdapter(userDataManager.getAdapter());
 
+
         //initialize fused location provider
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         initializeLocationCallBack();
         createLocationRequest();
         startLocationUpdates();
+
+
+        //retrieve user's current location at app launch
         getCurrentLocation(null);
 
-
-
-
-         dragSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, -30);
-         settleSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, 0);
+    }
 
 
 
 
+
+    //these methods are required for FusedLocationProvider to work
+    //*********************************************************************************************************************
+    protected void createLocationRequest()
+    {
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+    protected void startLocationUpdates()
+    {
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest,
+                locationCallback,
+                Looper.getMainLooper());
+    }
+    protected void initializeLocationCallBack()
+    {
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    // Update UI with location data
+                    // ...
+                }
+            }
+        };
+    }
+
+
+
+
+
+
+
+
+    //button click events
+    //*********************************************************************************************************************
+    //call this method to manually get the user's current location
+    public void getCurrentLocation(View view)
+    {
+        if (fusedLocationProviderClient != null)
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        currentLocation = location;
+                        currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+                    }
+                }
+            });
     }
 
 
@@ -165,14 +205,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    //todo: add a new "locate" button that calls this method to reset the user's marker location
 
 
+
+
+
+
+
+
+    //override methods
+    //*********************************************************************************************************************
+    //initialize Google Maps
     @Override
-    protected void onPause()
+    public void onMapReady(GoogleMap googleMap)
     {
-        super.onPause();
-        blurBackground.disable();
+        map = googleMap;
+        configureCameraIdle();
     }
 
     @Override
@@ -180,6 +228,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         super.onResume();
         permissionManager.checkPermission();
+        blurBackground.disable();
     }
 
     @Override
@@ -187,12 +236,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         super.onRestart();
         permissionManager.checkPermission();
-    }
-
-    @Override
-    protected void onStop()
-    {
-        super.onStop();
         blurBackground.disable();
     }
 
@@ -252,8 +295,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
+
+
+
+
+    //add other methods here
+    //*********************************************************************************************************************
+    //link layout components, find views by id
+    private void initializeComponents()
+    {
+        drawer = findViewById(R.id.drawer);
+        homePager = findViewById(R.id.home_pager);
+        homePager.setAdapter(new SectionsPagerAdapter());
+        blurBackground = findViewById(R.id.blur_background);
+        ImageView marker = findViewById(R.id.marker_sprite);
+        CardView addTile = findViewById(R.id.add_tile);
+        CardView menuTile = findViewById(R.id.menu_tile);
+        BlurController blurController = new BlurController(findViewById(R.id.background), blurBackground, addTile, menuTile, homePager);
+        drawer.addPanelSlideListener(blurController);
+        homePager.addOnPageChangeListener(blurController);
+        dragSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, -30);
+        settleSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, 0);
+    }
     //enable the app to retrieve the marker's location
-    public void configureCameraIdle()
+    private void configureCameraIdle()
     {
         GoogleMap.OnCameraIdleListener onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
             @Override
@@ -289,61 +355,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         map.setOnCameraIdleListener(onCameraIdleListener);
         map.setOnCameraMoveStartedListener(onCameraMoveStartedListener);
     }
-
-    //call this method to manually get the user's current location
-    public void getCurrentLocation(View view)
-    {
-        if (fusedLocationProviderClient != null)
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                // Got last known location. In some rare situations this can be null.
-                if (location != null) {
-                    currentLocation = location;
-                    currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
-                }
-            }
-        });
-    }
-
-
-
-
-
-
-
-    //these methods are required for FusedLocationProvider to work
-    protected void createLocationRequest()
-    {
-        locationRequest = LocationRequest.create();
-        locationRequest.setInterval(10000);
-        locationRequest.setFastestInterval(5000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-
-    private void startLocationUpdates()
-    {
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest,
-                locationCallback,
-                Looper.getMainLooper());
-    }
-
-    private void initializeLocationCallBack()
-    {
-        locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-                for (Location location : locationResult.getLocations()) {
-                    // Update UI with location data
-                    // ...
-                }
-            }
-        };
-    }
-
-
 }

@@ -31,18 +31,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a63ba670-a0f6-4e99-8daf-40fa1a13f8e6" name="Default Changelist" comment="added marker sprite animation">
+    <list default="true" id="a63ba670-a0f6-4e99-8daf-40fa1a13f8e6" name="Default Changelist" comment="added HomePager animation">
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex_archive_input_jar_hashes/debug/out" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex_archive_input_jar_hashes/debug/out" afterDir="false" />
@@ -57,8 +56,6 @@
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/util/BlurController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/util/BlurController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -445,7 +442,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602301120203</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="added HomePager animation">
+      <created>1602304302488</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1602304302488</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +484,8 @@
     <MESSAGE value="implemented fused location provider and fixed permissions" />
     <MESSAGE value="permission logic fix" />
     <MESSAGE value="added marker sprite animation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added marker sprite animation" />
+    <MESSAGE value="added HomePager animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added HomePager animation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="830" y="263" key="#com.intellij.ide.util.MemberChooser" timestamp="1602303805664">
@@ -520,26 +525,26 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="903" y="454" width="582" height="203" key="Github.ShareDialog/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1601024292771" />
-    <state width="2005" height="310" key="GridCell.Tab.0.bottom" timestamp="1602303875204">
+    <state width="2005" height="310" key="GridCell.Tab.0.bottom" timestamp="1602304785699">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1578" height="565" key="GridCell.Tab.0.bottom/0.0.1620.1040@0.0.1620.1040" timestamp="1602200509408" />
-    <state width="2005" height="310" key="GridCell.Tab.0.bottom/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602303875204" />
-    <state width="2005" height="310" key="GridCell.Tab.0.center" timestamp="1602303875204">
+    <state width="2005" height="310" key="GridCell.Tab.0.bottom/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602304785699" />
+    <state width="2005" height="310" key="GridCell.Tab.0.center" timestamp="1602304785699">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1578" height="565" key="GridCell.Tab.0.center/0.0.1620.1040@0.0.1620.1040" timestamp="1602200509407" />
-    <state width="2005" height="310" key="GridCell.Tab.0.center/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602303875204" />
-    <state width="2005" height="310" key="GridCell.Tab.0.left" timestamp="1602303875204">
+    <state width="2005" height="310" key="GridCell.Tab.0.center/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602304785699" />
+    <state width="2005" height="310" key="GridCell.Tab.0.left" timestamp="1602304785699">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1578" height="565" key="GridCell.Tab.0.left/0.0.1620.1040@0.0.1620.1040" timestamp="1602200509407" />
-    <state width="2005" height="310" key="GridCell.Tab.0.left/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602303875204" />
-    <state width="2005" height="310" key="GridCell.Tab.0.right" timestamp="1602303875204">
+    <state width="2005" height="310" key="GridCell.Tab.0.left/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602304785699" />
+    <state width="2005" height="310" key="GridCell.Tab.0.right" timestamp="1602304785699">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1578" height="565" key="GridCell.Tab.0.right/0.0.1620.1040@0.0.1620.1040" timestamp="1602200509407" />
-    <state width="2005" height="310" key="GridCell.Tab.0.right/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602303875204" />
+    <state width="2005" height="310" key="GridCell.Tab.0.right/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602304785699" />
     <state x="605" y="299" key="IDE.errors.dialog" timestamp="1602231450167">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -557,11 +562,11 @@
     </state>
     <state x="352" y="190" key="SettingsEditor/0.0.1620.1040@0.0.1620.1040" timestamp="1602154848414" />
     <state x="589" y="218" width="1375" height="850" key="SettingsEditor/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602128752426" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1602301136328">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1602304309546">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="488" y="270" key="Vcs.Push.Dialog.v2/0.0.1620.1040@0.0.1620.1040" timestamp="1602199838282" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602301136328" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/2560.0.1280.687/0.0.2048.1112@0.0.2048.1112" timestamp="1602304309546" />
     <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601343748502">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
