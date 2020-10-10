@@ -177,6 +177,7 @@
 
                 <!--left "Add" button-->
                 <androidx.cardview.widget.CardView
+                        android:id="@+id/add_tile"
                         android:layout_width="0dp"
                         android:layout_height="80dp"
                         app:cardCornerRadius="10dp"
@@ -201,6 +202,7 @@
 
                 <!--right "Menu" button-->
                 <androidx.cardview.widget.CardView
+                        android:id="@+id/menu_tile"
                         android:layout_width="0dp"
                         android:layout_height="80dp"
                         app:layout_constraintWidth_percent="0.45"

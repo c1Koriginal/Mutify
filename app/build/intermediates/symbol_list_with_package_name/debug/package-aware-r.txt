@@ -2120,6 +2120,7 @@ id add_country
 id add_locality
 id add_name
 id add_page
+id add_tile
 id adjust_height
 id adjust_width
 id alertTitle
@@ -2269,6 +2270,7 @@ id marker_focus
 id marker_sprite
 id masked
 id media_actions
+id menu_tile
 id message
 id middle
 id mini
@@ -2422,6 +2424,7 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id terrain
+id test
 id test_checkbox_android_button_tint
 id test_checkbox_app_button_tint
 id test_radiobutton_android_button_tint

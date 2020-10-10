@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.FragmentActivity;
@@ -83,7 +84,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         homePager.setAdapter(new SectionsPagerAdapter());
         blurBackground = findViewById(R.id.blur_background);
         ImageView marker = findViewById(R.id.marker_sprite);
-        drawer.addPanelSlideListener(new BlurController(findViewById(R.id.background), blurBackground));
+        CardView addTile = findViewById(R.id.add_tile);
+        CardView menuTile = findViewById(R.id.menu_tile);
+        BlurController blurController = new BlurController(findViewById(R.id.background), blurBackground, addTile, menuTile, homePager);
+        drawer.addPanelSlideListener(blurController);
+        homePager.addOnPageChangeListener(blurController);
 
 
         //initialize view model
