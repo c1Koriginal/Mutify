@@ -40,10 +40,10 @@ class HomePager(context: Context?, attrs: AttributeSet?) : ViewPager(context!!, 
         if (event.action == MotionEvent.ACTION_MOVE)
         {
             diff = event.x - initialXValue
-            if (diff > 0 && MapsActivity.homePager.currentItem == 0)
+            if (diff > 0 && this.currentItem == 0)
             // swipe from left to right detected
                 return false
-            else if (diff < 0 && MapsActivity.homePager.currentItem == 1)
+            else if (diff < 0 && this.currentItem == 1)
             // swipe from right to left detected
                 return false
         }
