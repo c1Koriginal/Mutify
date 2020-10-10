@@ -7,9 +7,12 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.dynamicanimation.animation.DynamicAnimation;
+import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +54,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //HomePager populates a traditional ViewPager with ViewGroups (eg. ConstraintLayout) instead of Fragments
     public static HomePager homePager;
+    private SpringAnimation dragSpring;
+    private SpringAnimation settleSpring;
 
 
     //initialize Google Maps
@@ -77,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         homePager = findViewById(R.id.home_pager);
         homePager.setAdapter(new SectionsPagerAdapter());
         blurBackground = findViewById(R.id.blur_background);
+        ImageView marker = findViewById(R.id.marker_sprite);
         drawer.addPanelSlideListener(new BlurController(findViewById(R.id.background), blurBackground));
 
 
@@ -103,6 +109,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         createLocationRequest();
         startLocationUpdates();
         getCurrentLocation(null);
+
+
+
+
+         dragSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, -30);
+         settleSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, 0);
+
+
+
+
     }
 
 
@@ -236,7 +252,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         GoogleMap.OnCameraIdleListener onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
             @Override
-            public void onCameraIdle() {
+            public void onCameraIdle()
+            {
+                dragSpring.skipToEnd();
+                settleSpring.start();
                 LatLng latLng = map.getCameraPosition().target;
                 Geocoder geocoder = new Geocoder(MapsActivity.this);
                 markerLocation = new Location("Camera Location");
@@ -254,7 +273,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         };
 
+        GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = new GoogleMap.OnCameraMoveStartedListener()
+        {
+            @Override
+            public void onCameraMoveStarted(int i)
+            {
+                dragSpring.start();
+            }
+        };
         map.setOnCameraIdleListener(onCameraIdleListener);
+        map.setOnCameraMoveStartedListener(onCameraMoveStartedListener);
     }
 
     //call this method to manually get the user's current location

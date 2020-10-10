@@ -54,4 +54,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.google.android.libraries.places:places:2.4.0'
     implementation 'com.github.mumayank:AirLocation:1.2'
+    def dynamicanimation_version = '1.0.0'
+    implementation "androidx.dynamicanimation:dynamicanimation:$dynamicanimation_version"
 }
