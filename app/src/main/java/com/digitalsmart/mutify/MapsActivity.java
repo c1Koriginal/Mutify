@@ -18,8 +18,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.digitalsmart.mutify.util.BlurController;
-import com.digitalsmart.mutify.util.HomePager;
-import com.digitalsmart.mutify.util.SectionsPagerAdapter;
 import com.google.android.gms.location.*;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.valkriaine.factor.HomePager;
 import no.danielzeller.blurbehindlib.BlurBehindLayout;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,6 +40,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SlidingUpPanelLayout drawer;
     private BlurBehindLayout blurBackground;
     private GoogleMap map;
+    private HomePager homePager;
+
+
+
+
+
+
     private LatLng currentLatLng;
     private UserLocation markerUserLocation;
     private Location currentLocation;
@@ -48,12 +54,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    //HomePager populates a traditional ViewPager with ViewGroups (eg. ConstraintLayout) instead of Fragments
-    public static HomePager homePager;
+
+
+
+
     private PermissionManager permissionManager;
 
 
-
+    //initialize view model
     private final UserDataManager userDataManager = new UserDataManager();
 
 
@@ -75,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         initializeComponents();
 
 
-        //initialize view model
+        //configure RecyclerView
         RecyclerView locationList = findViewById(R.id.recyclerview);
         locationList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -220,7 +228,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap)
     {
         map = googleMap;
-        configureCameraIdle();
+        configureCamera();
     }
 
     @Override
@@ -307,7 +315,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         drawer = findViewById(R.id.drawer);
         homePager = findViewById(R.id.home_pager);
-        homePager.setAdapter(new SectionsPagerAdapter());
+        homePager.addView(findViewById(R.id.add_page), 0);
+        homePager.addView(findViewById(R.id.list_page), 1);
         blurBackground = findViewById(R.id.blur_background);
         ImageView marker = findViewById(R.id.marker_sprite);
         CardView addTile = findViewById(R.id.add_tile);
@@ -319,7 +328,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         settleSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, 0);
     }
     //enable the app to retrieve the marker's location
-    private void configureCameraIdle()
+    private void configureCamera()
     {
         GoogleMap.OnCameraIdleListener onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
             @Override

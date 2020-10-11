@@ -64,12 +64,12 @@
         "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable_shadow.png.flat",
         "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable\\shadow.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",

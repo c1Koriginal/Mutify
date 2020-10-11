@@ -6,11 +6,17 @@ import androidx.cardview.widget.CardView
 import androidx.viewpager.widget.ViewPager
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState
+import com.valkriaine.factor.HomePager
 import no.danielzeller.blurbehindlib.BlurBehindLayout
 
 
 //custom PanelSlideListener that blurs the background
-class BlurController(view: View?, private val blurLayout: BlurBehindLayout, private val addTile: CardView, private val menuTile: CardView, private val homePager: HomePager) : SlidingUpPanelLayout.PanelSlideListener, ViewPager.OnPageChangeListener
+class BlurController(view: View?,
+                     private val blurLayout: BlurBehindLayout,
+                     private val addTile: CardView,
+                     private val menuTile: CardView,
+                     private val homePager: HomePager)
+    : SlidingUpPanelLayout.PanelSlideListener, ViewPager.OnPageChangeListener
 {
     override fun onPanelSlide(view: View, v: Float) {
         blurLayout.enable()
