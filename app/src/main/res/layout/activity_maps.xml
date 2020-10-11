@@ -23,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+
         <!--blur the entire background when the drawer is open-->
         <no.danielzeller.blurbehindlib.BlurBehindLayout
                 android:id="@+id/blur_background"
@@ -77,7 +79,7 @@
             <androidx.cardview.widget.CardView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginVertical="120dp"
@@ -107,7 +109,6 @@
 
 
 
-
             </androidx.cardview.widget.CardView>
 
 
@@ -117,24 +118,31 @@
         <!--this CardView hosts the search bar-->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:translationZ="100dp"
                 app:cardElevation="5dp"
+                android:minHeight="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="40dp"
                 card_view:cardCornerRadius="10dp">
 
-                <!--todo: implement search here-->
-                <androidx.appcompat.widget.SearchView
-                        android:layout_width="match_parent"
-                        android:background="#99FFFFFF"
-                        android:layout_height="match_parent"
-                        app:searchIcon="@drawable/search_icon"
-                        app:searchHintIcon="@drawable/search_icon"/>
+
+            <fragment android:id="@+id/autocomplete_fragment"
+                      android:background="#99FFFFFF"
+                      app:layout_constraintStart_toStartOf="parent"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintTop_toTopOf="parent"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            />
+
+
+
         </androidx.cardview.widget.CardView>
 
 
