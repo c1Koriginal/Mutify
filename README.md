@@ -1,5 +1,5 @@
 # Mutify
-App that mutes your phone automatically, based on user-selected locations 
+App that mutes your phone automatically, based on user-selected locations, time, and time durations
 
 
 [![](http://img.youtube.com/vi/zVScPfhnHts/0.jpg)](http://www.youtube.com/watch?v=zVScPfhnHts "")
