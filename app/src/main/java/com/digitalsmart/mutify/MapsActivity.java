@@ -198,13 +198,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         TextView country = findViewById(R.id.add_country);
         TextView locality = findViewById(R.id.add_locality);
 
-        UserLocation l = markerUserLocation;
-
-        if (l!= null)
+        if (markerUserLocation!= null)
         {
-            name.setText(l.getName());
-            country.setText(l.getCountry());
-            locality.setText(l.getLocality());
+            name.setText(markerUserLocation.getName());
+            country.setText(markerUserLocation.getCountry());
+            locality.setText(markerUserLocation.getLocality());
         }
     }
 
