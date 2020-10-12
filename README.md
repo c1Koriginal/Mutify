@@ -1,8 +1,10 @@
 # Mutify
-App that mutes your phone automatically, based on user-selected locations 
+App that mutes your phone automatically, based on user-selected locations, time, and time durations
 
-Currently working:
-- move the marker to select and retrieve certain locations on the map
-- gets the user's current location at launch 
-- slide open the bottom drawer to display the current marker information or a list of saved locations 
+
+[![](http://img.youtube.com/vi/zVScPfhnHts/0.jpg)](http://www.youtube.com/watch?v=zVScPfhnHts "")
+
+
+Development Progress
+https://www.youtube.com/playlist?list=PLr2SUHRsQtUcKDNWyCxmTi0O6B96-bdUm
 
