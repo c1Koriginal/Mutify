@@ -1414,7 +1414,7 @@ id baseline
 id beginOnFirstDraw
 id beginning
 id blocking
-id blur_background
+id blurLayer
 id bottom
 id bounce
 id buttonPanel
@@ -1438,6 +1438,7 @@ id cos
 id custom
 id customPanel
 id dark
+id dataBinding
 id decelerate
 id decelerateAndComplete
 id decor_content_parent
@@ -1456,7 +1457,6 @@ id dragRight
 id dragStart
 id dragUp
 id drawer
-id drawer_handle
 id easeIn
 id easeInOut
 id easeOut
@@ -1479,7 +1479,7 @@ id groups
 id hidden
 id home
 id homeAsUp
-id home_pager
+id homePager
 id honorRequest
 id hybrid
 id icon
@@ -1505,10 +1505,11 @@ id listMode
 id list_item
 id list_page
 id location
+id locationList
 id manually
 id map
+id markerSprite
 id marker_focus
-id marker_sprite
 id media_actions
 id menu_tile
 id message
@@ -1523,6 +1524,8 @@ id notification_main_column
 id notification_main_column_container
 id off
 id on
+id onAttachStateChangeListener
+id onDateChanged
 id onScroll
 id packed
 id parent
@@ -1556,7 +1559,6 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
-id recyclerview
 id reverseSawtooth
 id right
 id right_icon
@@ -1616,6 +1618,7 @@ id text
 id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
+id textWatcher
 id time
 id title
 id titleDividerNoCustom

@@ -11,7 +11,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        renderscriptTargetApi 28 //must match target sdk and build tools
+        renderscriptTargetApi 30 //must match target sdk and build tools
         renderscriptSupportModeEnabled true
         // Read the API key from ./secure.properties into R.string.maps_api_key
         def secureProps = new Properties()
@@ -22,6 +22,10 @@ android {
 
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 
     buildTypes {

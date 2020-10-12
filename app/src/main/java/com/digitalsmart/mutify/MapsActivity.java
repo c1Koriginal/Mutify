@@ -8,16 +8,14 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.util.BlurController;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.*;
@@ -31,8 +29,6 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.valkriaine.factor.HomePager;
-import no.danielzeller.blurbehindlib.BlurBehindLayout;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -42,17 +38,7 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener
 {
-
-    private SlidingUpPanelLayout drawer;
-    private BlurBehindLayout blurBackground;
     private GoogleMap map;
-    private HomePager homePager;
-
-
-
-
-
-
     private LatLng currentLatLng;
     private UserLocation markerUserLocation;
     private Location currentLocation;
@@ -62,10 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient fusedLocationProviderClient;
 
 
-
-
     private PermissionManager permissionManager;
-
 
     //initialize view model
     private final UserDataManager userDataManager = new UserDataManager();
@@ -75,12 +58,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SpringAnimation settleSpring;
 
 
+    //data binding object from activity_maps.xml
+    //to access any View/layout from activity_maps.xml, simply call binding.'layout id'
+    //for example, to access the ImageView "@+id/markerSprite", call binding.markerSprite
+    //instead of using findViewById()
+    //data binding library will also automatically convert view ids like "@+id/add_page" to "addPage" for easier usage in java code
+    private ActivityMapsBinding binding;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        //initialize data binding
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
 
         //check permission
         permissionManager = new PermissionManager(this);
@@ -90,8 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //configure RecyclerView
-        RecyclerView locationList = findViewById(R.id.recyclerview);
-        locationList.setLayoutManager(new LinearLayoutManager(this));
+        binding.locationList.setLayoutManager(new LinearLayoutManager(this));
 
 
         //initialize Google Maps fragment
@@ -104,7 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         userDataManager.generateDummyData();
 
         //accessing the recyclerview adapter via UserDataManager
-        locationList.setAdapter(userDataManager.getAdapter());
+        binding.locationList.setAdapter(userDataManager.getAdapter());
 
 
         //initialize fused location provider
@@ -183,8 +174,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void menuButtonClicked(View view)
     {
         //add the current marker location to the list
-        drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-        homePager.setCurrentItem(1,true);
+        binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+        binding.homePager.setCurrentItem(1,true);
     }
 
     //todo: change this after modifying activity_maps.xml
@@ -192,17 +183,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void addButtonClicked(View view)
     {
         //test methods to display the location info of the current marker location
-        drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-        homePager.setCurrentItem(0,true);
-        TextView name = findViewById(R.id.add_name);
-        TextView country = findViewById(R.id.add_country);
-        TextView locality = findViewById(R.id.add_locality);
+        binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+        binding.homePager.setCurrentItem(0,true);
 
         if (markerUserLocation!= null)
         {
-            name.setText(markerUserLocation.getName());
-            country.setText(markerUserLocation.getCountry());
-            locality.setText(markerUserLocation.getLocality());
+            binding.addName.setText(markerUserLocation.getName());
+            binding.addCountry.setText(markerUserLocation.getCountry());
+            binding.addLocality.setText(markerUserLocation.getLocality());
         }
     }
 
@@ -211,7 +199,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         //add the current marker location to the list
         userDataManager.add(markerUserLocation);
-        homePager.setCurrentItem(1, true);
+        binding.homePager.setCurrentItem(1, true);
     }
 
 
@@ -236,7 +224,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         super.onResume();
         permissionManager.checkPermission();
-        blurBackground.disable();
+        binding.blurLayer.disable();
     }
 
     @Override
@@ -244,7 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         super.onRestart();
         permissionManager.checkPermission();
-        blurBackground.disable();
+        binding.blurLayer.disable();
     }
 
     //required for API26 to work
@@ -335,25 +323,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //initialize views
-        drawer = findViewById(R.id.drawer);
-        homePager = findViewById(R.id.home_pager);
-        homePager.addView(findViewById(R.id.add_page), 0);
-        homePager.addView(findViewById(R.id.list_page), 1);
-        blurBackground = findViewById(R.id.blur_background);
-        ImageView marker = findViewById(R.id.marker_sprite);
-        CardView addTile = findViewById(R.id.add_tile);
-        CardView menuTile = findViewById(R.id.menu_tile);
+        binding.homePager.addView(binding.addPage, 0);
+        binding.homePager.addView(binding.listPage, 1);
 
 
         //set up blur effect and transition animations
-        BlurController blurController = new BlurController(findViewById(R.id.background), blurBackground, addTile, menuTile, homePager);
-        drawer.addPanelSlideListener(blurController);
-        homePager.addOnPageChangeListener(blurController);
+        BlurController blurController = new BlurController(binding.background, binding.blurLayer, binding.addTile, binding.menuTile, binding.homePager);
+        binding.drawer.addPanelSlideListener(blurController);
+        binding.homePager.addOnPageChangeListener(blurController);
 
 
         //spring animations for map marker
-        dragSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, -30);
-        settleSpring = new SpringAnimation(marker, DynamicAnimation.TRANSLATION_Y, 0);
+        dragSpring = new SpringAnimation(binding.markerSprite, DynamicAnimation.TRANSLATION_Y, -30);
+        settleSpring = new SpringAnimation(binding.markerSprite, DynamicAnimation.TRANSLATION_Y, 0);
     }
     //enable the app to retrieve the marker's location
     private void configureCamera()
