@@ -387,6 +387,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (a != null)
                     markerUserLocation = new UserLocation("Marker Location", a);
             }
+            else
+                Toast.makeText(MapsActivity.this, resultData.getString(RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
         }
     }
 }

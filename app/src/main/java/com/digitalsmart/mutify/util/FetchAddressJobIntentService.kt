@@ -33,13 +33,14 @@ class FetchAddressJobIntentService:JobIntentService()
 
     private var resultReceiver: ResultReceiver? = null
 
+    var errorMessage = ""
+
     /*
     override fun onHandleWork(intent: Intent) {
         onHandleIntent(intent)
     }*/
 
     override fun onHandleWork(intent: Intent) {
-        var errorMessage = ""
 
         resultReceiver = intent.getParcelableExtra(RECEIVER)
 
@@ -104,16 +105,17 @@ class FetchAddressJobIntentService:JobIntentService()
 
     private fun deliverResultToReceiver() {
         val bundle = Bundle()
-        bundle.putString(RESULT_DATA_KEY, "1")
+        bundle.putString(RESULT_DATA_KEY, errorMessage)
         resultReceiver!!.send(FAILURE_RESULT, bundle)
     }
 
 
-    companion object{
+    companion object
+    {
         @JvmStatic
-        fun enqueueWork(mapsActivity: MapsActivity, intent: Intent) {
+        fun enqueueWork(mapsActivity: MapsActivity, intent: Intent)
+        {
             enqueueWork(mapsActivity,FetchAddressJobIntentService::class.java, 1, intent)
         }
     }
-
 }
