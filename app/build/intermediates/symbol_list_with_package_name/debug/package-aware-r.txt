@@ -1418,6 +1418,7 @@ id blurLayer
 id bottom
 id bounce
 id buttonPanel
+id cache_measures
 id cancel_action
 id center
 id center_horizontal
@@ -1444,6 +1445,7 @@ id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
 id deltaRelative
+id dependency_ordering
 id dialog_button
 id dimensions
 id direct
@@ -1475,6 +1477,7 @@ id gone
 id graph
 id graph_wrap
 id group_divider
+id grouping
 id groups
 id hidden
 id home

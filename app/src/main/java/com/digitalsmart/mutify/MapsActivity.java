@@ -101,7 +101,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //initialize fused location provider
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-
         //must call these methods when implementing background service
         //remove these method calls if Mutify does not need to constantly update the user's location
         initializeLocationCallBack();
@@ -352,11 +351,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             try {
                 addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.d("GRPC", e.getMessage());
+                Toast.makeText(this.getApplicationContext(),
+                        e.getMessage(),
+                        Toast.LENGTH_SHORT)
+                        .show();
+
+
             }
             if (addressList != null && addressList.size() > 0) {
                 markerUserLocation = new UserLocation("Marker Location", addressList);
             }
+            else
+                markerUserLocation = new UserLocation("Retrieved Location", currentLocation);
         };
 
         GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i -> dragSpring.start();

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sl\\values-sl.xml",
+            "outputFile": "C:\\Users\\valkr\\Downloads\\Mutify\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sl\\values-sl.xml",
             "map": [
                 {
                     "source": "C:\\Users\\valkr\\.gradle\\caches\\transforms-2\\files-2.1\\f26e20509147c4af9f740c1840f34ebc\\jetified-places-2.4.0\\res\\values-sl\\values.xml",
