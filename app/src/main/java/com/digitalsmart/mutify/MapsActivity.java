@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.util.BlurController;
-import com.digitalsmart.mutify.util.Constants;
 import com.digitalsmart.mutify.util.FetchAddressJobIntentService;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.*;
@@ -34,6 +33,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.jetbrains.annotations.NotNull;
+import static com.digitalsmart.mutify.util.Constants.*;
 
 import java.util.Arrays;
 
@@ -272,19 +272,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //todo: toast messages are messy here
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int result = permissionManager.onRequestPermissionsResult(requestCode, grantResults);
-        if (result == Constants.REQUEST_GRANTED)
+        if (result == REQUEST_GRANTED)
         {
             getCurrentLocation(null);
             return;
         }
-        if (result == Constants.LOCATION_REQUEST_REJECTED)
+        if (result == LOCATION_REQUEST_REJECTED)
         {
             Toast.makeText(this.getApplicationContext(),
                     R.string.notify_permission,
                     Toast.LENGTH_SHORT)
                     .show();
         }
-        if (result == Constants.BACKGROUND_LOCATION_REQUEST_REJECTED)
+        if (result == BACKGROUND_LOCATION_REQUEST_REJECTED)
         {
             Toast.makeText(this.getApplicationContext(),
                     R.string.background_location_permission,
@@ -353,9 +353,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Create an intent for passing to the intent service responsible for fetching the address.
             Intent intent = new Intent(this, FetchAddressJobIntentService.class);
             // Pass the result receiver as an extra to the service.
-            intent.putExtra(Constants.RECEIVER, addressResultReceiver);
+            intent.putExtra(RECEIVER, addressResultReceiver);
             //pass the marker location
-            intent.putExtra(Constants.LOCATION_DATA_EXTRA, markerLocation);
+            intent.putExtra(LOCATION_DATA_EXTRA, markerLocation);
             FetchAddressJobIntentService.enqueueWork(MapsActivity.this, intent);
         };
         GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i -> dragSpring.start();
@@ -381,9 +381,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData)
         {
-            if (resultCode == Constants.SUCCESS_ADDRESS)
+            if (resultCode == SUCCESS_ADDRESS)
             {
-                Address a = resultData.getParcelable(Constants.ADDRESS);
+                Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
                     markerUserLocation = new UserLocation("Marker Location", a);
             }
