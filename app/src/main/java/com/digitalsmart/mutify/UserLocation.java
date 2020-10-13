@@ -1,23 +1,19 @@
 package com.digitalsmart.mutify;
 
-
 import android.location.Address;
 import android.location.Location;
 
-import java.util.List;
 
 //class defining UserLocation object
 //todo: add more data to store in this class
 public class UserLocation
 {
-    private String name;
+    private String name ="";
     private Location location;
-    private String locality;
-    private String country;
+    private Address address;
     //address list is retrieved from Geocoder, it contains detailed address information of the location
     //locality and country information are retrieved from the address list
     //call updateAddressInfo() and pass in the address list to update address information
-    private List<Address> addressList;
     //todo: add time, date, and time duration
 
     public UserLocation(Location location)
@@ -37,40 +33,29 @@ public class UserLocation
     }
 
     //this constructor initializes the address information
-    //pass in the address list obtained from Geocoder
-    public UserLocation(String name, List<Address> addressList)
+    public UserLocation(String name, Address a)
     {
         this.name = name;
-        updateAddressInfo(addressList);
+        this.address = a;
     }
 
-    public void setAddressList(List<Address> addressList)
-    {
-        this.addressList = addressList;
-        updateAddressInfo(addressList);
-    }
-
-    private void updateAddressInfo(List<Address> l)
-    {
-        this.addressList = l;
-        if (addressList != null && addressList.size() > 0) {
-            locality = addressList.get(0).getAddressLine(0);
-            country = addressList.get(0).getCountryName();
-        }
-    }
 
     public String getName()
     {
         return this.name;
     }
 
-    public String getLocality()
+    public String getAddressLine()
     {
-        return this.locality;
+        if (address != null)
+            return this.address.getAddressLine(0);
+        return "no address info";
     }
 
     public String getCountry()
     {
-        return this.country;
+        if (address != null)
+            return this.address.getCountryName();
+        return "no country info";
     }
 }

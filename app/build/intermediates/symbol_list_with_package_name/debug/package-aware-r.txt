@@ -1749,6 +1749,7 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string add_new_location
 string app_name
+string background_location_permission
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
 string common_google_play_services_enable_title

@@ -9,4 +9,7 @@
     <string name="saved_locations">Menu</string>
     <string name="confirm_add_location">Add</string>
     <string name="reset_camera">Reset Camera</string>
+    <string name="background_location_permission">Mutify needs to access your location in the background, please allow
+        access location all the time.
+    </string>
 </resources>

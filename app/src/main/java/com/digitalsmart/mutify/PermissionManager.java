@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import org.jetbrains.annotations.NotNull;
 
+import static com.digitalsmart.mutify.util.Constants.*;
+
 
 //manages all location related operations, including permission requests
 public class PermissionManager
@@ -21,9 +23,7 @@ public class PermissionManager
     private int requestCount = 0;
 
 
-    private static final int COARSE_LOCATION_REQUEST_CODE = 1023;
-    private static final int FINE_LOCATION_REQUEST_CODE = 1214;
-    private static final int BACKGROUND_LOCATION_REQUEST_CODE = 1113;
+
 
 
     //constructor
@@ -89,28 +89,28 @@ public class PermissionManager
     public int onRequestPermissionsResult(int requestCode, @NonNull @NotNull int[] grantResults)
     {
         if (requestCount >= 4)
-            return 0;
+            return REQUEST_GRANTED;
         switch (requestCode) {
             case FINE_LOCATION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     requestCount++;
-                    return 1;
+                    return LOCATION_REQUEST_REJECTED;
                 }
             case COARSE_LOCATION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     requestCount++;
-                    return 1;
+                    return LOCATION_REQUEST_REJECTED;
                 }
             case BACKGROUND_LOCATION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED  && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     requestCount++;
-                    return 2;
+                    return BACKGROUND_LOCATION_REQUEST_REJECTED;
                 }
             default:
-                return 0;
+                return REQUEST_GRANTED;
         }
     }
 

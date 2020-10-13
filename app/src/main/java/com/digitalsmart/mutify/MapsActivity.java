@@ -1,11 +1,13 @@
 package com.digitalsmart.mutify;
 
+import android.content.Intent;
 import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -17,6 +19,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.util.BlurController;
+import com.digitalsmart.mutify.util.Constants;
+import com.digitalsmart.mutify.util.FetchAddressJobIntentService;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.*;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,9 +35,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener
@@ -46,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private AddressResultReceiver addressResultReceiver;
 
 
     private PermissionManager permissionManager;
@@ -78,8 +81,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         permissionManager = new PermissionManager(this);
         permissionManager.checkPermission();
 
+        //register Geocoder intent listener
+        addressResultReceiver = new AddressResultReceiver(new Handler(Looper.getMainLooper()));
         initializeComponents();
-
 
         //configure RecyclerView
         binding.locationList.setLayoutManager(new LinearLayoutManager(this));
@@ -106,7 +110,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         initializeLocationCallBack();
         createLocationRequest();
         startLocationUpdates();
-
 
         //retrieve user's current location at app launch
         getCurrentLocation(null);
@@ -189,7 +192,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         {
             binding.addName.setText(markerUserLocation.getName());
             binding.addCountry.setText(markerUserLocation.getCountry());
-            binding.addLocality.setText(markerUserLocation.getLocality());
+            binding.addLocality.setText(markerUserLocation.getAddressLine());
         }
     }
 
@@ -219,17 +222,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onResume()
-    {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         permissionManager.checkPermission();
         binding.blurLayer.disable();
     }
 
     @Override
-    protected void onRestart()
+    protected void onResume()
     {
-        super.onRestart();
+        super.onResume();
         permissionManager.checkPermission();
         binding.blurLayer.disable();
     }
@@ -267,24 +269,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults)
     {
+        //todo: toast messages are messy here
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int result = permissionManager.onRequestPermissionsResult(requestCode, grantResults);
-        if (result == 0)
+        if (result == Constants.REQUEST_GRANTED)
         {
             getCurrentLocation(null);
             return;
         }
-        if (result == 1)
+        if (result == Constants.LOCATION_REQUEST_REJECTED)
         {
             Toast.makeText(this.getApplicationContext(),
                     R.string.notify_permission,
                     Toast.LENGTH_SHORT)
                     .show();
         }
-        if (result == 2)
+        if (result == Constants.BACKGROUND_LOCATION_REQUEST_REJECTED)
         {
             Toast.makeText(this.getApplicationContext(),
-                    "Mutify needs to access your location in the background, please allow access location all the time.",
+                    R.string.background_location_permission,
                     Toast.LENGTH_SHORT)
                     .show();
         }
@@ -343,32 +346,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             dragSpring.skipToEnd();
             settleSpring.start();
             LatLng latLng = map.getCameraPosition().target;
-            Geocoder geocoder = new Geocoder(MapsActivity.this);
             markerLocation = new Location("Camera Location");
             markerLocation.setLatitude(latLng.latitude);
             markerLocation.setLongitude(latLng.longitude);
-            List<Address> addressList = null;
-            try {
-                addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            } catch (IOException e) {
 
-                //grpc failed
-                //this is caused by slow internet speed or no internet connection
-                //geocoder cannot retrieve the address info in time for the UI thread to update
-                //todo: possible solution: run geocoder .getFromLocation on a different thread or as a JobIntentService
-                Log.d("GRPC", e.getMessage());
-                Toast.makeText(this.getApplicationContext(),
-                        e.getMessage(),
-                        Toast.LENGTH_SHORT)
-                        .show();
-            }
-            if (addressList != null && addressList.size() > 0) {
-                markerUserLocation = new UserLocation("Marker Location", addressList);
-            }
+            // Create an intent for passing to the intent service responsible for fetching the address.
+            Intent intent = new Intent(this, FetchAddressJobIntentService.class);
+            // Pass the result receiver as an extra to the service.
+            intent.putExtra(Constants.RECEIVER, addressResultReceiver);
+            //pass the marker location
+            intent.putExtra(Constants.LOCATION_DATA_EXTRA, markerLocation);
+            FetchAddressJobIntentService.enqueueWork(MapsActivity.this, intent);
         };
-
         GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i -> dragSpring.start();
         map.setOnCameraIdleListener(onCameraIdleListener);
         map.setOnCameraMoveStartedListener(onCameraMoveStartedListener);
+    }
+
+
+
+
+
+
+
+
+
+    private class AddressResultReceiver extends ResultReceiver
+    {
+        AddressResultReceiver(Handler handler)
+        {
+            super(handler);
+        }
+        //Receives data sent from FetchAddressJobIntentService and updates the UI in MainActivity.
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData)
+        {
+            if (resultCode == Constants.SUCCESS_ADDRESS)
+            {
+                Address a = resultData.getParcelable(Constants.ADDRESS);
+                if (a != null)
+                    markerUserLocation = new UserLocation("Marker Location", a);
+            }
+        }
     }
 }

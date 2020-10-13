@@ -91,7 +91,7 @@ public class UserDataManager
 
                 //todo: remove this line
                 //currently displaying location information as a string
-                locationViewHolder.location.setText(l.getCountry() + " " + l.getLocality());
+                locationViewHolder.location.setText(l.getCountry() + " " + l.getAddressLine());
             }
         }
 
