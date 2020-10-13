@@ -35,11 +35,6 @@ class FetchAddressJobIntentService:JobIntentService()
 
     var errorMessage = ""
 
-    /*
-    override fun onHandleWork(intent: Intent) {
-        onHandleIntent(intent)
-    }*/
-
     override fun onHandleWork(intent: Intent) {
 
         resultReceiver = intent.getParcelableExtra(RECEIVER)
