@@ -33,7 +33,7 @@ class FetchAddressJobIntentService:JobIntentService()
 
     private var resultReceiver: ResultReceiver? = null
 
-    var errorMessage = ""
+    private var errorMessage = ""
 
     override fun onHandleWork(intent: Intent) {
 
