@@ -351,19 +351,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             try {
                 addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             } catch (IOException e) {
+
+                //grpc failed
+                //this is caused by slow internet speed or no internet connection
+                //geocoder cannot retrieve the address info in time for the UI thread to update
+                //todo: possible solution: run geocoder .getFromLocation on a different thread or as a JobIntentService
                 Log.d("GRPC", e.getMessage());
                 Toast.makeText(this.getApplicationContext(),
                         e.getMessage(),
                         Toast.LENGTH_SHORT)
                         .show();
-
-
             }
             if (addressList != null && addressList.size() > 0) {
                 markerUserLocation = new UserLocation("Marker Location", addressList);
             }
-            else
-                markerUserLocation = new UserLocation("Retrieved Location", currentLocation);
         };
 
         GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i -> dragSpring.start();
