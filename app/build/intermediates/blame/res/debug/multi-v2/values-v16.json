@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\valkr\\Downloads\\Mutify\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
                     "source": "C:\\Users\\valkr\\.gradle\\caches\\transforms-2\\files-2.1\\26b4bc64c2039ee44ef16ef8ddd6a51c\\core-1.3.2\\res\\values-v16\\values-v16.xml",
