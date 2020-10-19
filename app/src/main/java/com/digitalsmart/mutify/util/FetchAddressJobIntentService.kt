@@ -33,8 +33,10 @@ class FetchAddressJobIntentService:JobIntentService()
 
     private var resultReceiver: ResultReceiver? = null
 
+    private var errorMessage = ""
+
     override fun onHandleWork(intent: Intent) {
-        var errorMessage = ""
+
 
         resultReceiver = intent.getParcelableExtra(RECEIVER)
 
@@ -65,7 +67,7 @@ class FetchAddressJobIntentService:JobIntentService()
         try {
             addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
         } catch (ioException: IOException) { //Catches network or i/o problems
-            errorMessage = "service not available"
+            errorMessage = "unable to retrieve address, please confirm you have an active internet connection"
             Log.e(tag, errorMessage, ioException)
         } catch (illegalArgumentException: IllegalArgumentException) { //Error in latitude or longitude data
             errorMessage = "invalid latitude or longitude"
@@ -99,7 +101,7 @@ class FetchAddressJobIntentService:JobIntentService()
 
     private fun deliverResultToReceiver() {
         val bundle = Bundle()
-        bundle.putString(RESULT_DATA_KEY, "1")
+        bundle.putString(RESULT_DATA_KEY, errorMessage)
         resultReceiver!!.send(FAILURE_RESULT, bundle)
     }
 

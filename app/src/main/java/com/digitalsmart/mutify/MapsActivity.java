@@ -143,7 +143,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     return;
                 }
                 for (Location location : locationResult.getLocations()) {
-                    // Update UI with location data
+                    // do something with the location data retrieved
                     // ...
                 }
             }
@@ -386,6 +386,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
                     markerUserLocation = new UserLocation("Marker Location", a);
+            }
+            else if (resultCode == FAILURE_RESULT)
+            {
+                Toast.makeText(MapsActivity.this, resultData.getString(RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
             }
         }
     }

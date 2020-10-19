@@ -11,9 +11,7 @@ public class UserLocation
     private String name ="";
     private Location location;
     private Address address;
-    //address list is retrieved from Geocoder, it contains detailed address information of the location
-    //locality and country information are retrieved from the address list
-    //call updateAddressInfo() and pass in the address list to update address information
+
     //todo: add time, date, and time duration
 
     public UserLocation(Location location)
