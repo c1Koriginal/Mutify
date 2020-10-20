@@ -1,8 +1,6 @@
 package com.digitalsmart.mutify;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
 import android.location.LocationListener;
@@ -13,15 +11,12 @@ import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.util.BlurController;
 import com.digitalsmart.mutify.util.FetchAddressJobIntentService;
@@ -37,12 +32,11 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-
 import org.jetbrains.annotations.NotNull;
 
-import static com.digitalsmart.mutify.util.Constants.*;
-
 import java.util.Arrays;
+
+import static com.digitalsmart.mutify.util.Constants.*;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {

@@ -3,9 +3,6 @@ package com.digitalsmart.mutify;
 import android.location.Address;
 import android.location.Location;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 
 //class defining UserLocation object
 //todo: add more data to store in this class
