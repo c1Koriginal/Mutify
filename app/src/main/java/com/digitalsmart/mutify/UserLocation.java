@@ -3,14 +3,18 @@ package com.digitalsmart.mutify;
 import android.location.Address;
 import android.location.Location;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 //class defining UserLocation object
 //todo: add more data to store in this class
 public class UserLocation
 {
-    private String name ="";
+    private String name = "";
     private Location location;
     private Address address;
+    private float radius;
 
     //todo: add time, date, and time duration
 
