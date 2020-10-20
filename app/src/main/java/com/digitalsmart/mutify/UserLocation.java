@@ -19,24 +19,17 @@ public class UserLocation
         this.location = location;
     }
 
-    public UserLocation(String name)
-    {
-        this.name = name;
-    }
-
     public UserLocation(String name, Location location)
     {
         this.name = name;
         this.location = location;
     }
 
-    //this constructor initializes the address information
-    public UserLocation(String name, Address a)
+
+    public void setAddress(Address a)
     {
-        this.name = name;
         this.address = a;
     }
-
 
     public String getName()
     {

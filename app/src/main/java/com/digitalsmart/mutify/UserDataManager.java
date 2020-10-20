@@ -59,14 +59,6 @@ public class UserDataManager
         return this.adapter;
     }
 
-    //generate dummy data for test purpose
-    public void generateDummyData()
-    {
-        for (int i = 1; i <= 5; i++)
-        {
-            locations.add(new UserLocation("Location " + i));
-        }
-    }
 
     //custom adapter for the list
     private class LocationsAdapter extends RecyclerView.Adapter

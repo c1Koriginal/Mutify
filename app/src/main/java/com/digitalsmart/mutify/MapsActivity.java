@@ -94,9 +94,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
-        //todo: remove this
-        //populating user location list with dummy data
-        userDataManager.generateDummyData();
 
         //accessing the recyclerview adapter via UserDataManager
         binding.locationList.setAdapter(userDataManager.getAdapter());
@@ -350,6 +347,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerLocation.setLatitude(latLng.latitude);
             markerLocation.setLongitude(latLng.longitude);
 
+            markerUserLocation = new UserLocation("Marker Location", markerLocation);
+
             // Create an intent for passing to the intent service responsible for fetching the address.
             Intent intent = new Intent(this, FetchAddressJobIntentService.class);
             // Pass the result receiver as an extra to the service.
@@ -385,10 +384,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
-                    markerUserLocation = new UserLocation("Marker Location", a);
+                    markerUserLocation.setAddress(a);
             }
             else if (resultCode == FAILURE_RESULT)
             {
+                //show the error message
                 Toast.makeText(MapsActivity.this, resultData.getString(RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
             }
         }
