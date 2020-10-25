@@ -1,12 +1,7 @@
-<<<<<<< Updated upstream
-#Mon Oct 19 17:02:13 PDT 2020
+#Sat Oct 24 21:03:51 PDT 2020
 base.1=C\:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
-=======
-#Mon Oct 19 16:54:40 PDT 2020
-base.0=/home/c1k/Desktop/Projects/Mutify/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
->>>>>>> Stashed changes
 path.1=classes.dex
+base.0=C\:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.1=classes2.dex
-path.0=classes.dex
 renamed.0=classes.dex
-base.1=/home/c1k/Desktop/Projects/Mutify/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex
+path.0=classes.dex

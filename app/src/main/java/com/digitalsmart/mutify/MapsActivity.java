@@ -54,7 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private PermissionManager permissionManager;
 
     //initialize view model
-    private final UserDataManager userDataManager = new UserDataManager();
+    private UserDataManager userDataManager;
 
 
     private SpringAnimation dragSpring;
@@ -94,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //accessing the recyclerview adapter via UserDataManager
-        binding.locationList.setAdapter(userDataManager.getAdapter());
+
 
 
         //initialize fused location provider
@@ -183,8 +183,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //todo: change this, this is a dummy method to add the current marker location to the list
     public void confirmButtonClicked(View view) {
         //add the current marker location to the list
+
+        //todo: add UI controls to setup the markerUserLocation
+
+        //retrieve radius from the UI controls
+        //test call to set radius to 80m
+        markerUserLocation.setRadius(80);
+
         userDataManager.add(markerUserLocation);
         binding.homePager.setCurrentItem(1, true);
+
+
+
     }
 
 
@@ -195,6 +205,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         configureCamera();
+        userDataManager = new UserDataManager(map);
+        binding.locationList.setAdapter(userDataManager.getAdapter());
     }
 
     @Override

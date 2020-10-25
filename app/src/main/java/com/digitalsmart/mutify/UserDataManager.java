@@ -1,12 +1,17 @@
 package com.digitalsmart.mutify;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 //ViewModel class for managing user data in a singleton manner
@@ -16,19 +21,23 @@ public class UserDataManager
 {
     private final ArrayList <UserLocation> locations = new ArrayList<>();
     private final LocationsAdapter adapter;
+    private final GoogleMap map;
 
     //constructor of the view model
     //add anything in the constructor to be initialized when the view model is created
-    public UserDataManager()
+    public UserDataManager(GoogleMap map)
     {
         getUserData();
+        this.map = map;
         adapter = new LocationsAdapter();
     }
 
     //call this method to retrieve the location list from a local file or a database
     public void getUserData()
     {
-        //todo: get saved locations here
+        //todo: retrieve saved locations from SQLite
+        //todo: foreach item in retrieved list of locations,call map.addCircle and map.addMarker
+        //todo: do this on a background thread
     }
 
     //call this method to save the list to a local file or a database
@@ -36,12 +45,20 @@ public class UserDataManager
     {
         adapter.notifyDataSetChanged();
         //todo: update current save of user data
+        //todo: change marker/circles if necessary
+        //call map.clear() and re-draw the markers and circles
+        //better implementations are also welcomed
     }
 
     //call this method to add a location to the list
     public void add(UserLocation location)
     {
         locations.add(location);
+        map.addCircle(new CircleOptions()
+                .center(location.getLatLng())
+                .radius(location.getRadius())
+                .strokeColor(Color.RED));
+        map.addMarker(new MarkerOptions().position(location.getLatLng()));
         updateUserData();
         //todo: scroll the recyclerview to the new item added
     }
