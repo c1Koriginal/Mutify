@@ -67,10 +67,10 @@ class FetchAddressJobIntentService:JobIntentService()
         try {
             addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
         } catch (ioException: IOException) { //Catches network or i/o problems
-            errorMessage = "unable to retrieve address, please confirm you have an active internet connection"
+            errorMessage = "Unable to retrieve address, please confirm you have an active internet connection"
             Log.e(tag, errorMessage, ioException)
         } catch (illegalArgumentException: IllegalArgumentException) { //Error in latitude or longitude data
-            errorMessage = "invalid latitude or longitude"
+            errorMessage = "Invalid latitude or longitude"
             Log.e(
                     tag,
                     errorMessage + ". Latitude = " + location.latitude +

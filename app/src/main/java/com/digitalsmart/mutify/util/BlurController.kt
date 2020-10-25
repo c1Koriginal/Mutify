@@ -4,6 +4,7 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.cardview.widget.CardView
 import androidx.viewpager.widget.ViewPager
+import com.skydoves.balloon.Balloon
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState
 import com.valkriaine.factor.HomePager
@@ -15,7 +16,8 @@ class BlurController(view: View?,
                      private val blurLayout: BlurBehindLayout,
                      private val addTile: CardView,
                      private val menuTile: CardView,
-                     private val homePager: HomePager)
+                     private val homePager: HomePager,
+                     private val balloon: Balloon)
     : SlidingUpPanelLayout.PanelSlideListener, ViewPager.OnPageChangeListener
 {
     override fun onPanelSlide(view: View, v: Float) {
@@ -28,6 +30,7 @@ class BlurController(view: View?,
 
     override fun onPanelStateChanged(view: View, panelState: PanelState, panelState1: PanelState)
     {
+        balloon.dismiss()
         if (panelState1 == PanelState.EXPANDED && panelState == PanelState.DRAGGING)
         {
             addTile.animate()

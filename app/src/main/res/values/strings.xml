@@ -12,4 +12,7 @@
     <string name="background_location_permission">Mutify needs to access your location in the background, please allow
         access location all the time.
     </string>
+    <string name="marker_location">Marker location</string>
+    <string name="latitude_place_holder">Latitude: -</string>
+    <string name="longitude_place_holder">Longitude: -</string>
 </resources>

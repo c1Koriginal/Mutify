@@ -53,7 +53,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-        <!--map marker-->
+            <!--invisible view for the pop-up balloon to reference as an anchor-->
+            <RelativeLayout
+                    android:id="@+id/spriteOutline"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <!--map marker sprite-->
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/markerSprite"
                     android:src="@drawable/marker"
@@ -67,7 +77,7 @@
                     android:translationZ="100dp"
                     android:contentDescription="@string/map_marker"/>
 
-
+            <!--shadow below marker sprite-->
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/marker_focus"
                     android:src="@drawable/shadow"
@@ -82,6 +92,8 @@
                     android:contentDescription="@string/map_marker"/>
 
 
+
+            <!--reset camera to current location-->
             <androidx.cardview.widget.CardView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -91,13 +103,10 @@
                     android:layout_marginVertical="120dp"
                     android:layout_marginHorizontal="10dp"
                     android:translationZ="50dp">
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#393939">
-
-                    <!--todo: restyle this button-->
                     <androidx.appcompat.widget.AppCompatImageButton
                             android:background="#00000000"
                             android:src="@drawable/location_icon"
@@ -109,19 +118,14 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:onClick="getCurrentLocation"
                             android:contentDescription="@string/reset_camera"/>
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
             </androidx.cardview.widget.CardView>
 
 
 
 
 
-        <!--this CardView hosts the search bar-->
+        <!--Place search-->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,8 +139,6 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="40dp"
                 card_view:cardCornerRadius="10dp">
-
-
             <fragment android:id="@+id/autocomplete_fragment"
                       android:background="#99FFFFFF"
                       app:layout_constraintStart_toStartOf="parent"
@@ -144,12 +146,10 @@
                       app:layout_constraintTop_toTopOf="parent"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-            />
-
-
-
+                      android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
         </androidx.cardview.widget.CardView>
+
+
 
 
         <!--This is the Maps fragment-->
@@ -268,15 +268,18 @@
 
                         <!--todo: edit all the views under the CardView-->
                         <!--todo: re-organize the views below to display meaningful information-->
+                        <!--todo: add a ScrollView here-->
                         <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
-                            <!--todo: dummy TextView, change this-->
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <!--todo: set name, restyle this-->
+                            <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/add_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:hint="Name"
+                                android:text="@string/marker_location"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -284,31 +287,25 @@
                                 android:layout_marginHorizontal="20dp"
                                 android:textSize="40sp"/>
 
-                            <!--todo: dummy TextView, change this-->
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/add_country"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/add_name"
-                                android:layout_marginVertical="20dp"
-                                android:layout_marginHorizontal="20dp"
-                                android:textSize="40sp"/>
 
-                            <!--todo: dummy TextView, change this-->
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/add_locality"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/add_country"
-                                android:layout_marginVertical="20dp"
-                                android:layout_marginHorizontal="20dp"
-                                android:textSize="40sp"/>
+                            <!--todo: set radius, change to a different style (best to use slider)-->
+                            <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/radius"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="set radius"
+                                    android:inputType="number"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/add_name"
+                                    android:layout_marginVertical="20dp"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:textSize="40sp"/>
 
-                            <!--todo: dummy button, change this-->
+
+
+
+                            <!--todo:confirm add location, restyle this-->
                             <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/add_confirm_button"
                                 android:text="@string/add_new_location"

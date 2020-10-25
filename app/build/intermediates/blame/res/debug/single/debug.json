@@ -78,5 +78,9 @@
     {
         "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\layout_address_balloon_layout.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\layout\\address_balloon_layout.xml"
     }
 ]

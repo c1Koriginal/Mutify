@@ -1,13 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
 MERGED from [androidx.databinding:databinding-adapters:4.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\6f6d2380b6a21f5e4b0ffdfcac687374\databinding-adapters-4.0.2\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.databinding:databinding-runtime:4.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\41aaaabbf446c1d6527b4b732f650b9e\databinding-runtime-4.0.2\AndroidManifest.xml:17:1-24:12
 MERGED from [com.github.Valkriaine:Factor:1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\93b263773115dae8e73992c8a5946260\jetified-Factor-1.0\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\0de55d84199a4c24756bd4a78efc1c11\jetified-core-ktx-1.3.2\AndroidManifest.xml:2:1-9:12
+MERGED from [com.github.skydoves:balloon:1.2.4] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f0b9fe697d5f760c1de7d730d3c2ab92\jetified-balloon-1.2.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\1dd4ed3901b8534cd2b6b8025da6644c\constraintlayout-2.0.2\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:2:1-23:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\9f8c6bf6d6cfede505145b0a0a600913\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
@@ -61,20 +62,20 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\valkr\.gradle\caches
 MERGED from [com.google.firebase:firebase-encoders-json:16.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\76b818ba6c13b1b5ece4ed4e8af462e1\jetified-firebase-encoders-json-16.1.0\AndroidManifest.xml:15:1-23:12
 MERGED from [com.android.volley:volley:1.1.1] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\6bf4798aa5a06ab3ed7a0ea0f88e343c\jetified-volley-1.1.1\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.datatransport:transport-api:2.2.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\9f30e23c79a9bdbdd5307b3214ca0509\jetified-transport-api-2.2.0\AndroidManifest.xml:15:1-22:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
 	package
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:3:11-44
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-52:12
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-53:12
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:11-69
@@ -107,7 +108,7 @@ ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:1
 	android:name
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:14:22-65
 application
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:16:5-50:19
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:16:5-51:19
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\1dd4ed3901b8534cd2b6b8025da6644c\constraintlayout-2.0.2\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\1dd4ed3901b8534cd2b6b8025da6644c\constraintlayout-2.0.2\AndroidManifest.xml:9:5-20
 MERGED from [com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:13:5-21:19
@@ -161,29 +162,31 @@ ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:3
 	android:name
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:33:17-62
 activity#com.digitalsmart.mutify.MapsActivity
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:36:9-44:20
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:36:9-45:20
 	android:label
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:38:17-60
+	android:windowSoftInputMode
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:39:17-56
 	android:name
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:37:17-45
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:39:13-43:29
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:40:13-44:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:40:17-68
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:41:17-68
 	android:name
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:40:25-66
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:41:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:42:17-76
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:43:17-76
 	android:name
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:42:27-74
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:43:27-74
 service#com.digitalsmart.mutify.util.FetchAddressJobIntentService
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:46:9-49:34
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:47:9-50:34
 	android:exported
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:49:9-32
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:50:9-32
 	android:permission
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:48:17-73
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:49:17-73
 	android:name
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:47:17-66
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:48:17-66
 uses-sdk
 INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
@@ -196,6 +199,8 @@ MERGED from [com.github.Valkriaine:Factor:1.0] C:\Users\valkr\.gradle\caches\tra
 MERGED from [com.github.Valkriaine:Factor:1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\93b263773115dae8e73992c8a5946260\jetified-Factor-1.0\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\0de55d84199a4c24756bd4a78efc1c11\jetified-core-ktx-1.3.2\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\0de55d84199a4c24756bd4a78efc1c11\jetified-core-ktx-1.3.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.skydoves:balloon:1.2.4] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f0b9fe697d5f760c1de7d730d3c2ab92\jetified-balloon-1.2.4\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.skydoves:balloon:1.2.4] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f0b9fe697d5f760c1de7d730d3c2ab92\jetified-balloon-1.2.4\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\1dd4ed3901b8534cd2b6b8025da6644c\constraintlayout-2.0.2\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\1dd4ed3901b8534cd2b6b8025da6644c\constraintlayout-2.0.2\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:7:5-44

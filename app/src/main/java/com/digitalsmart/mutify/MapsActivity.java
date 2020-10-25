@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -31,6 +32,10 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.skydoves.balloon.ArrowConstraints;
+import com.skydoves.balloon.ArrowOrientation;
+import com.skydoves.balloon.Balloon;
+import com.skydoves.balloon.BalloonAnimation;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,7 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private SpringAnimation dragSpring;
     private SpringAnimation settleSpring;
-
+    private Balloon balloon;
 
     //data binding object from activity_maps.xml
     //to access any View/layout from activity_maps.xml, simply call binding.'layout id'
@@ -136,7 +141,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 for (Location location : locationResult.getLocations()) {
                     // do something with the location data retrieved
-                    // ...
+                    Log.d("CALLBACK", location.toString());
                 }
             }
         };
@@ -172,12 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //test methods to display the location info of the current marker location
         binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         binding.homePager.setCurrentItem(0, true);
-
-        if (markerUserLocation != null) {
-            binding.addName.setText(markerUserLocation.getName());
-            binding.addCountry.setText(markerUserLocation.getCountry());
-            binding.addLocality.setText(markerUserLocation.getAddressLine());
-        }
+        binding.radius.setText(String.valueOf(80));
     }
 
     //todo: change this, this is a dummy method to add the current marker location to the list
@@ -188,13 +188,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //retrieve radius from the UI controls
         //test call to set radius to 80m
-        markerUserLocation.setRadius(80);
+        markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
+
+        markerUserLocation.setName(String.valueOf(binding.addName.getText()));
 
         userDataManager.add(markerUserLocation);
         binding.homePager.setCurrentItem(1, true);
-
-
-
     }
 
 
@@ -294,6 +293,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        //setup address info balloon
+        balloon = new Balloon.Builder(this)
+                .setArrowSize(10)
+                .setArrowOrientation(ArrowOrientation.BOTTOM)
+                .setArrowConstraints(ArrowConstraints.ALIGN_ANCHOR)
+                .setArrowPosition(0.5f)
+                .setArrowVisible(true)
+                .setWidthRatio(0.6f)
+                .setLayout(R.layout.address_balloon_layout)
+                .setBalloonAnimation(BalloonAnimation.OVERSHOOT)
+                .setDismissWhenTouchOutside(false)
+                .setLifecycleOwner(MapsActivity.this)
+                .build();
+
 
         //initialize views
         binding.homePager.addView(binding.addPage, 0);
@@ -301,18 +314,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //set up blur effect and transition animations
-        BlurController blurController = new BlurController(binding.background, binding.blurLayer, binding.addTile, binding.menuTile, binding.homePager);
+        BlurController blurController = new BlurController(
+                binding.background,
+                binding.blurLayer,
+                binding.addTile,
+                binding.menuTile,
+                binding.homePager,
+                balloon);
         binding.drawer.addPanelSlideListener(blurController);
         binding.homePager.addOnPageChangeListener(blurController);
 
-
-        //spring animations for map marker
+        //spring animations for map marker sprite
         dragSpring = new SpringAnimation(binding.markerSprite, DynamicAnimation.TRANSLATION_Y, -30);
         settleSpring = new SpringAnimation(binding.markerSprite, DynamicAnimation.TRANSLATION_Y, 0);
     }
 
     //enable the app to retrieve the marker's location
-    private void configureCamera() {
+    private void configureCamera()
+    {
         GoogleMap.OnCameraIdleListener onCameraIdleListener = () -> {
             dragSpring.skipToEnd();
             settleSpring.start();
@@ -330,13 +349,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //pass the marker location
             intent.putExtra(LOCATION_DATA_EXTRA, markerLocation);
             FetchAddressJobIntentService.enqueueWork(MapsActivity.this, intent);
+            balloon.showAlignTop(binding.spriteOutline, 0, -100);
+
         };
-        GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i -> dragSpring.start();
+        GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i -> {
+            dragSpring.start();
+            if (balloon != null)
+                balloon.dismiss();
+
+        };
         map.setOnCameraIdleListener(onCameraIdleListener);
         map.setOnCameraMoveStartedListener(onCameraMoveStartedListener);
     }
 
 
+    //update the information displayed in the balloon based on the Geocoder result
+    private void updateBalloon(String message, boolean isSuccessful)
+    {
+
+        if (markerUserLocation != null && balloon != null)
+        {
+            TextView address = balloon.getContentView().findViewById(R.id.address);
+            TextView lat = balloon.getContentView().findViewById(R.id.lat);
+            TextView lng = balloon.getContentView().findViewById(R.id.lng);
+            if (isSuccessful) {
+                address.setText(markerUserLocation.getAddressLine());
+                lat.setText("Latitude: " + markerUserLocation.getLatLng().latitude);
+                lng.setText("Longitude: " + markerUserLocation.getLatLng().longitude);
+            }
+            else
+            {
+                address.setText(message);
+                lat.setText("You may still edit this location and add it to your list.");
+                lng.setText("It simply won't contain address info. ");
+            }
+        }
+    }
+
+    //receive Geocoder fetch address result
     private class AddressResultReceiver extends ResultReceiver {
         AddressResultReceiver(Handler handler) {
             super(handler);
@@ -349,11 +399,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
                     markerUserLocation.setAddress(a);
+                updateBalloon(null, true);
             }
             else if (resultCode == FAILURE_RESULT)
             {
                 //show the error message
-                Toast.makeText(MapsActivity.this, resultData.getString(RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
+                updateBalloon(resultData.getString(RESULT_DATA_KEY), false);
             }
         }
     }

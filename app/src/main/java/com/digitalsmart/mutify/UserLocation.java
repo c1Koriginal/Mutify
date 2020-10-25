@@ -31,6 +31,11 @@ public class UserLocation
         this.latLng = new LatLng(location.getLatitude(), location.getLongitude());
     }
 
+    public void setName(String newName)
+    {
+        this.name = newName;
+    }
+
     public void setRadius(float rad)
     {
         this.radius = rad;

@@ -23,6 +23,13 @@ anim btn_radio_to_off_mtrl_ring_outer_path_animation
 anim btn_radio_to_on_mtrl_dot_group_animation
 anim btn_radio_to_on_mtrl_ring_outer_animation
 anim btn_radio_to_on_mtrl_ring_outer_path_animation
+anim dispose_center
+anim elastic_center
+anim fade_in
+anim fade_out
+anim overshoot_center
+anim show_down_center
+anim show_up_center
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -195,15 +202,24 @@ attr dragDirection
 attr dragScale
 attr dragThreshold
 attr drawPath
+attr drawableBottom
 attr drawableBottomCompat
 attr drawableEndCompat
+attr drawableHeight
+attr drawableLeft
 attr drawableLeftCompat
+attr drawablePadding
+attr drawableRight
 attr drawableRightCompat
 attr drawableSize
+attr drawableSquareSize
 attr drawableStartCompat
 attr drawableTint
+attr drawableTintColor
 attr drawableTintMode
+attr drawableTop
 attr drawableTopCompat
+attr drawableWidth
 attr drawerArrowStyle
 attr dropDownListViewStyle
 attr dropdownListPreferredItemHeight
@@ -1264,6 +1280,7 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable above_shadow
+drawable arrow
 drawable below_shadow
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
@@ -1387,11 +1404,10 @@ id actions
 id activity_chooser_view_content
 id add
 id add_confirm_button
-id add_country
-id add_locality
 id add_name
 id add_page
 id add_tile
+id address
 id adjust_height
 id adjust_width
 id alertTitle
@@ -1409,6 +1425,13 @@ id autoCompleteToEnd
 id autoCompleteToStart
 id autocomplete_fragment
 id background
+id balloon
+id balloonOverlayView
+id balloon_arrow
+id balloon_card
+id balloon_content
+id balloon_text
+id balloon_wrapper
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -1498,6 +1521,7 @@ id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
+id lat
 id layout
 id left
 id light
@@ -1507,6 +1531,7 @@ id linear
 id listMode
 id list_item
 id list_page
+id lng
 id location
 id locationList
 id manually
@@ -1560,6 +1585,7 @@ id postLayout
 id progress_circular
 id progress_horizontal
 id radio
+id radius
 id ratio
 id rectangles
 id reverseSawtooth
@@ -1593,6 +1619,7 @@ id spline
 id split_action_bar
 id spread
 id spread_inside
+id spriteOutline
 id square
 id src_atop
 id src_in
@@ -1683,7 +1710,10 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_maps
+layout address_balloon_layout
 layout custom_dialog
+layout layout_balloon
+layout layout_balloon_overlay
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -1769,8 +1799,11 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string confirm_add_location
+string latitude_place_holder
+string longitude_place_holder
 string map_marker
 string maps_api_key
+string marker_location
 string notify_location_service
 string notify_permission
 string places_autocomplete_clear_button
@@ -1952,6 +1985,11 @@ style Base_Widget_AppCompat_Toolbar_Button_Navigation
 style CardView
 style CardView_Dark
 style CardView_Light
+style Elastic
+style Fade
+style Normal
+style NormalDispose
+style Overshoot
 style PlacesAutocompleteBase
 style PlacesAutocompleteErrorButtonText
 style PlacesAutocompleteErrorMessageText
@@ -2229,6 +2267,7 @@ styleable Toolbar android_gravity android_minHeight buttonGravity collapseConten
 styleable Transform android_transformPivotX android_transformPivotY android_translationX android_translationY android_scaleX android_scaleY android_rotation android_rotationX android_rotationY android_translationZ android_elevation
 styleable Transition android_id autoTransition constraintSetEnd constraintSetStart duration layoutDuringTransition motionInterpolator pathMotionArc staggered transitionDisable transitionFlags
 styleable Variant constraints region_heightLessThan region_heightMoreThan region_widthLessThan region_widthMoreThan
+styleable VectorTextView drawableBottom drawableHeight drawableLeft drawablePadding drawableRight drawableSquareSize drawableTintColor drawableTop drawableWidth
 styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewStubCompat android_id android_layout android_inflatedId
