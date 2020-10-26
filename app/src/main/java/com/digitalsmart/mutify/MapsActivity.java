@@ -45,7 +45,8 @@ import java.util.Arrays;
 import static com.digitalsmart.mutify.util.Constants.*;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener
+{
     private GoogleMap map;
     private LatLng currentLatLng;
     private UserLocation markerUserLocation;
@@ -121,18 +122,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //app will stop updating location info if the user manually closes the app
     //this is not the same as background service, implement background service separately
     //*********************************************************************************************************************
-    protected void createLocationRequest() {
+    protected void createLocationRequest()
+    {
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(5000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-    protected void startLocationUpdates() {
+    protected void startLocationUpdates()
+    {
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
     }
 
-    protected void initializeLocationCallBack() {
+    protected void initializeLocationCallBack()
+    {
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -204,7 +208,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //*********************************************************************************************************************
     //initialize Google Maps
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)
+    {
         map = googleMap;
         configureCamera();
         userDataManager = new UserDataManager(map);
@@ -212,14 +217,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
         permissionManager.checkPermission();
         binding.blurLayer.disable();
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         permissionManager.checkPermission();
         binding.blurLayer.disable();
@@ -228,13 +235,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //required for API26 to work
     @SuppressWarnings("deprecation")
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
+    public void onStatusChanged(String provider, int status, Bundle extras)
+    {
         //do nothing
     }
 
     //called when user's location changes
     @Override
-    public void onLocationChanged(@NonNull Location location) {
+    public void onLocationChanged(@NonNull Location location)
+    {
 
     }
 
@@ -246,28 +255,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //called when the location service provider is enabled
     @Override
-    public void onProviderEnabled(@NonNull String provider) {
+    public void onProviderEnabled(@NonNull String provider)
+    {
         permissionManager.onProviderEnabled();
         getCurrentLocation(null);
     }
 
     //handles permission request responses
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults)
+    {
         //todo: toast messages are messy here
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int result = permissionManager.onRequestPermissionsResult(requestCode, grantResults);
-        if (result == REQUEST_GRANTED) {
+        if (result == REQUEST_GRANTED)
+        {
             getCurrentLocation(null);
             return;
         }
-        if (result == LOCATION_REQUEST_REJECTED) {
+        if (result == LOCATION_REQUEST_REJECTED)
+        {
             Toast.makeText(this.getApplicationContext(),
                     R.string.notify_permission,
                     Toast.LENGTH_SHORT)
                     .show();
         }
-        if (result == BACKGROUND_LOCATION_REQUEST_REJECTED) {
+        if (result == BACKGROUND_LOCATION_REQUEST_REJECTED)
+        {
             Toast.makeText(this.getApplicationContext(),
                     R.string.background_location_permission,
                     Toast.LENGTH_SHORT)
@@ -286,9 +300,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         assert autocompleteFragment != null;
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG, Place.Field.ID, Place.Field.NAME));
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener()
+        {
             @Override
-            public void onPlaceSelected(@NotNull Place place) {
+            public void onPlaceSelected(@NotNull Place place)
+            {
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 15));
             }
 
@@ -339,13 +355,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //get the device's screen width in pixels
     @SuppressWarnings("deprecation")
-    public int getScreenWidth() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+    public int getScreenWidth()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+        {
             WindowMetrics windowMetrics = getWindowManager().getCurrentWindowMetrics();
             Insets insets = windowMetrics.getWindowInsets()
                     .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars());
             return windowMetrics.getBounds().width() - insets.left - insets.right;
-        } else {
+        }
+        else
+            {
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             return displayMetrics.widthPixels;
@@ -358,7 +378,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //enable the app to retrieve the marker's location
     private void configureCamera()
     {
-        GoogleMap.OnCameraIdleListener onCameraIdleListener = () -> {
+        GoogleMap.OnCameraIdleListener onCameraIdleListener = () ->
+        {
             dragSpring.skipToEnd();
             settleSpring.start();
             LatLng latLng = map.getCameraPosition().target;
@@ -378,18 +399,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             balloon.showAlignTop(binding.spriteOutline);
 
         };
-        GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i -> {
+
+        GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i ->
+        {
             dragSpring.start();
             if (balloon != null)
                 balloon.dismiss();
 
         };
+
         map.setOnCameraIdleListener(onCameraIdleListener);
         map.setOnCameraMoveStartedListener(onCameraMoveStartedListener);
     }
 
 
-    //update the information displayed in the balloon based on the Geocoder result
+    //update the information displayed in the balloon based on the Geocoder fetching result
     private void updateBalloon(String message, boolean isSuccessful)
     {
         if (markerUserLocation != null && balloon != null)
@@ -421,10 +445,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             super(handler);
         }
 
-        //Receives data sent from FetchAddressJobIntentService and updates the UI in MainActivity.
+        //Receives data sent from FetchAddressJobIntentService and updates the balloon
         @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            if (resultCode == SUCCESS_ADDRESS) {
+        protected void onReceiveResult(int resultCode, Bundle resultData)
+        {
+            if (resultCode == SUCCESS_ADDRESS)
+            {
                 Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
                     markerUserLocation.setAddress(a);
