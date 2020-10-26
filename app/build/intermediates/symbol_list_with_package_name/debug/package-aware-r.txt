@@ -1430,6 +1430,7 @@ id balloonOverlayView
 id balloon_arrow
 id balloon_card
 id balloon_content
+id balloon_outline
 id balloon_text
 id balloon_wrapper
 id barrier
@@ -1800,6 +1801,8 @@ string common_signin_button_text
 string common_signin_button_text_long
 string confirm_add_location
 string latitude_place_holder
+string loading_address_info
+string location_name
 string longitude_place_holder
 string map_marker
 string maps_api_key
@@ -1817,6 +1820,7 @@ string places_try_again
 string reset_camera
 string saved_locations
 string search_menu_title
+string set_radius
 string status_bar_notification_info_overflow
 string title_activity_maps
 style AlertDialog_AppCompat

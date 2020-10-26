@@ -17,4 +17,5 @@
     <string name="longitude_place_holder">Longitude: -</string>
     <string name="set_radius">set radius</string>
     <string name="location_name">Name</string>
+    <string name="loading_address_info">Loading address info</string>
 </resources>

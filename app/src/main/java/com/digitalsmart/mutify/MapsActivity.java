@@ -57,8 +57,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private PermissionManager permissionManager;
-
-    //initialize view model
     private UserDataManager userDataManager;
 
 
@@ -151,11 +149,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //button click events
     //*********************************************************************************************************************
     //call this method to manually get the user's current location
-    public void getCurrentLocation(View view) {
+    public void getCurrentLocation(View view)
+    {
         if (fusedLocationProviderClient != null)
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, location -> {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, location ->
+        {
             // Got last known location. In some rare situations this can be null.
-            if (location != null) {
+            if (location != null)
+            {
                 currentLocation = location;
                 currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
@@ -301,7 +302,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .setArrowConstraints(ArrowConstraints.ALIGN_ANCHOR)
                 .setArrowPosition(0.5f)
                 .setArrowVisible(true)
-                .setWidthRatio(0.6f)
                 .setLayout(R.layout.address_balloon_layout)
                 .setBalloonAnimation(BalloonAnimation.OVERSHOOT)
                 .setDismissWhenTouchOutside(false)
@@ -321,7 +321,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.addTile,
                 binding.menuTile,
                 binding.homePager,
-                balloon);
+                balloon,
+                binding.spriteOutline);
         binding.drawer.addPanelSlideListener(blurController);
         binding.homePager.addOnPageChangeListener(blurController);
 
@@ -350,7 +351,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //pass the marker location
             intent.putExtra(LOCATION_DATA_EXTRA, markerLocation);
             FetchAddressJobIntentService.enqueueWork(MapsActivity.this, intent);
-            balloon.showAlignTop(binding.spriteOutline, 0, -100);
+            balloon.showAlignTop(binding.spriteOutline);
 
         };
         GoogleMap.OnCameraMoveStartedListener onCameraMoveStartedListener = i -> {
@@ -367,13 +368,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //update the information displayed in the balloon based on the Geocoder result
     private void updateBalloon(String message, boolean isSuccessful)
     {
-
         if (markerUserLocation != null && balloon != null)
         {
             TextView address = balloon.getContentView().findViewById(R.id.address);
             TextView lat = balloon.getContentView().findViewById(R.id.lat);
             TextView lng = balloon.getContentView().findViewById(R.id.lng);
-            if (isSuccessful) {
+            if (isSuccessful)
+            {
                 address.setText(markerUserLocation.getAddressLine());
                 lat.setText("Latitude: " + markerUserLocation.getLatLng().latitude);
                 lng.setText("Longitude: " + markerUserLocation.getLatLng().longitude);
@@ -384,11 +385,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 lat.setText("You may still edit this location and add it to your list.");
                 lng.setText("It simply won't contain address info. ");
             }
+            balloon.update(binding.spriteOutline);
         }
     }
 
     //receive Geocoder fetch address result
-    private class AddressResultReceiver extends ResultReceiver {
+    private class AddressResultReceiver extends ResultReceiver
+    {
+        //constructor
         AddressResultReceiver(Handler handler) {
             super(handler);
         }

@@ -17,7 +17,8 @@ class BlurController(view: View?,
                      private val addTile: CardView,
                      private val menuTile: CardView,
                      private val homePager: HomePager,
-                     private val balloon: Balloon)
+                     private val balloon: Balloon,
+                     private val anchor: View)
     : SlidingUpPanelLayout.PanelSlideListener, ViewPager.OnPageChangeListener
 {
     override fun onPanelSlide(view: View, v: Float) {
@@ -73,6 +74,7 @@ class BlurController(view: View?,
         }
         if (panelState1 == PanelState.COLLAPSED && panelState == PanelState.DRAGGING)
         {
+            balloon.showAlignTop(anchor)
             addTile.animate()
                     .translationX(0f)
                     .translationZ(0f)

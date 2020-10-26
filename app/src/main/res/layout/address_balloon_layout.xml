@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="240dp"
-              android:layout_height="120dp"
-              android:gravity="center"
-              android:orientation="vertical"
-              android:padding="10dp">
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:id="@+id/balloon_outline">
 
 
     <TextView
             android:id="@+id/address"
-            android:text="Loading address info"
+            android:text="@string/loading_address_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/quantum_white_100"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText" />
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
     <TextView
             android:id="@+id/lat"
@@ -42,4 +42,4 @@
 
 
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
