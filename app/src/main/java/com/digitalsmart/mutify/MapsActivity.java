@@ -223,6 +223,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //required for API26 to work
+    @SuppressWarnings("deprecation")
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         //do nothing

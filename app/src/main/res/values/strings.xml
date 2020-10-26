@@ -15,4 +15,6 @@
     <string name="marker_location">Marker location</string>
     <string name="latitude_place_holder">Latitude: -</string>
     <string name="longitude_place_holder">Longitude: -</string>
+    <string name="set_radius">set radius</string>
+    <string name="location_name">Name</string>
 </resources>

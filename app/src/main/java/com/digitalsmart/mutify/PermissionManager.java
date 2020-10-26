@@ -44,6 +44,7 @@ public class PermissionManager
     }
 
     //check if location service is currently enabled
+    @SuppressWarnings("deprecation")
     public Boolean isLocationEnabled(Context context)
     {
         if (locationManager == null)
