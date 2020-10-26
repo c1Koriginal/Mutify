@@ -18,9 +18,15 @@ class BlurController(view: View?,
                      private val menuTile: CardView,
                      private val homePager: HomePager,
                      private val balloon: Balloon,
-                     private val anchor: View)
+                     private val anchor: View,
+                     private val offset: Int)
     : SlidingUpPanelLayout.PanelSlideListener, ViewPager.OnPageChangeListener
 {
+    init
+    {
+
+    }
+
     override fun onPanelSlide(view: View, v: Float) {
         blurLayout.enable()
         if (v > 0.0f) {
@@ -35,11 +41,11 @@ class BlurController(view: View?,
         if (panelState1 == PanelState.EXPANDED && panelState == PanelState.DRAGGING)
         {
             addTile.animate()
-                    .translationX(200f)
+                    .translationX(offset - 10f)
                     .setInterpolator(AccelerateDecelerateInterpolator())
                     .start()
             menuTile.animate()
-                    .translationX(-200f)
+                    .translationX(-1 * offset + 10f)
                     .setInterpolator(AccelerateDecelerateInterpolator())
                     .start()
 

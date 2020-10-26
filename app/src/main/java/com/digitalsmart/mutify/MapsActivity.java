@@ -1,15 +1,16 @@
 package com.digitalsmart.mutify;
 
 import android.content.Intent;
+import android.graphics.Insets;
 import android.location.Address;
 import android.location.Location;
 import android.location.LocationListener;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.ResultReceiver;
+import android.os.*;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowInsets;
+import android.view.WindowMetrics;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -73,7 +74,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         //initialize data binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
@@ -277,7 +279,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //add other methods here
     //*********************************************************************************************************************
     //link layout components and initialize places sdk, find views by id
-    private void initializeComponents() {
+    private void initializeComponents()
+    {
         // Initialize the SDK
         Places.initialize(getApplicationContext(), this.getResources().getString(R.string.maps_api_key));
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
@@ -322,7 +325,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 binding.menuTile,
                 binding.homePager,
                 balloon,
-                binding.spriteOutline);
+                binding.spriteOutline,
+                getScreenWidth()/8);
         binding.drawer.addPanelSlideListener(blurController);
         binding.homePager.addOnPageChangeListener(blurController);
 
@@ -330,6 +334,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         dragSpring = new SpringAnimation(binding.markerSprite, DynamicAnimation.TRANSLATION_Y, -30);
         settleSpring = new SpringAnimation(binding.markerSprite, DynamicAnimation.TRANSLATION_Y, 0);
     }
+
+
+
+    //get the device's screen width in pixels
+    @SuppressWarnings("deprecation")
+    public int getScreenWidth() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            WindowMetrics windowMetrics = getWindowManager().getCurrentWindowMetrics();
+            Insets insets = windowMetrics.getWindowInsets()
+                    .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars());
+            return windowMetrics.getBounds().width() - insets.left - insets.right;
+        } else {
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            return displayMetrics.widthPixels;
+        }
+    }
+
+
+
 
     //enable the app to retrieve the marker's location
     private void configureCamera()
