@@ -120,11 +120,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (isFromLaunch)
                 fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, location -> {
                     if (location != null) {
+
                         currentLocation = location;
                         currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
-                        isFromLaunch = false;
                     }
+                    isFromLaunch = false;
                 });
             else
             fusedLocationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
@@ -352,10 +353,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //register Mutify's notification channel with the system
-    private void createNotificationChannel() {
+    private void createNotificationChannel()
+    {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
             String description = "Mutify app";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(PACKAGE_NAME, PACKAGE_NAME, importance);

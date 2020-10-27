@@ -13,6 +13,8 @@ import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingEvent;
 import java.util.List;
 
+import static com.digitalsmart.mutify.util.Constants.PACKAGE_NAME;
+
 
 //todo: add methods here to show notification
 public class GeofenceBroadcastReceiver extends BroadcastReceiver
@@ -53,7 +55,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                     Toast.LENGTH_SHORT)
                     .show();
         }
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER)
+        else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER)
         {
             message = " geo fences, entering detected";
             Log.d(TAG, count + message);
@@ -62,7 +64,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                     Toast.LENGTH_SHORT)
                     .show();
         }
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT)
+        else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT)
         {
             message = " geo fences, exiting detected";
             Log.d(TAG, count + message);
@@ -72,14 +74,19 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                     .show();
         }
         else
-            message = "error, unidentified geo fence transition detected. ";
+            message = " error, unidentified geo fence transition detected. ";
 
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "Mutify")
+
+        //test notification
+        //notification is shown when the device receives geo fencing broadcast
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
+                .setSmallIcon(R.drawable.location_icon)
                 .setContentTitle("Mutify Geo fencing test")
                 .setContentText(count + message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         notificationManager.notify(Constants.NOTIFICATION_ID, builder.build());
+        Log.d(TAG, "pass");
     }
 }

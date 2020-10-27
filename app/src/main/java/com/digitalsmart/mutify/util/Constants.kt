@@ -5,7 +5,7 @@ package com.digitalsmart.mutify.util
 //put any key values here
 object Constants {
 
-    //constants for Geocoder JobIntentService
+    //Geocoder JobIntentService
     const val FAILURE_RESULT = 403
     const val PACKAGE_NAME = "com.digitalsmart.mutify"
     const val ADDRESS = "$PACKAGE_NAME.ADDRESS"
@@ -14,7 +14,7 @@ object Constants {
     const val RESULT_DATA_KEY = "$PACKAGE_NAME.RESULT_DATA_KEY"
     const val LOCATION_DATA_EXTRA = "$PACKAGE_NAME.LOCATION_DATA_EXTRA"
 
-    //constants for PermissionManager
+    //PermissionManager
     const val COARSE_LOCATION_REQUEST_CODE = 5556
     const val FINE_LOCATION_REQUEST_CODE = 5557
     const val BACKGROUND_LOCATION_REQUEST_CODE = 5558
@@ -22,6 +22,6 @@ object Constants {
     const val BACKGROUND_LOCATION_REQUEST_REJECTED = 8555
     const val REQUEST_GRANTED = 1000
 
-    //constants for notification manager
-    const val NOTIFICATION_ID = 3538
+    //NotificationManager
+    const val NOTIFICATION_ID = 0
 }

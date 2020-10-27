@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.location.Geofence;
@@ -102,12 +103,10 @@ public class UserDataManager
                                 .radius(location.getRadius())
                                 .strokeColor(Color.RED));
                         map.addMarker(new MarkerOptions().position(location.getLatLng()));
+                        updateUserData();
                     })
-                    .addOnFailureListener(activity, e -> Log.d("fences", e.getMessage()));
-
-            updateUserData();
+                    .addOnFailureListener(e -> Toast.makeText(activity, "Geofencing not available, please turn on location service.", Toast.LENGTH_LONG).show());
         }
-
 
         //todo: scroll the recyclerview to the new item added
     }

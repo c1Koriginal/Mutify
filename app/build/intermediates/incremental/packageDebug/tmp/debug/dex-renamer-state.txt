@@ -1,4 +1,4 @@
-#Mon Oct 26 21:44:39 PDT 2020
+#Mon Oct 26 22:57:04 PDT 2020
 base.1=C\:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
 path.1=classes.dex
 base.0=C\:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
