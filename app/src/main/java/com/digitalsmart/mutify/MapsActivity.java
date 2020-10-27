@@ -1,5 +1,7 @@
 package com.digitalsmart.mutify;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Insets;
 import android.location.Address;
@@ -39,9 +41,7 @@ import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
-
 import static com.digitalsmart.mutify.util.Constants.*;
 
 
@@ -52,10 +52,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private UserLocation markerUserLocation;
     private Location currentLocation;
     private Location markerLocation;
-    private LocationRequest locationRequest;
-    private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private AddressResultReceiver addressResultReceiver;
+    private GeofencingClient geofencingClient;
 
 
     private PermissionManager permissionManager;
@@ -65,6 +64,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SpringAnimation dragSpring;
     private SpringAnimation settleSpring;
     private Balloon balloon;
+
+    private boolean isFromLaunch = true;
 
     //data binding object from activity_maps.xml
     //to access any View/layout from activity_maps.xml, simply call binding.'layout id'
@@ -87,10 +88,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //register Geocoder intent listener
         addressResultReceiver = new AddressResultReceiver(new Handler(Looper.getMainLooper()));
-        initializeComponents();
+        createNotificationChannel();
 
-        //configure RecyclerView
-        binding.locationList.setLayoutManager(new LinearLayoutManager(this));
+        //initialize geofence client
+        geofencingClient = LocationServices.getGeofencingClient(this);
+
+        initializeComponents();
 
 
         //initialize Google Maps fragment
@@ -99,57 +102,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-        //accessing the recyclerview adapter via UserDataManager
-
-
-
-        //initialize fused location provider
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        //must call these methods when implementing background service
-        //remove these method calls if Mutify does not need to constantly update the user's location
-        initializeLocationCallBack();
-        createLocationRequest();
-        startLocationUpdates();
-
         //retrieve user's current location at app launch
         getCurrentLocation(null);
     }
 
-
-    //call these methods to start constantly updating the user's location info
-    //as long as the app is still running (in the foreground or minimized)
-    //app will stop updating location info if the user manually closes the app
-    //this is not the same as background service, implement background service separately
-    //*********************************************************************************************************************
-    protected void createLocationRequest()
-    {
-        locationRequest = LocationRequest.create();
-        locationRequest.setInterval(10000);
-        locationRequest.setFastestInterval(5000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-
-    protected void startLocationUpdates()
-    {
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
-    }
-
-    protected void initializeLocationCallBack()
-    {
-        locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-                for (Location location : locationResult.getLocations()) {
-                    // do something with the location data retrieved
-                    Log.d("CALLBACK", location.toString());
-                }
-            }
-        };
-    }
 
 
     //button click events
@@ -158,16 +114,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void getCurrentLocation(View view)
     {
         if (fusedLocationProviderClient != null)
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, location ->
         {
-            // Got last known location. In some rare situations this can be null.
-            if (location != null)
-            {
-                currentLocation = location;
-                currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
-            }
-        });
+            //if the app just launched and this method is being called in onCreate, get the last known location
+            //to avoid delay
+            if (isFromLaunch)
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, location -> {
+                    if (location != null) {
+                        currentLocation = location;
+                        currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+                        isFromLaunch = false;
+                    }
+                });
+            else
+            fusedLocationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
+                    .addOnSuccessListener(this, location -> {
+                    if (location != null) {
+                    currentLocation = location;
+                    currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+                }
+            });
+        }
     }
 
 
@@ -212,7 +180,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         map = googleMap;
         configureCamera();
-        userDataManager = new UserDataManager(map);
+        userDataManager = new UserDataManager(map, geofencingClient, this);
         binding.locationList.setAdapter(userDataManager.getAdapter());
     }
 
@@ -222,6 +190,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onStart();
         permissionManager.checkPermission();
         binding.blurLayer.disable();
+        createNotificationChannel();
     }
 
     @Override
@@ -230,7 +199,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
         permissionManager.checkPermission();
         binding.blurLayer.disable();
+        createNotificationChannel();
     }
+
 
     //required for API26 to work
     @SuppressWarnings("deprecation")
@@ -314,6 +285,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
+
         //setup address info balloon
         balloon = new Balloon.Builder(this)
                 .setArrowSize(10)
@@ -331,6 +304,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //initialize views
         binding.homePager.addView(binding.addPage, 0);
         binding.homePager.addView(binding.listPage, 1);
+        binding.locationList.setLayoutManager(new LinearLayoutManager(this));
 
 
         //set up blur effect and transition animations
@@ -349,6 +323,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //spring animations for map marker sprite
         dragSpring = new SpringAnimation(binding.markerSprite, DynamicAnimation.TRANSLATION_Y, -30);
         settleSpring = new SpringAnimation(binding.markerSprite, DynamicAnimation.TRANSLATION_Y, 0);
+
+        //initialize fused location provider
+        //this is for locating the user when the app is running in the foreground only
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
 
@@ -369,6 +347,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             return displayMetrics.widthPixels;
+        }
+    }
+
+
+    //register Mutify's notification channel with the system
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String description = "Mutify app";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(PACKAGE_NAME, PACKAGE_NAME, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 

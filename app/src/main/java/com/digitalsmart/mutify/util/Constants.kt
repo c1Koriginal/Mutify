@@ -7,7 +7,7 @@ object Constants {
 
     //constants for Geocoder JobIntentService
     const val FAILURE_RESULT = 403
-    private const val PACKAGE_NAME = "com.digitalsmart.mutify"
+    const val PACKAGE_NAME = "com.digitalsmart.mutify"
     const val ADDRESS = "$PACKAGE_NAME.ADDRESS"
     const val SUCCESS_ADDRESS = 503
     const val RECEIVER = "$PACKAGE_NAME.RECEIVER"
@@ -21,4 +21,7 @@ object Constants {
     const val LOCATION_REQUEST_REJECTED = 6555
     const val BACKGROUND_LOCATION_REQUEST_REJECTED = 8555
     const val REQUEST_GRANTED = 1000
+
+    //constants for notification manager
+    const val NOTIFICATION_ID = 3538
 }

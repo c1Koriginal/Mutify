@@ -65,6 +65,10 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
+        <receiver
+            android:name="com.digitalsmart.mutify.GeofenceBroadcastReceiver"
+            android:enabled="true" />
+
         <activity
             android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
             android:exported="false"
