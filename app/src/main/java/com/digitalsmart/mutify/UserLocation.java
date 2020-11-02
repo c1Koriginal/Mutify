@@ -2,6 +2,9 @@ package com.digitalsmart.mutify;
 
 import android.location.Address;
 import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.digitalsmart.mutify.util.Constants;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.maps.model.LatLng;
@@ -9,11 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 
 //todo: store this object in SQLite
-public class UserLocation
-{
-
-
-
+public class UserLocation implements Parcelable {
     //unique id for geofencing object
     private String id = "";
 
@@ -29,11 +28,7 @@ public class UserLocation
     private int delay = 30000;
 
     //todo: add time, date, and time duration
-
-
-
-
-
+    
     public UserLocation(Location location)
     {
         this.location = location;
@@ -122,4 +117,42 @@ public class UserLocation
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL)
                 .build();
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeParcelable(this.location, flags);
+        dest.writeParcelable(this.address, flags);
+        dest.writeFloat(this.radius);
+        dest.writeParcelable(this.latLng, flags);
+        dest.writeInt(this.delay);
+    }
+
+    protected UserLocation(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.location = in.readParcelable(Location.class.getClassLoader());
+        this.address = in.readParcelable(Address.class.getClassLoader());
+        this.radius = in.readFloat();
+        this.latLng = in.readParcelable(LatLng.class.getClassLoader());
+        this.delay = in.readInt();
+    }
+
+    public static final Parcelable.Creator<UserLocation> CREATOR = new Parcelable.Creator<UserLocation>() {
+        @Override
+        public UserLocation createFromParcel(Parcel source) {
+            return new UserLocation(source);
+        }
+
+        @Override
+        public UserLocation[] newArray(int size) {
+            return new UserLocation[size];
+        }
+    };
 }
