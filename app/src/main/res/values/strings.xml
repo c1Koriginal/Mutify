@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Mutify</string>
+    <string name="title_activity_maps">Mutify</string>
+    <string name="map_marker">Map Marker</string>
+    <string name="notify_location_service">\"Please turn on location service for Mutify to work properly. \"</string>
+    <string name="notify_permission">Mutify requires permission to access your location in order to work properly.
+    </string>
+    <string name="add_new_location">Add</string>
+    <string name="saved_locations">Menu</string>
+    <string name="confirm_add_location">Add</string>
+    <string name="reset_camera">Reset Camera</string>
+    <string name="background_location_permission">Mutify needs to access your location in the background, please allow
+        access location all the time.
+    </string>
+    <string name="marker_location">Marker location</string>
+    <string name="latitude_place_holder">Latitude: -</string>
+    <string name="longitude_place_holder">Longitude: -</string>
+    <string name="set_radius">set radius</string>
+    <string name="location_name">Name</string>
+    <string name="loading_address_info">Loading address info</string>
+</resources>

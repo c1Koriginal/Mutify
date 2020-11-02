@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        tools:context=".MapsActivity">
+
+<data>
+    <!--binding layout data to MapsActivity-->
+    <variable name="layout_data_binding" type="com.digitalsmart.mutify.MapsActivity"/>
+</data>
+
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:id="@+id/drawer"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        app:umanoPanelHeight="100dp"
+        app:umanoOverlay="true"
+        app:umanoShadowHeight="0dp"
+        app:umanoFadeColor="#B3000000"
+        app:umanoScrollableView="@id/locationList"
+        app:umanoClipPanel="false">
+
+
+    <!--hosts the Google Maps fragment and search bar-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        <!--blur the entire background when the drawer is open-->
+        <no.danielzeller.blurbehindlib.BlurBehindLayout
+                android:id="@+id/blurLayer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:translationZ="100dp"
+                android:alpha="0"
+                app:blurRadius="50.0"
+                app:updateMode="manually"
+                app:useTextureView="false"
+                app:blurTextureScale="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!--all child views (search bar, Google Map, map marker) will be blurred-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <!--invisible view for the pop-up balloon to reference as an anchor-->
+            <RelativeLayout
+                    android:id="@+id/spriteOutline"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <!--map marker sprite-->
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/markerSprite"
+                    android:src="@drawable/marker"
+                    android:paddingBottom="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:translationZ="100dp"
+                    android:contentDescription="@string/map_marker"/>
+
+            <!--shadow below marker sprite-->
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/marker_focus"
+                    android:src="@drawable/shadow"
+                    android:layout_width="20dp"
+                    android:layout_height="25dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:adjustViewBounds="true"
+                    android:translationZ="90dp"
+                    android:contentDescription="@string/map_marker"/>
+
+
+
+            <!--reset camera to current location-->
+            <androidx.cardview.widget.CardView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginVertical="120dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:translationZ="50dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#393939">
+                    <androidx.appcompat.widget.AppCompatImageButton
+                            android:background="#00000000"
+                            android:src="@drawable/location_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:onClick="getCurrentLocation"
+                            android:contentDescription="@string/reset_camera"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+        <!--Place search-->
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:translationZ="100dp"
+                app:cardElevation="5dp"
+                android:minHeight="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="40dp"
+                card_view:cardCornerRadius="10dp">
+            <fragment android:id="@+id/autocomplete_fragment"
+                      android:background="#99FFFFFF"
+                      app:layout_constraintStart_toStartOf="parent"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintTop_toTopOf="parent"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        <!--This is the Maps fragment-->
+        <fragment
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".MapsActivity"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    <!--Bottom drawer, consists of drawer handle and drawer content-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:gravity="center|top">
+
+
+            <!--drawer handle-->
+            <!--holds everything that will be displayed on the drawer when the drawer is closed (collapsed)-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:translationZ="0dp">
+
+                <!--left "Add" button-->
+                <androidx.cardview.widget.CardView
+                        android:id="@+id/add_tile"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintWidth_percent="0.45"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        app:cardElevation="5dp"
+                        android:clickable="true"
+                        android:onClick="addButtonClicked">
+
+                    <!--todo: add some style to this TextView-->
+                    <TextView android:layout_width="wrap_content"
+                              android:text="@string/confirm_add_location"
+                              android:layout_gravity="center"
+                              android:textSize="20sp"
+                              android:textAlignment="center"
+                              android:layout_height="wrap_content"/>
+                </androidx.cardview.widget.CardView>
+
+
+                <!--right "Menu" button-->
+                <androidx.cardview.widget.CardView
+                        android:id="@+id/menu_tile"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        app:layout_constraintWidth_percent="0.45"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:cardElevation="5dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:clickable="true"
+                        android:onClick="menuButtonClicked">
+
+                    <!--todo: add some style to this TextView-->
+                    <TextView android:layout_width="wrap_content"
+                              android:text="@string/saved_locations"
+                              android:layout_gravity="center"
+                              android:textSize="20sp"
+                              android:textAlignment="center"
+                              android:layout_height="wrap_content"/>
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            <!--drawer content-->
+            <!--hosts everything that will be displayed when the drawer is open (expanded)-->
+            <com.valkriaine.factor.HomePager
+                    android:id="@+id/homePager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="100dp">
+
+
+                <!--open this page when the user clicks "Add" button-->
+                <!--display the current marker information and extra edit options-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/add_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    <androidx.cardview.widget.CardView
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="10dp"
+                            app:cardBackgroundColor="#9CFFFFFF"
+                            app:cardElevation="0dp"
+                            app:cardCornerRadius="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                        <!--todo: edit all the views under the CardView-->
+                        <!--todo: re-organize the views below to display meaningful information-->
+                        <!--todo: add a ScrollView here-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <!--todo: set name, restyle this-->
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/add_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/location_name"
+                                android:text="@string/marker_location"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:layout_marginVertical="20dp"
+                                android:layout_marginHorizontal="20dp"
+                                android:textSize="40sp"/>
+
+
+                            <!--todo: set radius, change to a different style (best to use slider)-->
+                            <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/radius"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/set_radius"
+                                    android:inputType="number"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/add_name"
+                                    android:layout_marginVertical="20dp"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:textSize="40sp"/>
+
+
+
+
+                            <!--todo:confirm add location, restyle this-->
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/add_confirm_button"
+                                android:text="@string/add_new_location"
+                                android:layout_width="100dp"
+                                android:layout_height="60dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginVertical="20dp"
+                                android:layout_marginHorizontal="20dp"
+                                android:onClick="confirmButtonClicked"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                <!--open this page when the user clicks "Menu" button-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/list_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <!--todo: design idea: add an extra section here to display recommended locations-->
+                    <!--todo: add a toggle for each recommendation and user-saved locations to enable/disable routine-->
+
+
+                    <!--display the list of user-saved locations (routines)-->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/locationList"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginBottom="10dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.valkriaine.factor.HomePager>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+</layout>

@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable_location_icon.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable\\location_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\layout_userlocation_list_item.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\layout\\userlocation_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable_search_icon.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable\\search_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_maps.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\layout\\activity_maps.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable_marker.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable\\marker.xml"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\drawable_shadow.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\drawable\\shadow.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\build\\intermediates\\res\\merged\\debug\\layout_address_balloon_layout.xml.flat",
+        "source": "C:\\Users\\valkr\\IdeaProjects\\Mutify\\app\\src\\main\\res\\layout\\address_balloon_layout.xml"
+    }
+]
