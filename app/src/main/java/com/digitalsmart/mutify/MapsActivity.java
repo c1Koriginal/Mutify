@@ -481,7 +481,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = new Intent("Cancel");
         PendingIntent pIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
         builder.addAction(R.drawable.location_icon, "Cancel",pIntent);
-       // pIntent.cancel();
+
 
         final int PROGRESS_MAX = 100;
         int PROGRESS_CURRENT = 0;
@@ -502,10 +502,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
         thread.start();
-       // notificationManager.cancel(NOTIFICATION_ID);
-       // builder.setContentText("New location has been added")
-       //         .setProgress(0,0,false);
-
-    //    notificationManager.notify(Constants.NOTIFICATION_ID, builder.build());
     }
 }
