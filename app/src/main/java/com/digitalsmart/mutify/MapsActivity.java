@@ -3,7 +3,6 @@ package com.digitalsmart.mutify;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Insets;
 import android.location.Address;
@@ -27,7 +26,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.util.BlurController;
-import com.digitalsmart.mutify.util.Constants;
 import com.digitalsmart.mutify.util.FetchAddressJobIntentService;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.*;
@@ -469,6 +467,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
+
+
     public void createNotification(){
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, PACKAGE_NAME)
@@ -476,10 +477,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .setContentTitle("Mutify Geo fencing test")
                 .setContentText("In progress")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        Context context = this;
 
         Intent intent = new Intent("Cancel");
-        PendingIntent pIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
+        PendingIntent pIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
         builder.addAction(R.drawable.location_icon, "Cancel",pIntent);
 
 
