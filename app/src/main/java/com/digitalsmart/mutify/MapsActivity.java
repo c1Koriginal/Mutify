@@ -3,6 +3,7 @@ package com.digitalsmart.mutify;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Insets;
 import android.location.Address;
@@ -28,7 +29,10 @@ import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.util.BlurController;
 import com.digitalsmart.mutify.util.FetchAddressJobIntentService;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.*;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,7 +48,9 @@ import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
+
 import static com.digitalsmart.mutify.util.Constants.*;
 
 
@@ -107,8 +113,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //retrieve user's current location at app launch
         getCurrentLocation(null);
-
-        createNotification();
     }
 
 
@@ -159,6 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         binding.homePager.setCurrentItem(0, true);
         binding.radius.setText(String.valueOf(80));
+        createNotification();
     }
 
     //todo: change this, this is a dummy method to add the current marker location to the list
@@ -468,9 +473,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-
-    public void createNotification(){
+    public void createNotification() {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, PACKAGE_NAME)
                 .setSmallIcon(R.drawable.location_icon)
@@ -480,7 +483,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent intent = new Intent("Cancel");
         PendingIntent pIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-        builder.addAction(R.drawable.location_icon, "Cancel",pIntent);
+        builder.addAction(R.drawable.location_icon, "Cancel", pIntent);
 
 
         final int PROGRESS_MAX = 100;
@@ -488,19 +491,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
 
-        Thread thread = new Thread(new Runnable(){
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int PROGRESS_CURRENT = 0; PROGRESS_CURRENT < PROGRESS_MAX; PROGRESS_CURRENT += 10){
+                for (int PROGRESS_CURRENT = 0; PROGRESS_CURRENT < PROGRESS_MAX; PROGRESS_CURRENT += 10) {
                     SystemClock.sleep(1000);
-                    builder.setProgress(PROGRESS_MAX,PROGRESS_CURRENT,false);
-                    notificationManager.notify(NOTIFICATION_ID, builder.build());
+                    builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
+                    notificationManager.notify(NOTIFICATION_ID, builder.setNotificationSilent().build());
                 }
                 builder.setProgress(0, 0, false);
                 builder.setContentText("New Location has been added");
-                notificationManager.notify(NOTIFICATION_ID, builder.build());
+                notificationManager.notify(NOTIFICATION_ID, builder.setNotificationSilent().build());
             }
         });
         thread.start();
+
     }
 }

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import org.jetbrains.annotations.NotNull;
 
@@ -142,5 +143,24 @@ public class PermissionManager
                         .show();
                 mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_REQUEST_CODE);
             }
+
+
+            //check and request permission to change system settings
+        if(!Settings.System.canWrite(mapsActivity)) {
+            // If do not have write settings permission then open the Can modify system settings panel.
+            AlertDialog alertDialog = new AlertDialog.Builder(mapsActivity).create();
+            alertDialog.setMessage("Please allow Mutify to change system settings.");
+            alertDialog.show();
+            alertDialog.setCanceledOnTouchOutside(true);
+            alertDialog.setOnCancelListener(dialog -> {
+                if(!Settings.System.canWrite(mapsActivity))
+                    mapsActivity.startActivity(new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS));
+                else
+                    alertDialog.cancel();
+            });
+
+        }
+
+
     }
 }
