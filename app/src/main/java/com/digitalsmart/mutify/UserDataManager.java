@@ -88,7 +88,7 @@ public class UserDataManager
         if (!fences.contains(location.getGeofence()))
         {
             fencesToAdd.add(location.getGeofence());
-            locations.add(location);
+
 
             geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
                     .addOnSuccessListener(activity, v -> {
@@ -103,6 +103,7 @@ public class UserDataManager
                                 .radius(location.getRadius())
                                 .strokeColor(Color.RED));
                         map.addMarker(new MarkerOptions().position(location.getLatLng()));
+                        locations.add(location);
                         updateUserData();
                     })
                     .addOnFailureListener(e -> Toast.makeText(activity, "Geofencing not available, please turn on location service.", Toast.LENGTH_LONG).show());
