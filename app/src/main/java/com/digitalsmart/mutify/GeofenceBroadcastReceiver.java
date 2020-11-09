@@ -48,6 +48,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
 
+
         counterThread = new Thread(() -> {
             for (int PROGRESS_CURRENT1 = 0; PROGRESS_CURRENT1 < PROGRESS_MAX; PROGRESS_CURRENT1 += 10)
             {
@@ -62,8 +63,6 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
             //change audio setting to vibrate
             audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
         });
-
-
 
 
         if (intent.getAction()!= null)
