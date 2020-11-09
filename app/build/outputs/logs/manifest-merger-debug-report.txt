@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
 MERGED from [androidx.databinding:databinding-adapters:4.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f1a806af3d5fc76ff8d9315775c9c155\databinding-adapters-4.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.databinding:databinding-runtime:4.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\237f22b967319e5303a6ac2a1b9e47c4\databinding-runtime-4.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.github.Valkriaine:Factor:1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\1b8cedff52b93ddf07ae9d6a541ed0ee\jetified-Factor-1.0\AndroidManifest.xml:2:1-11:12
@@ -62,22 +62,22 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\valkr\.gradle\caches
 MERGED from [com.google.firebase:firebase-encoders-json:16.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\a7fd7e006b585033dbc8a1f1cc1df5e7\jetified-firebase-encoders-json-16.1.0\AndroidManifest.xml:15:1-23:12
 MERGED from [com.android.volley:volley:1.1.1] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\c9aac91dd187cf8482cc7050a8459798\jetified-volley-1.1.1\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.datatransport:transport-api:2.2.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\85c668a459a878c553b62f154ee16a27\jetified-transport-api-2.2.0\AndroidManifest.xml:15:1-22:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
 	package
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:3:58-91
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:3:11-57
 	android:versionCode
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-57:12
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:1-61:12
 		INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:2:11-69
@@ -116,7 +116,7 @@ ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:1
 	android:name
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:15:22-70
 application
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:17:5-55:19
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:17:5-59:19
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\ff2dcd301a05b983e683d316ac823295\constraintlayout-2.0.2\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\ff2dcd301a05b983e683d316ac823295\constraintlayout-2.0.2\AndroidManifest.xml:9:5-20
 MERGED from [com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\47b0da92cc31a891cb550247773f0b0c\jetified-places-2.4.0\AndroidManifest.xml:13:5-21:19
@@ -196,11 +196,17 @@ ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:4
 	android:name
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:49:17-66
 receiver#com.digitalsmart.mutify.GeofenceBroadcastReceiver
-ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:53:9-54:43
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:53:9-58:20
 	android:enabled
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:54:19-41
 	android:name
 		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:53:19-60
+intent-filter#action:name:com.digitalsmart.mutify_cancel
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:55:13-57:29
+action#com.digitalsmart.mutify_cancel
+ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:56:17-72
+	android:name
+		ADDED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:56:25-70
 uses-sdk
 INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml

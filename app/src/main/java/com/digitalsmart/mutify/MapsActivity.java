@@ -2,8 +2,6 @@ package com.digitalsmart.mutify;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Insets;
 import android.location.Address;
@@ -18,8 +16,6 @@ import android.view.WindowMetrics;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
@@ -163,7 +159,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         binding.homePager.setCurrentItem(0, true);
         binding.radius.setText(String.valueOf(80));
-        createNotification();
     }
 
     //todo: change this, this is a dummy method to add the current marker location to the list
@@ -470,41 +465,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 updateBalloon(resultData.getString(RESULT_DATA_KEY), false);
             }
         }
-    }
-
-
-    public void createNotification() {
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, PACKAGE_NAME)
-                .setSmallIcon(R.drawable.location_icon)
-                .setContentTitle("Mutify Geo fencing test")
-                .setContentText("In progress")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        Intent intent = new Intent("Cancel");
-        PendingIntent pIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-        builder.addAction(R.drawable.location_icon, "Cancel", pIntent);
-
-
-        final int PROGRESS_MAX = 100;
-        int PROGRESS_CURRENT = 0;
-        builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int PROGRESS_CURRENT = 0; PROGRESS_CURRENT < PROGRESS_MAX; PROGRESS_CURRENT += 10) {
-                    SystemClock.sleep(1000);
-                    builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
-                    notificationManager.notify(NOTIFICATION_ID, builder.setNotificationSilent().build());
-                }
-                builder.setProgress(0, 0, false);
-                builder.setContentText("New Location has been added");
-                notificationManager.notify(NOTIFICATION_ID, builder.setNotificationSilent().build());
-            }
-        });
-        thread.start();
-
     }
 }

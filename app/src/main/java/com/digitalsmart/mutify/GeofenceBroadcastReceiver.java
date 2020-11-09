@@ -4,6 +4,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.SystemClock;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
@@ -22,14 +24,61 @@ import static com.digitalsmart.mutify.util.Constants.PACKAGE_NAME;
 public class GeofenceBroadcastReceiver extends BroadcastReceiver
 {
     private static final String TAG = "broadcast";
+    private SharedPreferences audioSettingSave;
     private Context context;
+    private AudioManager audioManager;
+    private NotificationManagerCompat notificationManager;
+    private NotificationCompat.Builder builder;
+    private Thread counterThread;
+    private final int PROGRESS_MAX = 100;
+    int PROGRESS_CURRENT = 0;
 
     @Override
     public void onReceive(Context context, Intent intent)
     {
         this.context = context;
+        notificationManager = NotificationManagerCompat.from(context);
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
+
+        builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
+                .setSmallIcon(R.drawable.location_icon)
+                .setContentTitle("Mutify")
+                .setContentText("In progress")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+        counterThread = new Thread(() -> {
+            for (int PROGRESS_CURRENT1 = 0; PROGRESS_CURRENT1 < PROGRESS_MAX; PROGRESS_CURRENT1 += 10)
+            {
+                SystemClock.sleep(1000);
+                builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT1,false);
+                notificationManager.notify(NOTIFICATION_ID, builder.setNotificationSilent().build());
+            }
+            builder.setProgress(0, 0, false);
+            builder.setContentText("Phone mutified.");
+            notificationManager.notify(NOTIFICATION_ID, builder.setNotificationSilent().build());
+
+            //change audio setting to vibrate
+            audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+        });
+
+
+
+
+        if (intent.getAction()!= null)
+        {
+            if (counterThread.isAlive() && intent.getAction().equals(PACKAGE_NAME + "_cancel"))
+            {
+                counterThread.interrupt();
+                //todo: the notification message doesn't clear, need fix
+                notificationManager.cancelAll();
+            }
+        }
+
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
-        if (geofencingEvent.hasError()) {
+        if (geofencingEvent.hasError())
+        {
             String errorMessage = GeofenceStatusCodes.getStatusCodeString(geofencingEvent.getErrorCode());
             Log.e(TAG, errorMessage);
             return;
@@ -51,6 +100,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         {
             message = " geo fences, dwelling detected";
             Log.d(TAG, count + message);
+            if (count > 0)
+                turnOnVibrate();
         }
         else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER)
         {
@@ -61,46 +112,52 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         {
             message = " geo fences, exiting detected";
             Log.d(TAG, count + message);
+            restoreAudioSettings();
         }
 
-
-        //test notification
-        //notification is shown when the device receives geo fencing broadcast
-        createNotification();
         Log.d(TAG, "pass");
     }
 
 
 
-    public void createNotification()
+    //turn on vibrate - "mutify"
+    private void turnOnVibrate()
     {
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
-                .setSmallIcon(R.drawable.location_icon)
-                .setContentTitle("Mutify Geo fencing test")
-                .setContentText("In progress")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        //save the previous audio settings
+        SharedPreferences.Editor editor = audioSettingSave.edit();
+        editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", audioManager.getRingerMode()).apply();
 
-        Intent intent = new Intent("Cancel");
-        PendingIntent pIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
-        builder.addAction(R.drawable.location_icon, "Cancel",pIntent);
-
-
-        final int PROGRESS_MAX = 100;
-        int PROGRESS_CURRENT = 0;
-        builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
-
-        Thread thread = new Thread(() -> {
-            for (int PROGRESS_CURRENT1 = 0; PROGRESS_CURRENT1 < PROGRESS_MAX; PROGRESS_CURRENT1 += 10){
-                SystemClock.sleep(1000);
-                builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT1,false);
-                notificationManager.notify(NOTIFICATION_ID, builder.setNotificationSilent().build());
+        if (!audioManager.isVolumeFixed())
+        {
+            if (audioManager.getRingerMode() != AudioManager.RINGER_MODE_VIBRATE)
+            {
+                Intent intent = new Intent(context, GeofenceBroadcastReceiver.class);
+                intent.setAction(PACKAGE_NAME + "_cancel");
+                PendingIntent pIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
+                builder.addAction(R.drawable.location_icon, "Cancel",pIntent);
+                builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
+                notificationManager.notify(NOTIFICATION_ID, builder.build());
+                counterThread.start();
             }
-            builder.setProgress(0, 0, false);
-            builder.setContentText("New Location has been added");
-            notificationManager.notify(NOTIFICATION_ID, builder.setNotificationSilent().build());
-        });
-        thread.start();
+        }
     }
+
+
+    //restore the audio settings from before the phone is muted
+    private void restoreAudioSettings()
+    {
+        int audioCode = audioSettingSave.getInt(PACKAGE_NAME + "_AUDIO_SETTINGS", -99);
+        if (audioCode != -99)
+        {
+            audioManager.setRingerMode(audioCode);
+            builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
+                    .setSmallIcon(R.drawable.location_icon)
+                    .setContentTitle("Mutify")
+                    .setContentText("Audio settings restored.")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+            notificationManager.notify(NOTIFICATION_ID, builder.build());
+        }
+    }
+
 }

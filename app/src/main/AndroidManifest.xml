@@ -51,7 +51,11 @@
         android:exported="true"/>
 
         <receiver android:name=".GeofenceBroadcastReceiver"
-                  android:enabled="true"/>
+                  android:enabled="true">
+            <intent-filter>
+                <action android:name="com.digitalsmart.mutify_cancel"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
