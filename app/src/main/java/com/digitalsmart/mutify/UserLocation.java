@@ -114,7 +114,7 @@ public class UserLocation implements Parcelable {
                 .setCircularRegion(this.latLng.latitude, this.latLng.longitude, radius)
                 .setLoiteringDelay(this.delay)
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build();
     }
 

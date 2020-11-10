@@ -1,6 +1,7 @@
 package com.digitalsmart.mutify;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.provider.Settings;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import org.jetbrains.annotations.NotNull;
 
@@ -155,6 +157,22 @@ public class PermissionManager
             alertDialog.setOnCancelListener(dialog -> {
                 if(!Settings.System.canWrite(mapsActivity))
                     mapsActivity.startActivity(new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS));
+                else
+                    alertDialog.cancel();
+            });
+
+        }
+
+        NotificationManager n = (NotificationManager) mapsActivity.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        if(!n.isNotificationPolicyAccessGranted())
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(mapsActivity).create();
+            alertDialog.setMessage("Please allow Mutify to modify do not disturb.");
+            alertDialog.show();
+            alertDialog.setCanceledOnTouchOutside(true);
+            alertDialog.setOnCancelListener(dialog -> {
+                if(!n.isNotificationPolicyAccessGranted())
+                    mapsActivity.startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS));
                 else
                     alertDialog.cancel();
             });

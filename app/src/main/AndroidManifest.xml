@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" tools:ignore="ProtectedPermissions"/>
 
     <application
@@ -51,6 +52,9 @@
         android:exported="true"/>
 
         <receiver android:name=".GeofenceBroadcastReceiver"
+                  android:enabled="true"/>
+
+        <receiver android:name=".CancelIntentReceiver"
                   android:enabled="true">
             <intent-filter>
                 <action android:name="com.digitalsmart.mutify_cancel"/>
