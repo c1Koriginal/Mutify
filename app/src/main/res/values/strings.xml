@@ -5,7 +5,7 @@
     <string name="notify_location_service">\"Please turn on location service for Mutify to work properly. \"</string>
     <string name="notify_permission">Mutify requires permission to access your location in order to work properly.
     </string>
-    <string name="add_new_location">Add</string>
+    <string name="add_new_location">Confirm</string>
     <string name="saved_locations">Menu</string>
     <string name="confirm_add_location">Add</string>
     <string name="reset_camera">Reset Camera</string>
@@ -16,6 +16,8 @@
     <string name="latitude_place_holder">Latitude: -</string>
     <string name="longitude_place_holder">Longitude: -</string>
     <string name="set_radius">set radius</string>
-    <string name="location_name">Name</string>
+    <string name="location_name">Enter a name</string>
     <string name="loading_address_info">Loading address info</string>
+    <string name="unit_meter">meters</string>
+    <string name="radius_hint">Radius:</string>
 </resources>

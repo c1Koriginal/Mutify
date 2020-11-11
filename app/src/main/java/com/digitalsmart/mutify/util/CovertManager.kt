@@ -9,8 +9,8 @@ class CovertManager (recyclerView: RecyclerView, userDataManager: UserDataManage
 {
     private val covertConfig : Covert.Config = Covert.Config(
             iconRes = R.drawable.location_icon, // The icon to show
-            iconDefaultColorRes = R.color.colorBlue,            // The color of the icon
-            actionColorRes = R.color.cardview_dark_background          // The color of the background
+            iconDefaultColorRes = R.color.quantum_white_100,            // The color of the icon
+            actionColorRes = R.color.quantum_googred100          // The color of the background
     )
 
     val covert = Covert.with(covertConfig)

@@ -97,10 +97,9 @@ public class UserDataManager
         if (!fences.contains(location.getGeofence()))
         {
             fencesToAdd.add(location.getGeofence());
-
-
             geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
-                    .addOnSuccessListener(activity, v -> {
+                    .addOnSuccessListener(activity, v ->
+                    {
                         fences.addAll(fencesToAdd);
                         fencesToAdd.clear();
                         Log.d("fences", "fences added. Fences saved: " + fences.size());
@@ -115,7 +114,9 @@ public class UserDataManager
                         locations.add(location);
                         updateUserData();
                     })
-                    .addOnFailureListener(e -> Toast.makeText(activity, "Geofencing not available, please turn on location service.", Toast.LENGTH_LONG).show());
+                    .addOnFailureListener(e -> Toast
+                            .makeText(activity, "Geofencing not available, please turn on location service.", Toast.LENGTH_LONG)
+                            .show());
         }
     }
 
@@ -193,7 +194,8 @@ public class UserDataManager
             covertManager.getCovert().drawCornerFlag(holder, true);
 
 
-            if (l != null) {
+            if (l != null)
+            {
                 locationViewHolder.name.setText(l.getName());
                 //currently displaying location information as a string
                 locationViewHolder.location.setText(l.getCountry() + " " + l.getAddressLine());
@@ -201,7 +203,8 @@ public class UserDataManager
         }
 
         @Override
-        public int getItemCount() {
+        public int getItemCount()
+        {
             return locations.size();
         }
 
