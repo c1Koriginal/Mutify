@@ -182,16 +182,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //add the current marker location to the list
 
         //retrieve radius from the UI controls
-        //test call to set radius to 80m
-        markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
-        markerUserLocation.setDelay(Integer.parseInt(Objects.requireNonNull(binding.delaySlider.getBubbleText())));
-        if (String.valueOf(binding.addName.getText()).isEmpty())
-            markerUserLocation.setName(markerUserLocation.getAddressLine());
-        else
-            markerUserLocation.setName(String.valueOf(binding.addName.getText()));
+        //do nothing if there is no marked user location
+        if (markerUserLocation != null) {
+            markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
+            markerUserLocation.setDelay(Integer.parseInt(Objects.requireNonNull(binding.delaySlider.getBubbleText())));
+            if (String.valueOf(binding.addName.getText()).isEmpty())
+                markerUserLocation.setName(markerUserLocation.getAddressLine());
+            else
+                markerUserLocation.setName(String.valueOf(binding.addName.getText()));
 
-        userDataManager.add(markerUserLocation);
-        binding.homePager.setCurrentItem(1, true);
+            userDataManager.add(markerUserLocation);
+            binding.homePager.setCurrentItem(1, true);
+        }
     }
 
 
