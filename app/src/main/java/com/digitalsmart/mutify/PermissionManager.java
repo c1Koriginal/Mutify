@@ -148,7 +148,8 @@ public class PermissionManager
 
 
             //check and request permission to change system settings
-        if(!Settings.System.canWrite(mapsActivity)) {
+        if(!Settings.System.canWrite(mapsActivity))
+        {
             // If do not have write settings permission then open the Can modify system settings panel.
             AlertDialog alertDialog = new AlertDialog.Builder(mapsActivity).create();
             alertDialog.setMessage("Please allow Mutify to change system settings.");

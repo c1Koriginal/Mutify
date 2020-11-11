@@ -8,12 +8,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.SystemClock;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingEvent;
@@ -29,9 +27,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     private static final String TAG = "broadcast";
     private SharedPreferences audioSettingSave;
     private Context context;
-    private AudioManager audioManager;
-    private NotificationManagerCompat notificationManager;
     private NotificationCompat.Builder builder;
+    NotificationManager notificationManager;
     private final int PROGRESS_MAX = 100;
     int PROGRESS_CURRENT = 0;
 
@@ -40,9 +37,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     {
         this.context = context;
         createNotificationChannel();
-        notificationManager = NotificationManagerCompat.from(context);
-        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                 .setSmallIcon(R.drawable.location_icon)
@@ -81,7 +76,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         {
             message = " geo fences, entering detected";
             Log.d(TAG, count + message);
-            turnOnVibrate();
+            turnOnDND();
         }
         else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT)
         {
@@ -96,15 +91,14 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
 
 
     //turn on vibrate - "mutify"
-    private void turnOnVibrate()
+    private void turnOnDND()
     {
         //save the previous audio settings
+        audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = audioSettingSave.edit();
-        editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", audioManager.getRingerMode());
+        editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
 
-        if (!audioManager.isVolumeFixed())
-        {
-            if (audioManager.getRingerMode() != AudioManager.RINGER_MODE_VIBRATE)
+        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_NONE)
             {
                 Intent intent = new Intent(context, CancelIntentReceiver.class);
                 intent.setAction(PACKAGE_NAME + "_cancel");
@@ -126,8 +120,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                     }
 
 
-                    //change audio setting to vibrate
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                    //turn on do not disturb
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
 
                     builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                             .setSmallIcon(R.drawable.location_icon)
@@ -145,28 +139,32 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
             else
             {
                 editor.putBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false);
+                Log.d(TAG, "settings not changed");
             }
             editor.apply();
-        }
+        Log.d(TAG, "settings changed: " + audioSettingSave.getBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false));
     }
 
 
     //restore the audio settings from before the phone is muted
     private void restoreAudioSettings()
     {
+        audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = audioSettingSave.edit();
         boolean changed = audioSettingSave.getBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false);
-        if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL)
+        Log.d(TAG, "settings changed: " + changed);
+        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_NONE)
         {
-            editor.putBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false);
-            editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", audioManager.getRingerMode());
+            editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
+            editor.apply();
         }
-        else if (changed)
+        if (changed)
         {
             int audioCode = audioSettingSave.getInt(PACKAGE_NAME + "_AUDIO_SETTINGS", -99);
             if (audioCode != -99)
             {
-                audioManager.setRingerMode(audioCode);
+                notificationManager.setInterruptionFilter(audioCode);
+                Log.d(TAG, "settings restored to: " + audioCode);
                 builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                         .setSmallIcon(R.drawable.location_icon)
                         .setContentTitle("Mutify")
@@ -177,8 +175,9 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
             }
         }
         editor.putBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false);
-        editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", audioManager.getRingerMode());
+        editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
         editor.apply();
+        Log.d(TAG, "settings not changed");
     }
 
 
