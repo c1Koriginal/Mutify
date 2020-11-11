@@ -97,8 +97,9 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = audioSettingSave.edit();
         editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
+        editor.apply();
 
-        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_NONE)
+        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_PRIORITY)
             {
                 Intent intent = new Intent(context, CancelIntentReceiver.class);
                 intent.setAction(PACKAGE_NAME + "_cancel");
@@ -106,6 +107,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                 builder.addAction(R.drawable.location_icon, "Cancel",pIntent);
                 builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
                 notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+
                 Thread counterThread = new Thread(() -> {
                     for (int PROGRESS_CURRENT1 = 0; PROGRESS_CURRENT1 < PROGRESS_MAX; PROGRESS_CURRENT1 += 10)
                     {
@@ -119,9 +122,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                                 .build());
                     }
 
-
                     //turn on do not disturb
-                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY);
 
                     builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                             .setSmallIcon(R.drawable.location_icon)
@@ -130,19 +132,18 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
                     notificationManager.notify(NOTIFICATION_ID, builder.setPriority(2).build());
-
-                    editor.putBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", true);
+                    editor.putString(PACKAGE_NAME+"_CHANGED", "true");
+                    editor.apply();
+                    Log.d(TAG, "settings changed: " + audioSettingSave.getString(PACKAGE_NAME+"_CHANGED", "unknown"));
                 });
                 counterThread.start();
                 Log.d("CANCER", String.valueOf(counterThread.getId()));
             }
             else
             {
-                editor.putBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false);
-                Log.d(TAG, "settings not changed");
+                editor.putString(PACKAGE_NAME+"_CHANGED", "false");
+                editor.apply();
             }
-            editor.apply();
-        Log.d(TAG, "settings changed: " + audioSettingSave.getBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false));
     }
 
 
@@ -151,14 +152,14 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     {
         audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = audioSettingSave.edit();
-        boolean changed = audioSettingSave.getBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false);
-        Log.d(TAG, "settings changed: " + changed);
-        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_NONE)
+        String changed = audioSettingSave.getString(PACKAGE_NAME+"_CHANGED", "unknown");
+
+        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_PRIORITY)
         {
             editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
             editor.apply();
         }
-        if (changed)
+        if (changed.equals("true") && notificationManager.getCurrentInterruptionFilter()== NotificationManager.INTERRUPTION_FILTER_PRIORITY)
         {
             int audioCode = audioSettingSave.getInt(PACKAGE_NAME + "_AUDIO_SETTINGS", -99);
             if (audioCode != -99)
@@ -174,10 +175,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                 notificationManager.notify(NOTIFICATION_ID, builder.build());
             }
         }
-        editor.putBoolean(PACKAGE_NAME + "_SETTINGS_CHANGED", false);
         editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
         editor.apply();
-        Log.d(TAG, "settings not changed");
     }
 
 
