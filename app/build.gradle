@@ -58,6 +58,7 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:2.4.0'
     implementation 'com.github.Valkriaine:Factor:1.0'
     implementation "com.github.skydoves:balloon:1.2.4"
+    implementation 'nz.co.trademe.covert:covert:2.0.0'
     def dynamic_animation_version = '1.0.0'
     implementation "androidx.dynamicanimation:dynamicanimation:$dynamic_animation_version"
     api 'com.google.maps:google-maps-services:0.10.2'

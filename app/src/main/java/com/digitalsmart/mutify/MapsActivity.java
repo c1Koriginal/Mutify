@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.util.BlurController;
+import com.digitalsmart.mutify.util.CovertManager;
 import com.digitalsmart.mutify.util.FetchAddressJobIntentService;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -43,6 +44,7 @@ import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import nz.co.trademe.covert.Covert;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -186,7 +188,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         map = googleMap;
         configureCamera();
-        userDataManager = new UserDataManager(map, geofencingClient, this);
+        userDataManager = new UserDataManager(map, geofencingClient, this, binding.locationList);
         binding.locationList.setAdapter(userDataManager.getAdapter());
     }
 

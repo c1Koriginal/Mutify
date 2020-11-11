@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.digitalsmart.mutify.util.CovertManager;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 //ViewModel class for managing user data in a singleton manner
@@ -36,15 +38,17 @@ public class UserDataManager
     private final GeofencingClient geofencingClient;
     private PendingIntent geofencePendingIntent;
     private final Activity activity;
+    private final CovertManager covertManager;
     private final ArrayList<String> locationsToRemove = new ArrayList<>();
 
     //constructor of the view model
     //add anything in the constructor to be initialized when the view model is created
-    public UserDataManager(GoogleMap map, GeofencingClient client, Activity activity)
+    public UserDataManager(GoogleMap map, GeofencingClient client, Activity activity, RecyclerView rc)
     {
         this.map = map;
         this.activity = activity;
         this.geofencingClient = client;
+        covertManager = new CovertManager(rc, this);
         adapter = new LocationsAdapter();
         fencesToAdd = new ArrayList<>();
         getUserData();
@@ -64,6 +68,11 @@ public class UserDataManager
         generateFences();
         if (fencesToAdd.size() > 0)
             geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent());
+    }
+
+    public boolean contains(int position)
+    {
+        return locations.get(position) == null;
     }
 
     //call this method to save the list to a local file or a database
@@ -108,18 +117,21 @@ public class UserDataManager
                     })
                     .addOnFailureListener(e -> Toast.makeText(activity, "Geofencing not available, please turn on location service.", Toast.LENGTH_LONG).show());
         }
-
-        //todo: scroll the recyclerview to the new item added
     }
 
     //call this method to remove saved location from the list
-    public void remove(UserLocation location)
+    public void remove(int adapterPosition)
     {
-        locations.remove(location);
+        UserLocation location = locations.get(adapterPosition);
+        locations.remove(adapterPosition);
         fencesToAdd.remove(location.getGeofence());
         locationsToRemove.add(location.getId());
         Task<Void> removal = geofencingClient.removeGeofences(locationsToRemove);
-        removal.addOnCompleteListener(task -> locationsToRemove.clear());
+        removal.addOnCompleteListener(task ->
+                {
+                    locationsToRemove.clear();
+                    Toast.makeText(activity, location.getName() + " removed", Toast.LENGTH_SHORT).show();
+                } );
         updateUserData();
     }
 
@@ -178,11 +190,11 @@ public class UserDataManager
         {
             UserLocation l = locations.get(position);
             LocationViewHolder locationViewHolder = (LocationViewHolder)holder;
+            covertManager.getCovert().drawCornerFlag(holder, true);
+
 
             if (l != null) {
                 locationViewHolder.name.setText(l.getName());
-
-                //todo: remove this line
                 //currently displaying location information as a string
                 locationViewHolder.location.setText(l.getCountry() + " " + l.getAddressLine());
             }
@@ -199,14 +211,11 @@ public class UserDataManager
 
             private final TextView name;
 
-            //todo: remove this line once this TextView is replaced, see userlocation_list_item.xml
             private final TextView location;
             public LocationViewHolder(View itemView)
             {
                 super(itemView);
                 name = itemView.findViewById(R.id.text);
-
-                //todo: remove this line once the TextView is replaced
                 location = itemView.findViewById(R.id.location);
             }
         }
