@@ -28,6 +28,9 @@ import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import com.digitalsmart.mutify.Services.LocationWorker;
 import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.model.UserLocation;
 import com.digitalsmart.mutify.uihelper.BlurController;
@@ -56,6 +59,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static com.digitalsmart.mutify.util.Constants.*;
 
@@ -70,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient fusedLocationProviderClient;
     private AddressResultReceiver addressResultReceiver;
     private GeofencingClient geofencingClient;
+    private PeriodicWorkRequest periodicWorkRequest;
 
 
     private PermissionManager permissionManager;
@@ -93,6 +98,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //instead of using findViewById()
     //data binding library will also automatically convert view ids like "@+id/add_page" to "addPage" for easier usage in java code
     private ActivityMapsBinding binding;
+
+
+    //receive Geocoder fetch address result
+    private class AddressResultReceiver extends ResultReceiver
+    {
+        //constructor
+        AddressResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        //Receives data sent from FetchAddressJobIntentService and updates the balloon
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData)
+        {
+            if (resultCode == SUCCESS_ADDRESS)
+            {
+                Address a = resultData.getParcelable(ADDRESS);
+                if (a != null)
+                    markerUserLocation.updateAddress(a);
+                updateBalloon(null, true);
+            }
+            else if (resultCode == FAILURE_RESULT)
+            {
+                //show the error message
+                updateBalloon(resultData.getString(RESULT_DATA_KEY), false);
+            }
+        }
+    }
 
 
     @Override
@@ -125,7 +158,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //retrieve user's current location at app launch
         getCurrentLocation(null);
 
-        //getNotifications();
+        //startPeriodicWork();
     }
 
 
@@ -569,30 +602,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    //receive Geocoder fetch address result
-    private class AddressResultReceiver extends ResultReceiver
-    {
-        //constructor
-        AddressResultReceiver(Handler handler) {
-            super(handler);
-        }
 
-        //Receives data sent from FetchAddressJobIntentService and updates the balloon
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //todo: this doesn't work
+    //start updating location in the background
+    private void startPeriodicWork()
+    {
+        WorkManager workManager = WorkManager.getInstance(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
-            if (resultCode == SUCCESS_ADDRESS)
-            {
-                Address a = resultData.getParcelable(ADDRESS);
-                if (a != null)
-                    markerUserLocation.updateAddress(a);
-                updateBalloon(null, true);
-            }
-            else if (resultCode == FAILURE_RESULT)
-            {
-                //show the error message
-                updateBalloon(resultData.getString(RESULT_DATA_KEY), false);
-            }
+            periodicWorkRequest = new PeriodicWorkRequest.Builder(LocationWorker.class, 5, TimeUnit.SECONDS).build();
         }
+        workManager.enqueue(periodicWorkRequest);
     }
 }

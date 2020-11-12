@@ -41,6 +41,10 @@ android {
 }
 
 dependencies {
+    def work_version = "2.4.0"
+    def room_version = "2.2.5"
+    def dynamic_animation_version = '1.0.0'
+    api 'com.google.maps:google-maps-services:0.10.2'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
@@ -61,11 +65,8 @@ dependencies {
     implementation 'nz.co.trademe.covert:covert:2.0.0'
     implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
     implementation 'com.robertlevonyan.view:CustomFloatingActionButton:3.0.1'
-    def dynamic_animation_version = '1.0.0'
     implementation "androidx.dynamicanimation:dynamicanimation:$dynamic_animation_version"
-    api 'com.google.maps:google-maps-services:0.10.2'
-    def room_version = "2.2.5"
-
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.work:work-runtime:$work_version"
 }

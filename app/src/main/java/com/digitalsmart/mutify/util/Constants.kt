@@ -24,4 +24,5 @@ object Constants {
 
     //NotificationManager
     const val NOTIFICATION_ID = 0
+    const val NOTIFICATION_ID_BACKGROUND = 1
 }
