@@ -621,7 +621,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .setSmallIcon(R.drawable.location_icon)
                 .setContentTitle("Mutify Geo fencing test")
                 .setContentText("In progress")
-                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .addAction(R.drawable.location_icon, "Cancel", pendingIntent);
 
@@ -654,6 +654,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (stopThread == true) {
                     editor.putBoolean("stop", false);
                     editor.apply();
+                    notifyMgr.cancelAll();
                     return;
                 }
                 SystemClock.sleep(1000);

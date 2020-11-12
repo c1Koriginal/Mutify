@@ -44,7 +44,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                 .setSmallIcon(R.drawable.location_icon)
                 .setContentTitle("Mutify")
                 .setContentText("In progress")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
 
 
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
@@ -117,6 +117,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                         if (stopThread == true) {
                             editor.putBoolean("stop", false);
                             editor.apply();
+                            notificationManager.cancelAll();
                             return;
                         }
 
