@@ -1,28 +1,29 @@
 package com.digitalsmart.mutify;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Insets;
-import android.graphics.Rect;
 import android.location.Address;
 import android.location.Location;
 import android.location.LocationListener;
+import android.media.AudioManager;
 import android.os.*;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowMetrics;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
@@ -53,8 +54,9 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.Objects;
+import java.util.Random;
 
+import static android.app.PendingIntent.*;
 import static com.digitalsmart.mutify.util.Constants.*;
 
 
@@ -77,12 +79,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SpringAnimation dragSpring;
     private SpringAnimation settleSpring;
     private Balloon balloon;
+    public static final String NOTIFICATION_ID = "NOTIFICATION_ID";
 
     private boolean isFromLaunch = true;
 
-    private final float[] radiusSliderPosition = {0f};
-    private final float[] delaySliderPosition = {0f};
-    private boolean radiusHasText = false;
+    public static boolean stopThread = false;
+
 
     //data binding object from activity_maps.xml
     //to access any View/layout from activity_maps.xml, simply call binding.'layout id'
@@ -121,6 +123,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //retrieve user's current location at app launch
         getCurrentLocation(null);
+
+        getNotifications();
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.cancel(getIntent().getIntExtra(NOTIFICATION_ID, -1));
+
+
+        /**
+         * for notification cancel
+         */
+
+        Context context = this;
+
+        SharedPreferences sharedPref = context.getSharedPreferences("stop", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        stopThread = false;
+
+        editor.putBoolean("stop", stopThread);
+        editor.apply();
     }
 
 
@@ -128,6 +149,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //button click events
     //*********************************************************************************************************************
     //call this method to manually get the user's current location
+    @SuppressLint("MissingPermission")
     public void getCurrentLocation(View view)
     {
         if (fusedLocationProviderClient != null)
@@ -145,21 +167,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     isFromLaunch = false;
                 });
             else
-            fusedLocationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
-                    .addOnSuccessListener(this, location -> {
-                    if (location != null) {
-                    currentLocation = location;
-                    currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
-                }
-            });
+                fusedLocationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
+                        .addOnSuccessListener(this, location -> {
+                            if (location != null) {
+                                currentLocation = location;
+                                currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+                            }
+                        });
         }
     }
 
 
     //open the bottom drawer and slide to the RecyclerView page
-    public void menuButtonClicked(View view)
-    {
+    public void menuButtonClicked(View view) {
         //add the current marker location to the list
         binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         binding.homePager.setCurrentItem(1, true);
@@ -167,38 +188,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //todo: change this after modifying activity_maps.xml
     //open the bottom drawer and slide to the edit page
-    public void addButtonClicked(View view)
-    {
+    public void addButtonClicked(View view) {
         //test methods to display the location info of the current marker location
         binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         binding.homePager.setCurrentItem(0, true);
-        binding.radiusSlider.setPosition(80f/500);
-        binding.delaySlider.setPosition(0.5f);
+        binding.radius.setText(String.valueOf(80));
     }
 
     //todo: change this, this is a dummy method to add the current marker location to the list
-    public void confirmButtonClicked(View view)
-    {
+    public void confirmButtonClicked(View view) {
         //add the current marker location to the list
 
+        //todo: add UI controls to setup the markerUserLocation
+
         //retrieve radius from the UI controls
-        //do nothing if there is no marked user location
-        if (markerUserLocation != null) {
-            markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
-            markerUserLocation.setDelay(Integer.parseInt(Objects.requireNonNull(binding.delaySlider.getBubbleText())));
-            if (String.valueOf(binding.addName.getText()).isEmpty())
-                markerUserLocation.setName(markerUserLocation.getAddressLine());
-            else
-                markerUserLocation.setName(String.valueOf(binding.addName.getText()));
+        //test call to set radius to 80m
+        markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
 
-            userDataManager.add(markerUserLocation);
-            binding.homePager.setCurrentItem(1, true);
-        }
+        markerUserLocation.setName(String.valueOf(binding.addName.getText()));
+
+        userDataManager.add(markerUserLocation);
+        binding.homePager.setCurrentItem(1, true);
     }
-
-
-
-
 
 
     //override methods
@@ -289,23 +300,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if ( v instanceof EditText) {
-                Rect outRect = new Rect();
-                v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
-                    v.clearFocus();
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                }
-            }
-        }
-        return super.dispatchTouchEvent( event );
-    }
-
 
     //add other methods here
     //*********************************************************************************************************************
@@ -373,91 +367,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //initialize fused location provider
         //this is for locating the user when the app is running in the foreground only
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-
-        //initialize radius slider and radius text input
-        binding.radiusSlider.setPositionListener(aFloat -> {
-            //do not update UI here
-            radiusSliderPosition[0] = (int) (500 * aFloat);
-            binding.radius.setText(String.valueOf((int) radiusSliderPosition[0]));
-            binding.radiusSlider.setBubbleText(String.valueOf((int) radiusSliderPosition[0]));
-            checkCanConfirm();
-            return null;
-        });
-        binding.radiusSlider.setEndTrackingListener(() -> {
-            binding.radiusSlider.setPosition(radiusSliderPosition[0] /500);
-            //update UI here
-            binding.radius.setText(String.valueOf((int) radiusSliderPosition[0]));
-            binding.radiusSlider.setBubbleText(String.valueOf((int) radiusSliderPosition[0]));
-            checkCanConfirm();
-            return null;
-        });
-        binding.radius.addTextChangedListener(new TextWatcher()
-        {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable)
-            {
-                if (editable.length() < 1)
-                {
-                    Toast.makeText(MapsActivity.this, "Please specify a radius", Toast.LENGTH_SHORT).show();
-                    radiusHasText = false;
-                }
-                else if (Float.parseFloat(String.valueOf(editable)) > 500)
-                {
-                    Toast.makeText(MapsActivity.this, "Please enter a value between 0 and 500", Toast.LENGTH_SHORT).show();
-                    binding.radius.setText("500");
-                    radiusHasText = true;
-                }
-                else
-                    {
-                    binding.radiusSlider.setBubbleText(String.valueOf(Integer.parseInt(String.valueOf(editable))));
-                    radiusHasText = true;
-                }
-                checkCanConfirm();
-            }
-        });
-        binding.radiusSlider.setPosition(80f/500);
-
-
-        //initialize delay slider
-        binding.delaySlider.setPositionListener(aFloat -> {
-            //do not update UI here
-            delaySliderPosition[0] = (int) (20 * aFloat);
-            binding.delaySlider.setBubbleText(String.valueOf((int) delaySliderPosition[0]));
-            binding.delayText.setText( (int) delaySliderPosition[0] + " seconds delay");
-            checkCanConfirm();
-            return null;
-        });
-        binding.delaySlider.setEndTrackingListener(() -> {
-            binding.delaySlider.setPosition(delaySliderPosition[0] /20);
-            //update UI here
-            binding.delaySlider.setBubbleText(String.valueOf((int) delaySliderPosition[0]));
-            binding.delayText.setText( (int) delaySliderPosition[0] + " seconds delay");
-            checkCanConfirm();
-            return null;
-        });
-        binding.delaySlider.setPosition(0.5f);
     }
 
-    private void checkCanConfirm()
-    {
-        if (delaySliderPosition[0] > 0 && radiusSliderPosition[0] > 0 && radiusHasText)
-            binding.addConfirmButton.setVisibility(View.VISIBLE);
-        else
-            binding.addConfirmButton.setVisibility(View.INVISIBLE);
-    }
 
 
     //get the device's screen width in pixels
@@ -472,7 +383,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return windowMetrics.getBounds().width() - insets.left - insets.right;
         }
         else
-            {
+        {
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             return displayMetrics.widthPixels;
@@ -497,6 +408,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             notificationManager.createNotificationChannel(channel);
         }
     }
+
 
 
 
@@ -559,11 +471,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 lng.setText("It simply won't contain address info. ");
             }
             balloon.update(binding.spriteOutline);
-            if (binding.drawer.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED)
-                balloon.dismiss();
         }
     }
-
 
     //receive Geocoder fetch address result
     private class AddressResultReceiver extends ResultReceiver
@@ -590,5 +499,71 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 updateBalloon(resultData.getString(RESULT_DATA_KEY), false);
             }
         }
+    }
+    public class AppConstant
+    {
+        public static final String CANCEL_ACTION = "CANCEL_ACTION";
+    }
+
+    public void getNotifications(){
+
+        Context context = this;
+        int notificationId = new Random().nextInt();
+        Intent cancelBar = new Intent(this, CancelIntentReceiver.class);
+        cancelBar.setAction(AppConstant.CANCEL_ACTION);
+        PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(this, 0, cancelBar, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
+                .setSmallIcon(R.drawable.location_icon)
+                .setContentTitle("Mutify Geo fencing test")
+                .setContentText("In progress")
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setContentIntent(pendingIntent)
+                .addAction(R.drawable.location_icon, "Cancel", pendingIntent);
+
+
+        final int progressMax = 100;
+        final int progressMin = 0;
+        builder.setProgress(progressMax, progressMin, false);
+
+        NotificationManager notifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notifyMgr.notify(notificationId, builder.build());
+
+        SharedPreferences sharedPref = context.getSharedPreferences("stop", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        stopThread = sharedPref.getBoolean("stop", false);
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int count = 0;
+                try {
+                    while (count <= 100) {
+                        stopThread = sharedPref.getBoolean("stop", false);
+
+                        if (stopThread == true) {
+                            editor.putBoolean("stop", false);
+                            editor.apply();
+                            return;
+                        }
+                        count = count + 2;
+                        SystemClock.sleep(1000);
+                        builder.setProgress(progressMax, count, false);
+                        notifyMgr.notify(notificationId, builder.build());
+                    }
+
+                    builder.setProgress(0, 0, false);
+                    builder.setContentText("Activated");
+                    notifyMgr.notify(notificationId, builder.build());
+
+
+                } catch (Exception e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+        thread.start();
     }
 }

@@ -31,6 +31,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     NotificationManager notificationManager;
     private final int PROGRESS_MAX = 100;
     int PROGRESS_CURRENT = 0;
+    public static boolean stopThread = false;
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -44,7 +45,6 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                 .setContentTitle("Mutify")
                 .setContentText("In progress")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
 
 
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
@@ -99,7 +99,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
         editor.apply();
 
-        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+        if (notificationManager.getCurrentInterruptionFilter() != NotificationManager.INTERRUPTION_FILTER_PRIORITY)
             {
                 Intent intent = new Intent(context, CancelIntentReceiver.class);
                 intent.setAction(PACKAGE_NAME + "_cancel");
@@ -112,6 +112,14 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                 Thread counterThread = new Thread(() -> {
                     for (int PROGRESS_CURRENT1 = 0; PROGRESS_CURRENT1 < PROGRESS_MAX; PROGRESS_CURRENT1 += 10)
                     {
+                        stopThread = audioSettingSave.getBoolean("stop", false);
+
+                        if (stopThread == true) {
+                            editor.putBoolean("stop", false);
+                            editor.apply();
+                            return;
+                        }
+
                         SystemClock.sleep(1000);
                         builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT1,false);
                         notificationManager.notify(NOTIFICATION_ID, builder

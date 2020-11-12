@@ -3,6 +3,9 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a44fa2a3ac058a31ca126542bdf30e13/jetified-AndroidSlidingUpPanel-3.5.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a44fa2a3ac058a31ca126542bdf30e13/jetified-AndroidSlidingUpPanel-3.5.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0945d7920286fc9d7f2974648142001d/jetified-AndroidSlidingUpPanel-3.5.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0945d7920286fc9d7f2974648142001d/jetified-AndroidSlidingUpPanel-3.5.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0945d7920286fc9d7f2974648142001d/jetified-AndroidSlidingUpPanel-3.5.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
