@@ -25,7 +25,7 @@ import static com.digitalsmart.mutify.util.Constants.PACKAGE_NAME;
 public class GeofenceBroadcastReceiver extends BroadcastReceiver
 {
     private static final String TAG = "broadcast";
-    private SharedPreferences audioSettingSave;
+    private SharedPreferences mutifySharedPreferences;
     private Context context;
     private NotificationCompat.Builder builder;
     private NotificationManager notificationManager;
@@ -94,8 +94,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     {
         createNotificationChannel();
         //save the previous audio settings
-        audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = audioSettingSave.edit();
+        mutifySharedPreferences = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mutifySharedPreferences.edit();
         editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
         editor.apply();
 
@@ -113,7 +113,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                 Thread counterThread = new Thread(() -> {
                     for (int PROGRESS_CURRENT1 = 0; PROGRESS_CURRENT1 < PROGRESS_MAX; PROGRESS_CURRENT1 += 10)
                     {
-                        stopThread = audioSettingSave.getBoolean("stop", false);
+                        stopThread = mutifySharedPreferences.getBoolean("stop", false);
 
                         if (stopThread) {
                             editor.putBoolean("stop", false);
@@ -144,7 +144,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                     notificationManager.notify(NOTIFICATION_ID, builder.setPriority(2).build());
                     editor.putString(PACKAGE_NAME+"_CHANGED", "true");
                     editor.apply();
-                    Log.d(TAG, "settings changed: " + audioSettingSave.getString(PACKAGE_NAME+"_CHANGED", "unknown"));
+                    Log.d(TAG, "settings changed: " + mutifySharedPreferences.getString(PACKAGE_NAME+"_CHANGED", "unknown"));
                 });
                 counterThread.start();
 
@@ -161,9 +161,9 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     private void restoreAudioSettings()
     {
         createNotificationChannel();
-        audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = audioSettingSave.edit();
-        String changed = audioSettingSave.getString(PACKAGE_NAME+"_CHANGED", "unknown");
+        mutifySharedPreferences = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mutifySharedPreferences.edit();
+        String changed = mutifySharedPreferences.getString(PACKAGE_NAME+"_CHANGED", "unknown");
 
         if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_ALARMS)
         {
@@ -172,7 +172,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         }
         if (changed.equals("true") && notificationManager.getCurrentInterruptionFilter()== NotificationManager.INTERRUPTION_FILTER_ALARMS)
         {
-            int audioCode = audioSettingSave.getInt(PACKAGE_NAME + "_AUDIO_SETTINGS", -99);
+            int audioCode = mutifySharedPreferences.getInt(PACKAGE_NAME + "_AUDIO_SETTINGS", -99);
             if (audioCode != -99)
             {
                 notificationManager.setInterruptionFilter(audioCode);

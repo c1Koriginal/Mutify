@@ -76,9 +76,7 @@ public class UserDataManager
                 updateMap();
             });
         }).start();
-
-        updateMap();
-
+        
         //call generateFences after retrieving all the data (background thread finish)
         generateFences();
         if (fencesToAdd.size() > 0)
