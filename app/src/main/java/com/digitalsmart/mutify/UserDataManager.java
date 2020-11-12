@@ -3,8 +3,10 @@ package com.digitalsmart.mutify;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +16,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
+import com.digitalsmart.mutify.broadcast_receivers.GeofenceBroadcastReceiver;
 import com.digitalsmart.mutify.database.UserLocationDatabase;
 import com.digitalsmart.mutify.model.UserLocation;
 import com.digitalsmart.mutify.uihelper.CovertManager;
-import com.digitalsmart.mutify.util.GeofenceBroadcastReceiver;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -35,16 +38,18 @@ import java.util.ArrayList;
 public class UserDataManager
 {
     private final ArrayList <UserLocation> locations = new ArrayList<>();
-    private final ArrayList<Geofence> fencesToAdd;
+    private final ArrayList<String> locationsToRemove = new ArrayList<>();
     private final ArrayList<Geofence> fences = new ArrayList<>();
-    private final LocationsAdapter adapter;
-    private final GoogleMap map;
+    private final ArrayList<Geofence> fencesToAdd = new ArrayList<>();
+
+    private LocationsAdapter adapter;
+    private GoogleMap map;
     private final GeofencingClient geofencingClient;
     private PendingIntent geofencePendingIntent;
-    private final Activity activity;
-    private final CovertManager covertManager;
+    private Activity activity;
+    private CovertManager covertManager;
     private final UserLocationDatabase db;
-    private final ArrayList<String> locationsToRemove = new ArrayList<>();
+
 
     //constructor of the view model
     //add anything in the constructor to be initialized when the view model is created
@@ -55,12 +60,31 @@ public class UserDataManager
         this.geofencingClient = client;
         covertManager = new CovertManager(rc, this);
         adapter = new LocationsAdapter();
-        fencesToAdd = new ArrayList<>();
 
         db = Room.databaseBuilder(activity.getApplicationContext(), UserLocationDatabase.class, "user-locations").build();
 
-
         getUserData();
+    }
+
+    //lightweight constructor for restoring fences after reboot
+    @SuppressLint("MissingPermission")
+    public UserDataManager(Context context)
+    {
+        this.geofencingClient = LocationServices.getGeofencingClient(context);
+        db = Room.databaseBuilder(context, UserLocationDatabase.class, "user-locations").build();
+    }
+
+    //restore fences after reboot, call this in RebootBroadcastReceiver
+    @SuppressLint("MissingPermission")
+    public void addFencesAfterReboot(Context context)
+    {
+        new Thread(() -> locations.addAll(db.userLocationDAO().getAll())).start();
+        SystemClock.sleep(10000);
+        generateFences();
+        if (fencesToAdd.size() > 0)
+            geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
+                    .addOnCompleteListener(task -> Toast.makeText(context, "Mutify successfully restored geofences.", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(exception -> Toast.makeText(context, "Mutify could not restore geofences.", Toast.LENGTH_SHORT).show());
     }
 
     //call this method to retrieve the location list from a local file or a database
@@ -80,7 +104,12 @@ public class UserDataManager
         //call generateFences after retrieving all the data (background thread finish)
         generateFences();
         if (fencesToAdd.size() > 0)
-            geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent());
+            geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
+                    .addOnFailureListener(e ->
+                    {
+                        Toast.makeText(activity, "Mutify could not restore geofences.", Toast.LENGTH_SHORT).show();
+                        Log.wtf("fences", e.getMessage());
+                    });
     }
 
     public boolean contains(int position)
@@ -93,13 +122,21 @@ public class UserDataManager
     @SuppressLint("MissingPermission")
     public void add(UserLocation location)
     {
+        if (locations.size() > 99)
+        {
+            Toast.makeText(activity, "You can only save max 100 locations.", Toast.LENGTH_SHORT).show();
+            Log.d("fences", "number of locations saved: " + locations.size());
+            return;
+        }
+        if (!locations.contains(location))
+        {
             fencesToAdd.add(location.getGeofence());
             geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
                     .addOnSuccessListener(activity, v ->
                     {
                         fences.addAll(fencesToAdd);
                         fencesToAdd.clear();
-                        Log.d("fences", "fences added. Fences saved: " + fences.size());
+                        Log.d("fences", "fences added. Fences saved in this session: " + fences.size());
 
                         //draw circle and put marker on the map
                         //if geo fence is successfully added
@@ -114,12 +151,19 @@ public class UserDataManager
                             db.userLocationDAO().insert(location);
                             activity.runOnUiThread(adapter::notifyDataSetChanged);
                         });
-                        insert.setUncaughtExceptionHandler((t, e) -> Toast.makeText(activity, "Location already added.", Toast.LENGTH_SHORT).show());
+                        insert.setUncaughtExceptionHandler((t, e) ->
+                        {
+                            Toast.makeText(activity, "Location already added.", Toast.LENGTH_SHORT).show();
+                            Log.d("fences", e.getMessage() + fences.size());
+                        });
                         insert.start();
                     })
                     .addOnFailureListener(e -> Toast
                             .makeText(activity, "Geofencing not available, please turn on location service.", Toast.LENGTH_LONG)
                             .show());
+        }
+        else
+            Toast.makeText(activity, "Location already added.", Toast.LENGTH_SHORT).show();
     }
 
     //call this method to remove saved location from the list
@@ -169,8 +213,6 @@ public class UserDataManager
         fences.addAll(fencesToAdd);
     }
 
-
-
     //methods needed for adding new geo fences, do not call them directly
     //call add() to add new fences
     private PendingIntent getGeofencePendingIntent()
@@ -195,7 +237,7 @@ public class UserDataManager
 
     //custom adapter for the list
     @SuppressWarnings("rawtypes")
-    private class LocationsAdapter extends RecyclerView.Adapter
+    public class LocationsAdapter extends RecyclerView.Adapter
     {
         @NonNull
         @NotNull
@@ -217,8 +259,9 @@ public class UserDataManager
             if (l != null)
             {
                 locationViewHolder.name.setText(l.getName());
-                //currently displaying location information as a string
-                locationViewHolder.location.setText(l.getCountry() + " " + l.getAddressLine());
+                locationViewHolder.address.setText(l.getAddressLine());
+                locationViewHolder.country.setText(l.getCountry());
+                locationViewHolder.zipCode.setText(l.getPostalCode());
             }
         }
 
@@ -233,13 +276,16 @@ public class UserDataManager
         {
 
             private final TextView name;
-
-            private final TextView location;
+            private final TextView address;
+            private final TextView country;
+            private final TextView zipCode;
             public LocationViewHolder(View itemView)
             {
                 super(itemView);
-                name = itemView.findViewById(R.id.text);
-                location = itemView.findViewById(R.id.location);
+                name = itemView.findViewById(R.id.item_name);
+                address = itemView.findViewById(R.id.item_address);
+                country = itemView.findViewById(R.id.item_country);
+                zipCode = itemView.findViewById(R.id.item_code);
             }
         }
     }

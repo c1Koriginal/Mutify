@@ -31,7 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.model.UserLocation;
 import com.digitalsmart.mutify.uihelper.BlurController;
-import com.digitalsmart.mutify.util.FetchAddressJobIntentService;
+import com.digitalsmart.mutify.Services.FetchAddressJobIntentService;
 import com.digitalsmart.mutify.util.PermissionManager;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -177,6 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.homePager.setCurrentItem(0, true);
         binding.radiusSlider.setPosition(80f/500);
         binding.delaySlider.setPosition(0.5f);
+        binding.addName.setText("Location " + (userDataManager.getAdapter().getItemCount() + 1));
         permissionManager.checkPermission();
     }
 
@@ -191,7 +192,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
             markerUserLocation.setDelay(Integer.parseInt(Objects.requireNonNull(binding.delaySlider.getBubbleText())));
             if (String.valueOf(binding.addName.getText()).isEmpty())
-                markerUserLocation.setName(markerUserLocation.getAddressLine());
+                markerUserLocation.setName("Location " + (userDataManager.getAdapter().getItemCount() + 1));
             else
                 markerUserLocation.setName(String.valueOf(binding.addName.getText()));
 
@@ -584,6 +585,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
+                    markerUserLocation.updateAddress(a);
                 updateBalloon(null, true);
             }
             else if (resultCode == FAILURE_RESULT)

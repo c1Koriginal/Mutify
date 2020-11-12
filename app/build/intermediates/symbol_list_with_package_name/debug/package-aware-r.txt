@@ -2266,6 +2266,10 @@ id image
 id info
 id invisible
 id italic
+id item_address
+id item_code
+id item_country
+id item_name
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
@@ -2282,7 +2286,6 @@ id listMode
 id list_item
 id list_page
 id lng
-id location
 id locationList
 id manually
 id map

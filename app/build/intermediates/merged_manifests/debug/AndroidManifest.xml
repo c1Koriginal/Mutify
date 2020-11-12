@@ -64,16 +64,22 @@
         </activity>
 
         <service
-            android:name="com.digitalsmart.mutify.util.FetchAddressJobIntentService"
+            android:name="com.digitalsmart.mutify.Services.FetchAddressJobIntentService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver
-            android:name="com.digitalsmart.mutify.util.GeofenceBroadcastReceiver"
+            android:name="com.digitalsmart.mutify.broadcast_receivers.GeofenceBroadcastReceiver"
             android:enabled="true" />
         <receiver
-            android:name="com.digitalsmart.mutify.util.CancelIntentReceiver"
+            android:name="com.digitalsmart.mutify.broadcast_receivers.CancelIntentReceiver"
+            android:enabled="true" />
+        <receiver
+            android:name="com.digitalsmart.mutify.broadcast_receivers.RebootBroadcastReceiver"
             android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
         </receiver>
 
         <activity
