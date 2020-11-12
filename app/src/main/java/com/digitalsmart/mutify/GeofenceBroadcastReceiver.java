@@ -21,7 +21,6 @@ import java.util.List;
 import static com.digitalsmart.mutify.util.Constants.NOTIFICATION_ID;
 import static com.digitalsmart.mutify.util.Constants.PACKAGE_NAME;
 
-//todo: the notifications don't pop up (only appear in the status bar), need fix
 public class GeofenceBroadcastReceiver extends BroadcastReceiver
 {
     private static final String TAG = "broadcast";
@@ -58,8 +57,6 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         // Get the transition type.
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
 
-
-
         // Get the geo fences that were triggered. A single event can trigger
         // multiple geo fences.
         List<Geofence> triggeringFences = geofencingEvent.getTriggeringGeofences();
@@ -69,6 +66,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
 
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL)
         {
+            //todo: change to dwelling
             message = " geo fences, dwelling detected";
             Log.d(TAG, count + message);
         }
@@ -84,7 +82,6 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
             Log.d(TAG, count + message);
             restoreAudioSettings();
         }
-
         Log.d(TAG, "pass");
     }
 
@@ -93,6 +90,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     //turn on vibrate - "mutify"
     private void turnOnDND()
     {
+        createNotificationChannel();
         //save the previous audio settings
         audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = audioSettingSave.edit();
@@ -114,7 +112,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                     {
                         stopThread = audioSettingSave.getBoolean("stop", false);
 
-                        if (stopThread == true) {
+                        if (stopThread) {
                             editor.putBoolean("stop", false);
                             editor.apply();
                             notificationManager.cancelAll();
@@ -159,6 +157,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     //restore the audio settings from before the phone is muted
     private void restoreAudioSettings()
     {
+        createNotificationChannel();
         audioSettingSave = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = audioSettingSave.edit();
         String changed = audioSettingSave.getString(PACKAGE_NAME+"_CHANGED", "unknown");
@@ -189,6 +188,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     }
 
 
+    //create a notification channel, feel free to call this method repeatedly
     private void createNotificationChannel()
     {
         // Create the NotificationChannel, but only on API 26+ because

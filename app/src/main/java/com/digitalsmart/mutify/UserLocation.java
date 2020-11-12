@@ -12,13 +12,15 @@ import com.google.android.gms.maps.model.LatLng;
 
 
 //todo: store this object in SQLite
-public class UserLocation implements Parcelable {
+public class UserLocation implements Parcelable
+{
     //unique id for geofencing object
     private String id = "";
 
     private String name = "";
 
     private final Location location;
+
     private Address address;
 
     private float radius = 0f;
@@ -26,8 +28,6 @@ public class UserLocation implements Parcelable {
     private final LatLng latLng;
 
     private int delay = 30000;
-
-    //todo: add time, date, and time duration
     
     public UserLocation(Location location)
     {
@@ -76,11 +76,6 @@ public class UserLocation implements Parcelable {
     public String getName()
     {
         return this.name;
-    }
-
-    public int getDelay()
-    {
-        return this.delay;
     }
 
     public String getAddressLine()

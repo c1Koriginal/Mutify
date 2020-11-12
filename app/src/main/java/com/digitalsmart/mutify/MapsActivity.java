@@ -2,10 +2,8 @@ package com.digitalsmart.mutify;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.location.Address;
@@ -25,7 +23,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
@@ -57,7 +54,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Random;
 
 import static com.digitalsmart.mutify.util.Constants.*;
 
@@ -88,11 +84,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final float[] delaySliderPosition = {0f};
     private boolean radiusHasText = false;
 
-    private NotificationCompat.Builder builder;
-    NotificationManager notificationManager;
-    private final int PROGRESS_MAX = 100;
-    int PROGRESS_CURRENT = 0;
-    public static boolean stopThread = false;
 
     //data binding object from activity_maps.xml
     //to access any View/layout from activity_maps.xml, simply call binding.'layout id'
@@ -132,7 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //retrieve user's current location at app launch
         getCurrentLocation(null);
 
-        getNotifications();
+        //getNotifications();
     }
 
 
@@ -177,7 +168,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.homePager.setCurrentItem(1, true);
     }
 
-    //todo: change this after modifying activity_maps.xml
     //open the bottom drawer and slide to the edit page
     public void addButtonClicked(View view)
     {
@@ -188,7 +178,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.delaySlider.setPosition(0.5f);
     }
 
-    //todo: change this, this is a dummy method to add the current marker location to the list
     public void confirmButtonClicked(View view)
     {
         //add the current marker location to the list
@@ -277,7 +266,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults)
     {
-        //todo: toast messages are messy here
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int result = permissionManager.onRequestPermissionsResult(requestCode, grantResults);
         if (result == REQUEST_GRANTED)
@@ -602,87 +590,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 updateBalloon(resultData.getString(RESULT_DATA_KEY), false);
             }
         }
-    }
-    public class AppConstant
-    {
-        public static final String CANCEL_ACTION = "CANCEL_ACTION";
-    }
-
-    public void getNotifications(){
-
-        Context context = this;
-        int notificationId = new Random().nextInt();
-        Intent cancelBar = new Intent(this, CancelIntentReceiver.class);
-        cancelBar.setAction(AppConstant.CANCEL_ACTION);
-        PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(this, 0, cancelBar, 0);
-
-        builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
-                .setSmallIcon(R.drawable.location_icon)
-                .setContentTitle("Mutify Geo fencing test")
-                .setContentText("In progress")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent)
-                .addAction(R.drawable.location_icon, "Cancel", pendingIntent);
-
-
-        final int progressMax = 100;
-        final int progressMin = 0;
-        builder.setProgress(progressMax, progressMin, false);
-
-        NotificationManager notifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notifyMgr.notify(notificationId, builder.build());
-
-        SharedPreferences sharedPref = context.getSharedPreferences("stop", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        stopThread = sharedPref.getBoolean("stop", false);
-
-
-        Intent intent = new Intent(context, CancelIntentReceiver.class);
-        intent.setAction(PACKAGE_NAME + "_cancel");
-        PendingIntent pIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
-        //builder.addAction(R.drawable.location_icon, "Cancel",pIntent);
-        builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
-        notifyMgr.notify(notificationId, builder.build());
-
-
-        Thread counterThread = new Thread(() -> {
-            for (int PROGRESS_CURRENT1 = 0; PROGRESS_CURRENT1 < PROGRESS_MAX; PROGRESS_CURRENT1 += 10)
-            {
-                stopThread = sharedPref.getBoolean("stop", false);
-
-                if (stopThread == true) {
-                    editor.putBoolean("stop", false);
-                    editor.apply();
-                    notifyMgr.cancelAll();
-                    return;
-                }
-                SystemClock.sleep(1000);
-                builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT1, false);
-                notifyMgr.notify(notificationId, builder
-                        .setColorized(true)
-                        .setNotificationSilent()
-                        .setPriority(2)
-                        .setOngoing(true)
-                        .build());
-            }
-
-            //turn on do not disturb
-            notifyMgr.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY);
-
-            builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
-                    .setSmallIcon(R.drawable.location_icon)
-                    .setContentTitle("Mutify")
-                    .setContentText("Phone mutified.")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-            notifyMgr.notify(notificationId, builder.setPriority(2).build());
-            editor.putString(PACKAGE_NAME+"_CHANGED", "true");
-            editor.apply();
-
-        });
-        counterThread.start();
-
-        //thread.start();
     }
 }

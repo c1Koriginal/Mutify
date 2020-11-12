@@ -1,10 +1,10 @@
-#Wed Nov 11 16:59:03 PST 2020
+#Wed Nov 11 17:30:01 PST 2020
+base.2=C\:\\Users\\valkr\\Downloads\\Mutify\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.2=classes2.dex
+base.1=C\:\\Users\\valkr\\Downloads\\Mutify\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
 path.1=classes.dex
-path.0=classes.dex
+base.0=C\:\\Users\\valkr\\Downloads\\Mutify\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.2=/home/c1k/Desktop/Projects/Mutify/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
-base.1=/home/c1k/Desktop/Projects/Mutify/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex
-base.0=/home/c1k/Desktop/Projects/Mutify/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+path.0=classes.dex
