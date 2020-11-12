@@ -1,4 +1,4 @@
-package com.digitalsmart.mutify.util
+package com.digitalsmart.mutify.uihelper
 
 import androidx.recyclerview.widget.RecyclerView
 import com.digitalsmart.mutify.R

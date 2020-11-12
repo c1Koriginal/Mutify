@@ -1,4 +1,4 @@
-package com.digitalsmart.mutify;
+package com.digitalsmart.mutify.util;
 
 import android.Manifest;
 import android.app.NotificationManager;
@@ -11,8 +11,9 @@ import android.provider.Settings;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import com.digitalsmart.mutify.MapsActivity;
+import com.digitalsmart.mutify.R;
 import org.jetbrains.annotations.NotNull;
 
 import static com.digitalsmart.mutify.util.Constants.*;

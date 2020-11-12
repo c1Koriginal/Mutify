@@ -1,4 +1,4 @@
-package com.digitalsmart.mutify;
+package com.digitalsmart.mutify.model;
 
 import android.location.Address;
 import android.location.Location;

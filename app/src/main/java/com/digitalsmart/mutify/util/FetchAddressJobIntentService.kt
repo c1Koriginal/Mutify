@@ -109,7 +109,7 @@ class FetchAddressJobIntentService:JobIntentService()
     companion object{
         @JvmStatic
         fun enqueueWork(mapsActivity: MapsActivity, intent: Intent) {
-            enqueueWork(mapsActivity,FetchAddressJobIntentService::class.java, 1, intent)
+            enqueueWork(mapsActivity, FetchAddressJobIntentService::class.java, 1, intent)
         }
     }
 

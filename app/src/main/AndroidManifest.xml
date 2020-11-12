@@ -51,10 +51,10 @@
                 android:permission="android.permission.BIND_JOB_SERVICE"
         android:exported="true"/>
 
-        <receiver android:name=".GeofenceBroadcastReceiver"
+        <receiver android:name=".util.GeofenceBroadcastReceiver"
                   android:enabled="true"/>
 
-        <receiver android:name=".CancelIntentReceiver"
+        <receiver android:name=".util.CancelIntentReceiver"
                   android:enabled="true">
             <intent-filter>
                 <action android:name="com.digitalsmart.mutify_cancel"/>

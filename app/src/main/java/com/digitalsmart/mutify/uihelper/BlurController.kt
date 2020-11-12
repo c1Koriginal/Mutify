@@ -1,4 +1,4 @@
-package com.digitalsmart.mutify.util
+package com.digitalsmart.mutify.uihelper
 
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator

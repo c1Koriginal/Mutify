@@ -1,4 +1,4 @@
-package com.digitalsmart.mutify;
+package com.digitalsmart.mutify.util;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
+import com.digitalsmart.mutify.R;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingEvent;
@@ -27,10 +28,9 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     private SharedPreferences audioSettingSave;
     private Context context;
     private NotificationCompat.Builder builder;
-    NotificationManager notificationManager;
+    private NotificationManager notificationManager;
     private final int PROGRESS_MAX = 100;
-    int PROGRESS_CURRENT = 0;
-    public static boolean stopThread = false;
+    private boolean stopThread = false;
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -99,6 +99,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
 
         if (notificationManager.getCurrentInterruptionFilter() != NotificationManager.INTERRUPTION_FILTER_PRIORITY)
             {
+                int PROGRESS_CURRENT = 0;
                 Intent intent = new Intent(context, CancelIntentReceiver.class);
                 intent.setAction(PACKAGE_NAME + "_cancel");
                 PendingIntent pIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
@@ -144,7 +145,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                     Log.d(TAG, "settings changed: " + audioSettingSave.getString(PACKAGE_NAME+"_CHANGED", "unknown"));
                 });
                 counterThread.start();
-                Log.d("CANCER", String.valueOf(counterThread.getId()));
+
             }
             else
             {
