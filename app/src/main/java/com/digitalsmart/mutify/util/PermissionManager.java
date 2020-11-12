@@ -25,7 +25,7 @@ public class PermissionManager
     private final MapsActivity mapsActivity;
     private LocationManager locationManager;
     private int requestCount = 0;
-
+    private AlertDialog alertDialog;
 
 
 
@@ -122,65 +122,42 @@ public class PermissionManager
     //check and ask for permissions
     public void checkPermission()
     {
-            if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(mapsActivity.getApplicationContext(),
-                        R.string.notify_permission,
-                        Toast.LENGTH_SHORT)
-                        .show();
-                mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, FINE_LOCATION_REQUEST_CODE);
-            }
-            if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(mapsActivity.getApplicationContext(),
-                        R.string.notify_permission,
-                        Toast.LENGTH_SHORT)
-                        .show();
-                mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION }, COARSE_LOCATION_REQUEST_CODE);
-            }
-            if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-            {
-                Toast.makeText(mapsActivity.getApplicationContext(),
-                        R.string.notify_permission,
-                        Toast.LENGTH_SHORT)
-                        .show();
-                mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_REQUEST_CODE);
-            }
-
-
-            //check and request permission to change system settings
-        if(!Settings.System.canWrite(mapsActivity))
-        {
-            // If do not have write settings permission then open the Can modify system settings panel.
-            AlertDialog alertDialog = new AlertDialog.Builder(mapsActivity).create();
-            alertDialog.setMessage("Please allow Mutify to change system settings.");
-            alertDialog.show();
-            alertDialog.setCanceledOnTouchOutside(true);
-            alertDialog.setOnCancelListener(dialog -> {
-                if(!Settings.System.canWrite(mapsActivity))
-                    mapsActivity.startActivity(new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS));
-                else
-                    alertDialog.cancel();
-            });
-
-        }
-
         NotificationManager n = (NotificationManager) mapsActivity.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if(!n.isNotificationPolicyAccessGranted())
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(mapsActivity).create();
-            alertDialog.setMessage("Please allow Mutify to modify do not disturb.");
-            alertDialog.show();
-            alertDialog.setCanceledOnTouchOutside(true);
-            alertDialog.setOnCancelListener(dialog -> {
-                if(!n.isNotificationPolicyAccessGranted())
-                    mapsActivity.startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS));
-                else
-                    alertDialog.cancel();
-            });
-
+            if (alertDialog == null || !alertDialog.isShowing())
+            {
+                alertDialog = new AlertDialog.Builder(mapsActivity).create();
+                alertDialog.setMessage("Please allow Mutify to modify do not disturb.");
+                alertDialog.show();
+                alertDialog.setCanceledOnTouchOutside(true);
+                alertDialog.setOnCancelListener(dialog -> {
+                    if(!n.isNotificationPolicyAccessGranted())
+                    {
+                        mapsActivity.startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS));
+                    }
+                    else
+                    {
+                        alertDialog.cancel();
+                    }
+                });
+            }
         }
-
-
+        if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(mapsActivity.getApplicationContext(),
+                    R.string.notify_permission,
+                    Toast.LENGTH_SHORT)
+                    .show();
+            mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, FINE_LOCATION_REQUEST_CODE);
+        }
+        if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION }, COARSE_LOCATION_REQUEST_CODE);
+        }
+        if (ContextCompat.checkSelfPermission(mapsActivity, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+        {
+            mapsActivity.requestPermissions(new String[] { Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_REQUEST_CODE);
+        }
     }
 }

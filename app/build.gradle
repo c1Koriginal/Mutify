@@ -64,4 +64,8 @@ dependencies {
     def dynamic_animation_version = '1.0.0'
     implementation "androidx.dynamicanimation:dynamicanimation:$dynamic_animation_version"
     api 'com.google.maps:google-maps-services:0.10.2'
+    def room_version = "2.2.5"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }

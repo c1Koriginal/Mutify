@@ -20,7 +20,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Include required permissions for Google Maps API to run. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -70,14 +69,11 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver
-            android:name="com.digitalsmart.mutify.GeofenceBroadcastReceiver"
+            android:name="com.digitalsmart.mutify.util.GeofenceBroadcastReceiver"
             android:enabled="true" />
         <receiver
-            android:name="com.digitalsmart.mutify.CancelIntentReceiver"
+            android:name="com.digitalsmart.mutify.util.CancelIntentReceiver"
             android:enabled="true" >
-            <intent-filter>
-                <action android:name="com.digitalsmart.mutify_cancel" />
-            </intent-filter>
         </receiver>
 
         <activity
@@ -90,6 +86,11 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <service
+            android:name="androidx.room.MultiInstanceInvalidationService"
+            android:directBootAware="true"
+            android:exported="false" />
 
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"

@@ -173,11 +173,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //open the bottom drawer and slide to the edit page
     public void addButtonClicked(View view)
     {
-        //test methods to display the location info of the current marker location
         binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         binding.homePager.setCurrentItem(0, true);
         binding.radiusSlider.setPosition(80f/500);
         binding.delaySlider.setPosition(0.5f);
+        permissionManager.checkPermission();
     }
 
     public void confirmButtonClicked(View view)
@@ -186,6 +186,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //retrieve radius from the UI controls
         //do nothing if there is no marked user location
+        permissionManager.checkPermission();
         if (markerUserLocation != null) {
             markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
             markerUserLocation.setDelay(Integer.parseInt(Objects.requireNonNull(binding.delaySlider.getBubbleText())));
@@ -551,8 +552,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (isSuccessful)
             {
                 address.setText(markerUserLocation.getAddressLine());
-                lat.setText("Latitude: " + markerUserLocation.getLatLng().latitude);
-                lng.setText("Longitude: " + markerUserLocation.getLatLng().longitude);
+                lat.setText("Latitude: " + markerUserLocation.getLatitude());
+                lng.setText("Longitude: " + markerUserLocation.getLongitude());
             }
             else
             {
@@ -583,7 +584,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
-                    markerUserLocation.setAddress(a);
                 updateBalloon(null, true);
             }
             else if (resultCode == FAILURE_RESULT)

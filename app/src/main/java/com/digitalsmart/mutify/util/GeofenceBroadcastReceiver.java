@@ -69,12 +69,14 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
             //todo: change to dwelling
             message = " geo fences, dwelling detected";
             Log.d(TAG, count + message);
+            turnOnDND();
         }
         else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER)
         {
             message = " geo fences, entering detected";
             Log.d(TAG, count + message);
             turnOnDND();
+
         }
         else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT)
         {
@@ -97,7 +99,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
         editor.apply();
 
-        if (notificationManager.getCurrentInterruptionFilter() != NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+        if (notificationManager.getCurrentInterruptionFilter() != NotificationManager.INTERRUPTION_FILTER_ALARMS)
             {
                 int PROGRESS_CURRENT = 0;
                 Intent intent = new Intent(context, CancelIntentReceiver.class);
@@ -131,7 +133,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                     }
 
                     //turn on do not disturb
-                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY);
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALARMS);
 
                     builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                             .setSmallIcon(R.drawable.location_icon)
@@ -163,12 +165,12 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         SharedPreferences.Editor editor = audioSettingSave.edit();
         String changed = audioSettingSave.getString(PACKAGE_NAME+"_CHANGED", "unknown");
 
-        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+        if (notificationManager.getCurrentInterruptionFilter()!= NotificationManager.INTERRUPTION_FILTER_ALARMS)
         {
             editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
             editor.apply();
         }
-        if (changed.equals("true") && notificationManager.getCurrentInterruptionFilter()== NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+        if (changed.equals("true") && notificationManager.getCurrentInterruptionFilter()== NotificationManager.INTERRUPTION_FILTER_ALARMS)
         {
             int audioCode = audioSettingSave.getInt(PACKAGE_NAME + "_AUDIO_SETTINGS", -99);
             if (audioCode != -99)

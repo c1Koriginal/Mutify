@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+import com.digitalsmart.mutify.database.UserLocationDatabase;
 import com.digitalsmart.mutify.model.UserLocation;
 import com.digitalsmart.mutify.uihelper.CovertManager;
 import com.digitalsmart.mutify.util.GeofenceBroadcastReceiver;
@@ -41,6 +43,7 @@ public class UserDataManager
     private PendingIntent geofencePendingIntent;
     private final Activity activity;
     private final CovertManager covertManager;
+    private final UserLocationDatabase db;
     private final ArrayList<String> locationsToRemove = new ArrayList<>();
 
     //constructor of the view model
@@ -53,6 +56,10 @@ public class UserDataManager
         covertManager = new CovertManager(rc, this);
         adapter = new LocationsAdapter();
         fencesToAdd = new ArrayList<>();
+
+        db = Room.databaseBuilder(activity.getApplicationContext(), UserLocationDatabase.class, "user-locations").build();
+
+
         getUserData();
     }
 
@@ -60,11 +67,17 @@ public class UserDataManager
     @SuppressLint("MissingPermission")
     public void getUserData()
     {
-        //todo: retrieve saved locations from SQLite
-        //todo: foreach item in retrieved list of locations,call map.addCircle and map.addMarker
-        //todo: do this on a background thread
+        new Thread(() ->
+        {
+            locations.addAll(db.userLocationDAO().getAll());
+            activity.runOnUiThread(() ->
+            {
+                adapter.notifyDataSetChanged();
+                updateMap();
+            });
+        }).start();
 
-
+        updateMap();
 
         //call generateFences after retrieving all the data (background thread finish)
         generateFences();
@@ -77,27 +90,11 @@ public class UserDataManager
         return locations.get(position) == null;
     }
 
-    //call this method to save the list to a local file or a database
-    public void updateUserData()
-    {
-        //todo: update current save of user data
-
-        //todo: change marker/circles if necessary
-        //call map.clear() and re-draw the markers and circles
-        //better implementations are also welcomed
-
-
-        //if successful call notifyDataSetChanged to update UI (recyclerview)
-        adapter.notifyDataSetChanged();
-    }
 
     //call this method to add a location to the list
     @SuppressLint("MissingPermission")
     public void add(UserLocation location)
     {
-        //avoid adding duplicate fences
-        if (!fences.contains(location.getGeofence()))
-        {
             fencesToAdd.add(location.getGeofence());
             geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
                     .addOnSuccessListener(activity, v ->
@@ -114,30 +111,53 @@ public class UserDataManager
                                 .strokeColor(Color.RED));
                         map.addMarker(new MarkerOptions().position(location.getLatLng()));
                         locations.add(location);
-                        updateUserData();
+                        Thread insert = new Thread(() ->
+                        {
+                            db.userLocationDAO().insert(location);
+                            activity.runOnUiThread(adapter::notifyDataSetChanged);
+                        });
+                        insert.setUncaughtExceptionHandler((t, e) -> Toast.makeText(activity, "Location already added.", Toast.LENGTH_SHORT).show());
+                        insert.start();
                     })
                     .addOnFailureListener(e -> Toast
                             .makeText(activity, "Geofencing not available, please turn on location service.", Toast.LENGTH_LONG)
                             .show());
-        }
     }
 
     //call this method to remove saved location from the list
     public void remove(int adapterPosition)
     {
         UserLocation location = locations.get(adapterPosition);
-        locations.remove(adapterPosition);
         fencesToAdd.remove(location.getGeofence());
         locationsToRemove.add(location.getId());
         Task<Void> removal = geofencingClient.removeGeofences(locationsToRemove);
         removal.addOnCompleteListener(task ->
                 {
                     locationsToRemove.clear();
-                    Toast.makeText(activity, location.getName() + " removed", Toast.LENGTH_SHORT).show();
+                    new Thread(() -> db.userLocationDAO().delete(location)).start();
+                    locations.remove(adapterPosition);
+                    Toast.makeText(activity, location.getName() + " removed, remaining " + locations.size(), Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+
+                    updateMap();
                 } );
-        updateUserData();
     }
 
+    //update markers and circles
+    private void updateMap()
+    {
+        new Thread(() -> activity.runOnUiThread(() ->
+        {
+            map.clear();
+            for (UserLocation location: locations)
+            {
+                map.addCircle(new CircleOptions()
+                        .center(location.getLatLng())
+                        .radius(location.getRadius())
+                        .strokeColor(Color.RED));
+            }
+        })).start();
+    }
     //return the RecyclerView adapter
     public LocationsAdapter getAdapter()
     {

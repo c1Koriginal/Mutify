@@ -9,211 +9,211 @@
 9        android:targetSdkVersion="30" />
 10
 11    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-11-->C:\Users\valkr\Downloads\Mutify\app\src\debug\AndroidManifest.xml:3:5-114
-11-->C:\Users\valkr\Downloads\Mutify\app\src\debug\AndroidManifest.xml:3:22-76
+11-->C:\Users\valkr\IdeaProjects\Mutify\app\src\debug\AndroidManifest.xml:3:5-114
+11-->C:\Users\valkr\IdeaProjects\Mutify\app\src\debug\AndroidManifest.xml:3:22-76
 12    <!--
 13         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
 14         Google Maps Android API v2, but you must specify either coarse or fine
 15         location permissions for the "MyLocation" functionality.
 16    -->
 17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-17-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:10:5-78
-17-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:10:22-76
+17-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:10:5-78
+17-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:10:22-76
 18    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
-18-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:11:5-82
-18-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:11:22-79
+18-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:11:5-82
+18-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:11:22-79
 19    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-19-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:12:5-84
-19-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:12:22-82
+19-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:12:5-84
+19-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:12:22-82
 20    <uses-permission android:name="android.permission.INTERNET" />
-20-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:13:5-67
-20-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:13:22-64
+20-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:13:5-67
+20-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:13:22-64
 21    <uses-permission android:name="android.permission.WAKE_LOCK" />
-21-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:14:5-68
-21-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:14:22-65
+21-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:14:5-68
+21-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:14:22-65
 22    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-22-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:15:5-85
-22-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:15:22-82
-23    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-23-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:16:5-108
-23-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:16:22-70
-24    <uses-permission android:name="android.permission.VIBRATE" />
-24-->[nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:9:5-66
-24-->[nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:9:22-63
-25    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Include required permissions for Google Maps API to run. -->
-25-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:10:5-76
-25-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:10:22-73
-26    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
-26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
-27
-28    <uses-feature
-28-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
-29        android:glEsVersion="0x00020000"
-29-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
-30        android:required="true" />
-30-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
-31
-32    <application
-32-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:18:5-63:19
-33        android:allowBackup="true"
-33-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:19:13-39
-34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-34-->[androidx.core:core:1.3.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\26b4bc64c2039ee44ef16ef8ddd6a51c\core-1.3.2\AndroidManifest.xml:24:18-86
-35        android:debuggable="true"
-36        android:extractNativeLibs="false"
-37        android:icon="@mipmap/ic_launcher"
-37-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:20:13-47
-38        android:label="@string/app_name"
-38-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:21:13-45
-39        android:roundIcon="@mipmap/ic_launcher_round"
-39-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:22:13-58
-40        android:supportsRtl="true"
-40-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:23:13-39
-41        android:testOnly="true"
-42        android:theme="@style/AppTheme" >
-42-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:24:13-44
-43
-44        <!--
-45             The API key for Google Maps-based APIs is defined as a string resource.
-46             (See the file "res/values/google_maps_api.xml").
-47             Note that the API key is linked to the encryption key used to sign the APK.
-48             You need a different API key for each encryption key, including the release key that is used to
-49             sign the APK for publishing.
-50             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-51        -->
-52        <meta-data
-52-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:34:9-36:55
-53            android:name="com.google.android.geo.API_KEY"
-53-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:35:17-62
-54            android:value="@string/maps_api_key" />
-54-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:36:17-53
-55
-56        <activity
-56-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:38:9-47:20
-57            android:name="com.digitalsmart.mutify.MapsActivity"
-57-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:39:17-45
-58            android:label="@string/title_activity_maps"
-58-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:40:17-60
-59            android:windowSoftInputMode="adjustPan" >
-59-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:41:17-56
-60            <intent-filter>
-60-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:42:13-46:29
-61                <action android:name="android.intent.action.MAIN" />
-61-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:43:17-68
-61-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:43:25-66
-62
-63                <category android:name="android.intent.category.LAUNCHER" />
-63-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:45:17-76
-63-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:45:27-74
-64            </intent-filter>
-65        </activity>
-66
-67        <service
-67-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:49:9-52:34
-68            android:name="com.digitalsmart.mutify.util.FetchAddressJobIntentService"
-68-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:50:17-66
-69            android:exported="true"
-69-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:52:9-32
-70            android:permission="android.permission.BIND_JOB_SERVICE" />
-70-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:51:17-73
-71
-72        <receiver
-72-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:54:9-55:43
-73            android:name="com.digitalsmart.mutify.GeofenceBroadcastReceiver"
-73-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:54:19-60
-74            android:enabled="true" />
-74-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:55:19-41
-75        <receiver
-75-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:57:9-62:20
-76            android:name="com.digitalsmart.mutify.CancelIntentReceiver"
-76-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:57:19-55
-77            android:enabled="true" >
-77-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:58:19-41
-78            <intent-filter>
-78-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:59:13-61:29
-79                <action android:name="com.digitalsmart.mutify_cancel" />
-79-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:60:17-72
-79-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:60:25-70
-80            </intent-filter>
-81        </receiver>
-82
-83        <activity
-83-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:14:9-20:20
-84            android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
-84-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:15:13-91
-85            android:exported="false"
-85-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:16:13-37
-86            android:label="@string/places_autocomplete_label"
-86-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:17:13-62
-87            android:theme="@style/PlacesAutocompleteOverlay"
-87-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:18:13-61
-88            android:windowSoftInputMode="adjustResize" >
-88-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:19:13-55
-89        </activity> <!-- Needs to be explicitly declared on P+ -->
-90        <uses-library
-90-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
-91            android:name="org.apache.http.legacy"
-91-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
-92            android:required="false" />
-92-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
-93
-94        <activity
-94-->[com.google.android.gms:play-services-base:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\baf287cacf7c86cc3023860c286bba49\jetified-play-services-base-17.3.0\AndroidManifest.xml:23:9-26:75
-95            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-95-->[com.google.android.gms:play-services-base:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\baf287cacf7c86cc3023860c286bba49\jetified-play-services-base-17.3.0\AndroidManifest.xml:24:13-79
-96            android:exported="false"
-96-->[com.google.android.gms:play-services-base:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\baf287cacf7c86cc3023860c286bba49\jetified-play-services-base-17.3.0\AndroidManifest.xml:25:13-37
-97            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-97-->[com.google.android.gms:play-services-base:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\baf287cacf7c86cc3023860c286bba49\jetified-play-services-base-17.3.0\AndroidManifest.xml:26:13-72
-98
-99        <meta-data
-99-->[com.google.android.gms:play-services-basement:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\27363996f5a1ce936e2628e8fd1b249c\jetified-play-services-basement-17.3.0\AndroidManifest.xml:23:9-25:69
-100            android:name="com.google.android.gms.version"
-100-->[com.google.android.gms:play-services-basement:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\27363996f5a1ce936e2628e8fd1b249c\jetified-play-services-basement-17.3.0\AndroidManifest.xml:24:13-58
-101            android:value="@integer/google_play_services_version" />
-101-->[com.google.android.gms:play-services-basement:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\27363996f5a1ce936e2628e8fd1b249c\jetified-play-services-basement-17.3.0\AndroidManifest.xml:25:13-66
-102
-103        <provider
-103-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
-104            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-104-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
-105            android:authorities="com.digitalsmart.mutify.lifecycle-process"
-105-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
-106            android:exported="false"
-106-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
-107            android:multiprocess="true" />
-107-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
-108
-109        <service
-109-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:29:9-35:19
-110            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
-110-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:30:13-103
-111            android:exported="false" >
-111-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:31:13-37
-112            <meta-data
-112-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:32:13-34:39
-113                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
-113-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:33:17-94
-114                android:value="cct" />
-114-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:34:17-36
-115        </service>
-116        <service
-116-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:26:9-30:19
-117            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
-117-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:27:13-117
-118            android:exported="false"
-118-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:28:13-37
-119            android:permission="android.permission.BIND_JOB_SERVICE" >
-119-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:29:13-69
-120        </service>
-121
-122        <receiver
-122-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:32:9-34:40
-123            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-123-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:33:13-132
-124            android:exported="false" />
-124-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:34:13-37
-125    </application>
-126
-127</manifest>
+22-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:15:5-85
+22-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:15:22-82
+23    <uses-permission android:name="android.permission.VIBRATE" />
+23-->[nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:9:5-66
+23-->[nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:9:22-63
+24    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Include required permissions for Google Maps API to run. -->
+24-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:10:5-76
+24-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:10:22-73
+25    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+25-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
+25-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
+26
+27    <uses-feature
+27-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+28        android:glEsVersion="0x00020000"
+28-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+29        android:required="true" />
+29-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+30
+31    <application
+31-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:17:5-59:19
+32        android:allowBackup="true"
+32-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:18:13-39
+33        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+33-->[androidx.core:core:1.3.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\26b4bc64c2039ee44ef16ef8ddd6a51c\core-1.3.2\AndroidManifest.xml:24:18-86
+34        android:debuggable="true"
+35        android:extractNativeLibs="false"
+36        android:icon="@mipmap/ic_launcher"
+36-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:19:13-47
+37        android:label="@string/app_name"
+37-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:20:13-45
+38        android:roundIcon="@mipmap/ic_launcher_round"
+38-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:21:13-58
+39        android:supportsRtl="true"
+39-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:22:13-39
+40        android:testOnly="true"
+41        android:theme="@style/AppTheme" >
+41-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:23:13-44
+42
+43        <!--
+44             The API key for Google Maps-based APIs is defined as a string resource.
+45             (See the file "res/values/google_maps_api.xml").
+46             Note that the API key is linked to the encryption key used to sign the APK.
+47             You need a different API key for each encryption key, including the release key that is used to
+48             sign the APK for publishing.
+49             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+50        -->
+51        <meta-data
+51-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:33:9-35:55
+52            android:name="com.google.android.geo.API_KEY"
+52-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:34:17-62
+53            android:value="@string/maps_api_key" />
+53-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:35:17-53
+54
+55        <activity
+55-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:37:9-46:20
+56            android:name="com.digitalsmart.mutify.MapsActivity"
+56-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:38:17-45
+57            android:label="@string/title_activity_maps"
+57-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:39:17-60
+58            android:windowSoftInputMode="adjustPan" >
+58-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:40:17-56
+59            <intent-filter>
+59-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:41:13-45:29
+60                <action android:name="android.intent.action.MAIN" />
+60-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:42:17-68
+60-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:42:25-66
+61
+62                <category android:name="android.intent.category.LAUNCHER" />
+62-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:44:17-76
+62-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:44:27-74
+63            </intent-filter>
+64        </activity>
+65
+66        <service
+66-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:48:9-51:34
+67            android:name="com.digitalsmart.mutify.util.FetchAddressJobIntentService"
+67-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:49:17-66
+68            android:exported="true"
+68-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:51:9-32
+69            android:permission="android.permission.BIND_JOB_SERVICE" />
+69-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:50:17-73
+70
+71        <receiver
+71-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:53:9-54:43
+72            android:name="com.digitalsmart.mutify.util.GeofenceBroadcastReceiver"
+72-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:53:19-65
+73            android:enabled="true" />
+73-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:54:19-41
+74        <receiver
+74-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:56:9-58:20
+75            android:name="com.digitalsmart.mutify.util.CancelIntentReceiver"
+75-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:56:19-60
+76            android:enabled="true" >
+76-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:57:19-41
+77        </receiver>
+78
+79        <activity
+79-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:14:9-20:20
+80            android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
+80-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:15:13-91
+81            android:exported="false"
+81-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:16:13-37
+82            android:label="@string/places_autocomplete_label"
+82-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:17:13-62
+83            android:theme="@style/PlacesAutocompleteOverlay"
+83-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:18:13-61
+84            android:windowSoftInputMode="adjustResize" >
+84-->[com.google.android.libraries.places:places:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\7be23d97b9add9cfb4cadbfbfd483b17\jetified-places-2.4.0\AndroidManifest.xml:19:13-55
+85        </activity> <!-- Needs to be explicitly declared on P+ -->
+86        <uses-library
+86-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+87            android:name="org.apache.http.legacy"
+87-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+88            android:required="false" />
+88-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\612b51ec0f1f25f8552dc66884f550fd\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+89
+90        <service
+90-->[androidx.room:room-runtime:2.2.5] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\9507ccf9706ff9560abd2833e129f2b1\room-runtime-2.2.5\AndroidManifest.xml:25:9-28:40
+91            android:name="androidx.room.MultiInstanceInvalidationService"
+91-->[androidx.room:room-runtime:2.2.5] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\9507ccf9706ff9560abd2833e129f2b1\room-runtime-2.2.5\AndroidManifest.xml:26:13-74
+92            android:directBootAware="true"
+92-->[androidx.room:room-runtime:2.2.5] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\9507ccf9706ff9560abd2833e129f2b1\room-runtime-2.2.5\AndroidManifest.xml:27:13-43
+93            android:exported="false" />
+93-->[androidx.room:room-runtime:2.2.5] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\9507ccf9706ff9560abd2833e129f2b1\room-runtime-2.2.5\AndroidManifest.xml:28:13-37
+94
+95        <activity
+95-->[com.google.android.gms:play-services-base:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\baf287cacf7c86cc3023860c286bba49\jetified-play-services-base-17.3.0\AndroidManifest.xml:23:9-26:75
+96            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+96-->[com.google.android.gms:play-services-base:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\baf287cacf7c86cc3023860c286bba49\jetified-play-services-base-17.3.0\AndroidManifest.xml:24:13-79
+97            android:exported="false"
+97-->[com.google.android.gms:play-services-base:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\baf287cacf7c86cc3023860c286bba49\jetified-play-services-base-17.3.0\AndroidManifest.xml:25:13-37
+98            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+98-->[com.google.android.gms:play-services-base:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\baf287cacf7c86cc3023860c286bba49\jetified-play-services-base-17.3.0\AndroidManifest.xml:26:13-72
+99
+100        <meta-data
+100-->[com.google.android.gms:play-services-basement:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\27363996f5a1ce936e2628e8fd1b249c\jetified-play-services-basement-17.3.0\AndroidManifest.xml:23:9-25:69
+101            android:name="com.google.android.gms.version"
+101-->[com.google.android.gms:play-services-basement:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\27363996f5a1ce936e2628e8fd1b249c\jetified-play-services-basement-17.3.0\AndroidManifest.xml:24:13-58
+102            android:value="@integer/google_play_services_version" />
+102-->[com.google.android.gms:play-services-basement:17.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\27363996f5a1ce936e2628e8fd1b249c\jetified-play-services-basement-17.3.0\AndroidManifest.xml:25:13-66
+103
+104        <provider
+104-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
+105            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+105-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
+106            android:authorities="com.digitalsmart.mutify.lifecycle-process"
+106-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
+107            android:exported="false"
+107-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
+108            android:multiprocess="true" />
+108-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\122a9a4da5402ca7c61fc314f9afe595\jetified-lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
+109
+110        <service
+110-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:29:9-35:19
+111            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+111-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:30:13-103
+112            android:exported="false" >
+112-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:31:13-37
+113            <meta-data
+113-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:32:13-34:39
+114                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+114-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:33:17-94
+115                android:value="cct" />
+115-->[com.google.android.datatransport:transport-backend-cct:2.3.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\29f9e57b40ffd9e9e779e05006520cea\jetified-transport-backend-cct-2.3.0\AndroidManifest.xml:34:17-36
+116        </service>
+117        <service
+117-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:26:9-30:19
+118            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+118-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:27:13-117
+119            android:exported="false"
+119-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:28:13-37
+120            android:permission="android.permission.BIND_JOB_SERVICE" >
+120-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:29:13-69
+121        </service>
+122
+123        <receiver
+123-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:32:9-34:40
+124            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+124-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:33:13-132
+125            android:exported="false" />
+125-->[com.google.android.datatransport:transport-runtime:2.2.3] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\4f51e979d19f7d6a1992560ed0c66b78\jetified-transport-runtime-2.2.3\AndroidManifest.xml:34:13-37
+126    </application>
+127
+128</manifest>
