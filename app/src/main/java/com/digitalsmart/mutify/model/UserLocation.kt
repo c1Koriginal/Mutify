@@ -4,6 +4,7 @@ import android.location.Address
 import android.location.Location
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.digitalsmart.mutify.util.Constants
 import com.google.android.gms.location.Geofence
@@ -14,7 +15,9 @@ import java.lang.Exception
 @Entity
 class UserLocation
 {
-    //unique id for geofencing object
+
+    //table columns
+
     @PrimaryKey
     var id: String
 
@@ -43,6 +46,10 @@ class UserLocation
     var postalCode = "unknown zip code"
 
 
+
+
+    //other data
+
     val latLng: LatLng get() = LatLng(latitude, longitude)
 
     val geofence: Geofence get() =
@@ -55,11 +62,36 @@ class UserLocation
                 .build()
 
 
+    @Ignore
+    var address: Address? = null
+        set(a)
+        {
+            field = a
+
+            try { addressLine = a!!.getAddressLine(0) }
+            catch (e : Exception) { }
+
+            try { country = a!!.countryName }
+            catch (e : Exception) { }
+
+            try { postalCode = a!!.postalCode }
+            catch (e : Exception) { }
+        }
 
 
 
-    //sqlite constructor
-    constructor(name: String, radius: Float, delay: Int, latitude: Double, longitude: Double, addressLine: String, country: String, postalCode: String)
+
+
+
+    //constructor
+    constructor(name: String,
+                radius: Float,
+                delay: Int,
+                latitude: Double,
+                longitude: Double,
+                addressLine: String,
+                country: String,
+                postalCode: String)
     {
         this.name = name
         this.radius = radius
@@ -72,47 +104,14 @@ class UserLocation
         this.id = Constants.PACKAGE_NAME + this.latitude + "_" + this.longitude
     }
 
-
-    //standard constructor
-    constructor(name: String, location: Location)
+    //constructor
+    @Ignore
+    constructor(name: String,
+                location: Location)
     {
         this.name = name
         latitude = location.latitude
         longitude = location.longitude
         id = Constants.PACKAGE_NAME + latitude + "_" + longitude
-    }
-
-    //save only the address line, country, and postal code
-    fun updateAddress(a: Address)
-    {
-        try
-        {
-            addressLine = a.getAddressLine(0)
-
-        }
-        catch (e : Exception)
-        {
-
-        }
-
-        try
-        {
-            country = a.countryName
-
-        }
-        catch (e : Exception)
-        {
-
-        }
-
-        try
-        {
-            postalCode = a.postalCode
-
-        }
-        catch (e : Exception)
-        {
-
-        }
     }
 }

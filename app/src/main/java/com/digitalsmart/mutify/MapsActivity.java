@@ -116,7 +116,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
-                    markerUserLocation.updateAddress(a);
+                    markerUserLocation.setAddress(a);
                 updateBalloon(null, true);
             }
             else if (resultCode == FAILURE_RESULT)

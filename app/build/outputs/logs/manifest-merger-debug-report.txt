@@ -7,7 +7,7 @@ INJECTED from C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:2
 MERGED from C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:2:1-62:12
 MERGED from [androidx.databinding:databinding-adapters:4.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\6f6d2380b6a21f5e4b0ffdfcac687374\databinding-adapters-4.0.2\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.databinding:databinding-runtime:4.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\41aaaabbf446c1d6527b4b732f650b9e\databinding-runtime-4.0.2\AndroidManifest.xml:17:1-24:12
-MERGED from [com.github.Valkriaine:Factor:1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\93b263773115dae8e73992c8a5946260\jetified-Factor-1.0\AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.Valkriaine:Factor:1.1] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\51794e7e5732e27805824cf607945d99\jetified-Factor-1.1\AndroidManifest.xml:2:1-11:12
 MERGED from [nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\0de55d84199a4c24756bd4a78efc1c11\jetified-core-ktx-1.3.2\AndroidManifest.xml:2:1-9:12
 MERGED from [com.github.skydoves:balloon:1.2.4] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\f0b9fe697d5f760c1de7d730d3c2ab92\jetified-balloon-1.2.4\AndroidManifest.xml:2:1-11:12
@@ -248,8 +248,8 @@ MERGED from [androidx.databinding:databinding-adapters:4.0.2] C:\Users\valkr\.gr
 MERGED from [androidx.databinding:databinding-adapters:4.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\6f6d2380b6a21f5e4b0ffdfcac687374\databinding-adapters-4.0.2\AndroidManifest.xml:22:5-44
 MERGED from [androidx.databinding:databinding-runtime:4.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\41aaaabbf446c1d6527b4b732f650b9e\databinding-runtime-4.0.2\AndroidManifest.xml:22:5-44
 MERGED from [androidx.databinding:databinding-runtime:4.0.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\41aaaabbf446c1d6527b4b732f650b9e\databinding-runtime-4.0.2\AndroidManifest.xml:22:5-44
-MERGED from [com.github.Valkriaine:Factor:1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\93b263773115dae8e73992c8a5946260\jetified-Factor-1.0\AndroidManifest.xml:7:5-9:41
-MERGED from [com.github.Valkriaine:Factor:1.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\93b263773115dae8e73992c8a5946260\jetified-Factor-1.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.Valkriaine:Factor:1.1] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\51794e7e5732e27805824cf607945d99\jetified-Factor-1.1\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.Valkriaine:Factor:1.1] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\51794e7e5732e27805824cf607945d99\jetified-Factor-1.1\AndroidManifest.xml:7:5-9:41
 MERGED from [nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:5:5-7:41
 MERGED from [nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\0de55d84199a4c24756bd4a78efc1c11\jetified-core-ktx-1.3.2\AndroidManifest.xml:5:5-7:41
