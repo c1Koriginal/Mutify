@@ -2,7 +2,7 @@
 App that mutes your phone automatically, based on user-selected locations
 
 
-[![](http://img.youtube.com/vi/BRWwD41amaU/0.jpg)](https://www.youtube.com/watch?v=BRWwD41amaU "")
+[![](http://img.youtube.com/vi/A7zhiTBjcc0/0.jpg)](https://www.youtube.com/watch?v=A7zhiTBjcc0"")
 
 
 Development Progress
