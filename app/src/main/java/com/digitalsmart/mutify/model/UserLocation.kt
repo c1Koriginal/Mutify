@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng
 import java.lang.Exception
 
 
+@Suppress("EqualsOrHashCode")
 @Entity
 class UserLocation
 {
@@ -46,8 +47,6 @@ class UserLocation
     var postalCode = "unknown zip code"
 
 
-
-
     //other data
 
     val latLng: LatLng get() = LatLng(latitude, longitude)
@@ -60,27 +59,6 @@ class UserLocation
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT or Geofence.GEOFENCE_TRANSITION_DWELL)
                 .build()
-
-
-    @Ignore
-    var address: Address? = null
-        set(a)
-        {
-            field = a
-
-            try { addressLine = a!!.getAddressLine(0) }
-            catch (e : Exception) { }
-
-            try { country = a!!.countryName }
-            catch (e : Exception) { }
-
-            try { postalCode = a!!.postalCode }
-            catch (e : Exception) { }
-        }
-
-
-
-
 
 
     //constructor
@@ -115,6 +93,17 @@ class UserLocation
         id = Constants.PACKAGE_NAME + latitude + "_" + longitude
     }
 
+    fun setAddress(a: Address)
+    {
+        try { addressLine = a.getAddressLine(0) }
+        catch (ignored : Exception) { }
+
+        try { country = a.countryName }
+        catch (ignored : Exception) { }
+
+        try { postalCode = a.postalCode }
+        catch (ignored : Exception) { }
+    }
 
 
     //Overrides
@@ -122,19 +111,5 @@ class UserLocation
     {
         return if (other is UserLocation) { other.id == this.id }
         else false
-    }
-
-    override fun hashCode(): Int
-    {
-        var result = id.hashCode()
-        result = 31 * result + name.hashCode()
-        result = 31 * result + radius.hashCode()
-        result = 31 * result + delay
-        result = 31 * result + latitude.hashCode()
-        result = 31 * result + longitude.hashCode()
-        result = 31 * result + addressLine.hashCode()
-        result = 31 * result + country.hashCode()
-        result = 31 * result + postalCode.hashCode()
-        return result
     }
 }
