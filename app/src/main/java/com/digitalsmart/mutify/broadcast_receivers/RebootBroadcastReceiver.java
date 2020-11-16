@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import com.digitalsmart.mutify.UserDataManager;
 
-//restore geofences after the device reboots
+//restore geofencing after the device reboots
 public class RebootBroadcastReceiver extends BroadcastReceiver
 {
     @Override

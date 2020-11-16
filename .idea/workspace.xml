@@ -9,24 +9,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b5fb97a-6a6f-4d2e-9e02-8cb5c5326290" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Mutify.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Mutify.app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeNativeLibs/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeNativeLibs/merge-state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/javaResources0" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/javaResources0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/digitalsmart/mutify/BuildConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/digitalsmart/mutify/BuildConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/digitalsmart/mutify/MapsActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/digitalsmart/mutify/MapsActivity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_java_res/debug/out.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_java_res/debug/out.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/digitalsmart/mutify/BuildConfig.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/digitalsmart/mutify/BuildConfig.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/digitalsmart/mutify/MapsActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/digitalsmart/mutify/MapsActivity.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/UserDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/UserDataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/broadcast_receivers/RebootBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/broadcast_receivers/RebootBroadcastReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/model/UserLocation.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/digitalsmart/mutify/model/UserLocation.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,38 +103,46 @@
       <option name="project" value="LOCAL" />
       <updated>1605555984413</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="cleaned up code in UserLocation.kt">
+      <created>1605557861965</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1605557861965</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed project configuration failure due to invalid workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed project configuration failure due to invalid workspace.xml" />
+    <MESSAGE value="cleaned up code in UserLocation.kt" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up code in UserLocation.kt" />
   </component>
   <component name="WindowStateProjectService">
     <state x="291" y="95" key="#Project_Structure" timestamp="1605555770595">
       <screen x="0" y="0" width="1620" height="1040" />
     </state>
     <state x="291" y="95" key="#Project_Structure/0.0.1620.1040@0.0.1620.1040" timestamp="1605555770595" />
-    <state x="422" y="107" key="CommitChangelistDialog2" timestamp="1605555981445">
+    <state x="422" y="107" key="CommitChangelistDialog2" timestamp="1605557858880">
       <screen x="0" y="0" width="1620" height="1040" />
     </state>
-    <state x="422" y="107" key="CommitChangelistDialog2/0.0.1620.1040@0.0.1620.1040" timestamp="1605555981445" />
-    <state width="1578" height="240" key="GridCell.Tab.0.bottom" timestamp="1605557666391">
+    <state x="422" y="107" key="CommitChangelistDialog2/0.0.1620.1040@0.0.1620.1040" timestamp="1605557858880" />
+    <state width="1578" height="240" key="GridCell.Tab.0.bottom" timestamp="1605558454092">
       <screen x="0" y="0" width="1620" height="1040" />
     </state>
-    <state width="1578" height="240" key="GridCell.Tab.0.bottom/0.0.1620.1040@0.0.1620.1040" timestamp="1605557666391" />
-    <state width="1578" height="240" key="GridCell.Tab.0.center" timestamp="1605557666391">
+    <state width="1578" height="240" key="GridCell.Tab.0.bottom/0.0.1620.1040@0.0.1620.1040" timestamp="1605558454092" />
+    <state width="1578" height="240" key="GridCell.Tab.0.center" timestamp="1605558454092">
       <screen x="0" y="0" width="1620" height="1040" />
     </state>
-    <state width="1578" height="240" key="GridCell.Tab.0.center/0.0.1620.1040@0.0.1620.1040" timestamp="1605557666391" />
-    <state width="1578" height="240" key="GridCell.Tab.0.left" timestamp="1605557666391">
+    <state width="1578" height="240" key="GridCell.Tab.0.center/0.0.1620.1040@0.0.1620.1040" timestamp="1605558454092" />
+    <state width="1578" height="240" key="GridCell.Tab.0.left" timestamp="1605558454092">
       <screen x="0" y="0" width="1620" height="1040" />
     </state>
-    <state width="1578" height="240" key="GridCell.Tab.0.left/0.0.1620.1040@0.0.1620.1040" timestamp="1605557666391" />
-    <state width="1578" height="240" key="GridCell.Tab.0.right" timestamp="1605557666391">
+    <state width="1578" height="240" key="GridCell.Tab.0.left/0.0.1620.1040@0.0.1620.1040" timestamp="1605558454092" />
+    <state width="1578" height="240" key="GridCell.Tab.0.right" timestamp="1605558454092">
       <screen x="0" y="0" width="1620" height="1040" />
     </state>
-    <state width="1578" height="240" key="GridCell.Tab.0.right/0.0.1620.1040@0.0.1620.1040" timestamp="1605557666391" />
+    <state width="1578" height="240" key="GridCell.Tab.0.right/0.0.1620.1040@0.0.1620.1040" timestamp="1605558454092" />
     <state x="391" y="263" key="IDE.errors.dialog" timestamp="1605556302119">
       <screen x="0" y="0" width="1620" height="1040" />
     </state>

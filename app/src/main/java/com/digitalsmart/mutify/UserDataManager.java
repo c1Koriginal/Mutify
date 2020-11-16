@@ -83,8 +83,8 @@ public class UserDataManager
         generateFences();
         if (fencesToAdd.size() > 0)
             geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
-                    .addOnCompleteListener(task -> Toast.makeText(context, "Mutify successfully restored geofences.", Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(exception -> Toast.makeText(context, "Mutify could not restore geofences.", Toast.LENGTH_SHORT).show());
+                    .addOnCompleteListener(task -> Toast.makeText(context, "Mutify successfully restored geo fences.", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(exception -> Toast.makeText(context, "Mutify could not restore geo fences.", Toast.LENGTH_SHORT).show());
     }
 
     //call this method to retrieve the location list from a local file or a database
@@ -107,7 +107,7 @@ public class UserDataManager
             geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
                     .addOnFailureListener(e ->
                     {
-                        Toast.makeText(activity, "Mutify could not restore geofences.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "Mutify could not restore geo fences.", Toast.LENGTH_SHORT).show();
                         Log.wtf("fences", e.getMessage());
                     });
     }
@@ -128,6 +128,7 @@ public class UserDataManager
             Log.d("fences", "number of locations saved: " + locations.size());
             return;
         }
+
         if (!locations.contains(location))
         {
             fencesToAdd.add(location.getGeofence());

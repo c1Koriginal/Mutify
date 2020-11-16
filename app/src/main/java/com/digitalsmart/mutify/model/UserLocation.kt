@@ -114,4 +114,27 @@ class UserLocation
         longitude = location.longitude
         id = Constants.PACKAGE_NAME + latitude + "_" + longitude
     }
+
+
+
+    //Overrides
+    override fun equals(other: Any?): Boolean
+    {
+        return if (other is UserLocation) { other.id == this.id }
+        else false
+    }
+
+    override fun hashCode(): Int
+    {
+        var result = id.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + delay
+        result = 31 * result + latitude.hashCode()
+        result = 31 * result + longitude.hashCode()
+        result = 31 * result + addressLine.hashCode()
+        result = 31 * result + country.hashCode()
+        result = 31 * result + postalCode.hashCode()
+        return result
+    }
 }

@@ -93,10 +93,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //data binding object from activity_maps.xml
-    //to access any View/layout from activity_maps.xml, simply call binding.'layout id'
-    //for example, to access the ImageView "@+id/markerSprite", call binding.markerSprite
-    //instead of using findViewById()
-    //data binding library will also automatically convert view ids like "@+id/add_page" to "addPage" for easier usage in java code
     private ActivityMapsBinding binding;
 
 
@@ -221,7 +217,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //retrieve radius from the UI controls
         //do nothing if there is no marked user location
         permissionManager.checkPermission();
-        if (markerUserLocation != null) {
+        if (markerUserLocation != null)
+        {
             markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
             markerUserLocation.setDelay(Integer.parseInt(Objects.requireNonNull(binding.delaySlider.getBubbleText())));
             if (String.valueOf(binding.addName.getText()).isEmpty())
