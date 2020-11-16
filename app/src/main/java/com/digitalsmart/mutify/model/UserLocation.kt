@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 import com.digitalsmart.mutify.util.Constants
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.maps.model.LatLng
+import java.lang.Exception
 
 
 @Entity
@@ -84,8 +85,34 @@ class UserLocation
     //save only the address line, country, and postal code
     fun updateAddress(a: Address)
     {
-        addressLine = a.getAddressLine(0)
-        country = a.countryName
-        postalCode = a.postalCode
+        try
+        {
+            addressLine = a.getAddressLine(0)
+
+        }
+        catch (e : Exception)
+        {
+
+        }
+
+        try
+        {
+            country = a.countryName
+
+        }
+        catch (e : Exception)
+        {
+
+        }
+
+        try
+        {
+            postalCode = a.postalCode
+
+        }
+        catch (e : Exception)
+        {
+
+        }
     }
 }

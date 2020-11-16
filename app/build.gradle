@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.github.hannesa2:AndroidSlidingUpPanel:3.5.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
     implementation 'com.google.android.libraries.places:places:2.4.0'
-    implementation 'com.github.Valkriaine:Factor:1.0'
+    implementation 'com.github.Valkriaine:Factor:1.1'
     implementation "com.github.skydoves:balloon:1.2.4"
     implementation 'nz.co.trademe.covert:covert:2.0.0'
     implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'

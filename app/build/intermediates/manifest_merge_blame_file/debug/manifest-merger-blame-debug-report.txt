@@ -9,31 +9,31 @@
 9        android:targetSdkVersion="30" />
 10
 11    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-11-->C:\Users\valkr\IdeaProjects\Mutify\app\src\debug\AndroidManifest.xml:3:5-114
-11-->C:\Users\valkr\IdeaProjects\Mutify\app\src\debug\AndroidManifest.xml:3:22-76
+11-->C:\Users\valkr\Downloads\Mutify\app\src\debug\AndroidManifest.xml:3:5-114
+11-->C:\Users\valkr\Downloads\Mutify\app\src\debug\AndroidManifest.xml:3:22-76
 12    <!--
 13         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
 14         Google Maps Android API v2, but you must specify either coarse or fine
 15         location permissions for the "MyLocation" functionality.
 16    -->
 17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-17-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:10:5-78
-17-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:10:22-76
+17-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:10:5-78
+17-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:10:22-76
 18    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
-18-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:11:5-82
-18-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:11:22-79
+18-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:11:5-82
+18-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:11:22-79
 19    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-19-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:12:5-84
-19-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:12:22-82
+19-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:12:5-84
+19-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:12:22-82
 20    <uses-permission android:name="android.permission.INTERNET" />
-20-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:13:5-67
-20-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:13:22-64
+20-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:13:5-67
+20-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:13:22-64
 21    <uses-permission android:name="android.permission.WAKE_LOCK" />
-21-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:14:5-68
-21-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:14:22-65
+21-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:14:5-68
+21-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:14:22-65
 22    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-22-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:15:5-85
-22-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:15:22-82
+22-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:15:5-85
+22-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:15:22-82
 23    <uses-permission android:name="android.permission.VIBRATE" />
 23-->[nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:9:5-66
 23-->[nz.co.trademe.covert:covert:2.0.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\155280ce14f3fe318421f8a840d0cf49\jetified-covert-2.0.0\AndroidManifest.xml:9:22-63
@@ -59,24 +59,24 @@
 32-->[androidx.work:work-runtime:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\264bc76e4d5be88d45266453227ecfe0\work-runtime-2.4.0\AndroidManifest.xml:28:22-74
 33
 34    <application
-34-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:17:5-60:19
+34-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:17:5-60:19
 35        android:allowBackup="true"
-35-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:18:13-39
+35-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:18:13-39
 36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 36-->[androidx.core:core:1.3.2] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\26b4bc64c2039ee44ef16ef8ddd6a51c\core-1.3.2\AndroidManifest.xml:24:18-86
 37        android:debuggable="true"
 38        android:extractNativeLibs="false"
 39        android:icon="@mipmap/ic_launcher"
-39-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:19:13-47
+39-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:19:13-47
 40        android:label="@string/app_name"
-40-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:20:13-45
+40-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:20:13-45
 41        android:roundIcon="@mipmap/ic_launcher_round"
-41-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:21:13-58
+41-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:21:13-58
 42        android:supportsRtl="true"
-42-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:22:13-39
+42-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:22:13-39
 43        android:testOnly="true"
 44        android:theme="@style/AppTheme" >
-44-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:23:13-44
+44-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:23:13-44
 45
 46        <!--
 47             The API key for Google Maps-based APIs is defined as a string resource.
@@ -87,64 +87,64 @@
 52             You can define the keys for the debug and release targets in src/debug/ and src/release/.
 53        -->
 54        <meta-data
-54-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:33:9-35:55
+54-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:33:9-35:55
 55            android:name="com.google.android.geo.API_KEY"
-55-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:34:17-62
+55-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:34:17-62
 56            android:value="@string/maps_api_key" />
-56-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:35:17-53
+56-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:35:17-53
 57
 58        <activity
-58-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:37:9-46:20
+58-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:37:9-46:20
 59            android:name="com.digitalsmart.mutify.MapsActivity"
-59-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:38:17-45
+59-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:38:17-45
 60            android:label="@string/title_activity_maps"
-60-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:39:17-60
+60-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:39:17-60
 61            android:windowSoftInputMode="adjustPan" >
-61-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:40:17-56
+61-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:40:17-56
 62            <intent-filter>
-62-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:41:13-45:29
+62-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:41:13-45:29
 63                <action android:name="android.intent.action.MAIN" />
-63-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:42:17-68
-63-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:42:25-66
+63-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:42:17-68
+63-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:42:25-66
 64
 65                <category android:name="android.intent.category.LAUNCHER" />
-65-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:44:17-76
-65-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:44:27-74
+65-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:44:17-76
+65-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:44:27-74
 66            </intent-filter>
 67        </activity>
 68
 69        <service
-69-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:48:9-51:34
+69-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:48:9-51:34
 70            android:name="com.digitalsmart.mutify.Services.FetchAddressJobIntentService"
-70-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:49:17-70
+70-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:49:17-70
 71            android:exported="true"
-71-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:51:9-32
+71-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:51:9-32
 72            android:permission="android.permission.BIND_JOB_SERVICE" />
-72-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:50:17-73
+72-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:50:17-73
 73
 74        <receiver
-74-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:53:9-105
+74-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:53:9-105
 75            android:name="com.digitalsmart.mutify.broadcast_receivers.GeofenceBroadcastReceiver"
-75-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:53:19-80
+75-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:53:19-80
 76            android:enabled="true" />
-76-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:53:81-103
+76-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:53:81-103
 77        <receiver
-77-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:54:9-100
+77-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:54:9-100
 78            android:name="com.digitalsmart.mutify.broadcast_receivers.CancelIntentReceiver"
-78-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:54:19-75
+78-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:54:19-75
 79            android:enabled="true" />
-79-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:54:76-98
+79-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:54:76-98
 80        <receiver
-80-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:55:9-59:20
+80-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:55:9-59:20
 81            android:name="com.digitalsmart.mutify.broadcast_receivers.RebootBroadcastReceiver"
-81-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:55:19-78
+81-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:55:19-78
 82            android:enabled="true" >
-82-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:55:79-101
+82-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:55:79-101
 83            <intent-filter>
-83-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:56:13-58:29
+83-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:56:13-58:29
 84                <action android:name="android.intent.action.BOOT_COMPLETED" />
-84-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:57:17-78
-84-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:57:25-76
+84-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:57:17-78
+84-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:57:25-76
 85            </intent-filter>
 86        </receiver>
 87
@@ -314,8 +314,8 @@
 172            <intent-filter>
 172-->[androidx.work:work-runtime:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\264bc76e4d5be88d45266453227ecfe0\work-runtime-2.4.0\AndroidManifest.xml:114:13-118:29
 173                <action android:name="android.intent.action.BOOT_COMPLETED" />
-173-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:57:17-78
-173-->C:\Users\valkr\IdeaProjects\Mutify\app\src\main\AndroidManifest.xml:57:25-76
+173-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:57:17-78
+173-->C:\Users\valkr\Downloads\Mutify\app\src\main\AndroidManifest.xml:57:25-76
 174                <action android:name="android.intent.action.TIME_SET" />
 174-->[androidx.work:work-runtime:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\264bc76e4d5be88d45266453227ecfe0\work-runtime-2.4.0\AndroidManifest.xml:116:17-73
 174-->[androidx.work:work-runtime:2.4.0] C:\Users\valkr\.gradle\caches\transforms-2\files-2.1\264bc76e4d5be88d45266453227ecfe0\work-runtime-2.4.0\AndroidManifest.xml:116:25-70

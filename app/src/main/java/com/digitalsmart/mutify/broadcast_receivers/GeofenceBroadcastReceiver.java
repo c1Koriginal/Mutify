@@ -69,7 +69,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
             //todo: change to dwelling
             message = " geo fences, dwelling detected";
             Log.d(TAG, count + message);
-            turnOnDND();
+            //turnOnDND();
         }
         else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER)
         {
