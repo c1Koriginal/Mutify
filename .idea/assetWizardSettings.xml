@@ -320,8 +320,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="location_icon" />
-                            <entry key="sourceFile" value="C:\Users\valkr\Downloads\11bf0f3327b55e1d97e676f53ddea92c.svg" />
+                            <entry key="outputName" value="settings" />
+                            <entry key="sourceFile" value="C:\Users\valkr\Downloads\settings.svg" />
                           </map>
                         </option>
                       </PersistentState>

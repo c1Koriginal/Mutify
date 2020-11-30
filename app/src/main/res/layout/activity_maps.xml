@@ -412,14 +412,45 @@
 
 
                 <!--open this page when the user clicks "Menu" button-->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/list_page"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
+
+                    <!--settings-->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/settings"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                                android:src="@drawable/settings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#00FFFFFF"
+                                android:maxWidth="20dp"
+                                android:maxHeight="20dp"
+                                android:onClick="launchSettings"/>
+
+                        <androidx.appcompat.widget.AppCompatButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#00FFFFFF"
+                                android:height="20dp"
+                                android:textColor="@color/quantum_white_100"
+                                android:text="@string/settings"
+                                android:onClick="launchSettings"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <!--todo: design idea: add an extra section here to display recommended locations-->
                     <!--todo: add a toggle for each recommendation and user-saved locations to enable/disable routine-->
-
 
                     <!--display the list of user-saved locations (routines)-->
                     <androidx.recyclerview.widget.RecyclerView
@@ -427,12 +458,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:clipToPadding="false"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_marginBottom="10dp"/>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </com.valkriaine.factor.HomePager>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>

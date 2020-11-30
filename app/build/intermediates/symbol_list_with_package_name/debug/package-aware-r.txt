@@ -2079,8 +2079,6 @@ drawable ic_clear_black_24dp
 drawable ic_edit_black_24dp
 drawable ic_keyboard_arrow_left_black_24dp
 drawable ic_keyboard_arrow_right_black_24dp
-drawable ic_launcher_background
-drawable ic_launcher_foreground
 drawable ic_menu_arrow_down_black_24dp
 drawable ic_menu_arrow_up_black_24dp
 drawable ic_mtrl_checked_circle
@@ -2118,6 +2116,7 @@ drawable quantum_ic_arrow_back_grey600_24
 drawable quantum_ic_clear_grey600_24
 drawable quantum_ic_cloud_off_vd_theme_24
 drawable quantum_ic_search_grey600_24
+drawable settings
 drawable shadow
 drawable test_custom_background
 drawable tooltip_frame_dark
@@ -2498,6 +2497,7 @@ id search_src_text
 id search_voice_btn
 id select_dialog_listview
 id selected
+id settings
 id shortcut
 id showCustom
 id showHome
@@ -2744,8 +2744,6 @@ layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
 layout userlocation_list_item
-mipmap ic_launcher
-mipmap ic_launcher_round
 mipmap mutify_icon
 mipmap mutify_icon_foreground
 mipmap mutify_icon_round
@@ -2881,6 +2879,7 @@ string reset_camera
 string saved_locations
 string search_menu_title
 string set_radius
+string settings
 string status_bar_notification_info_overflow
 string title_activity_maps
 string transition_type

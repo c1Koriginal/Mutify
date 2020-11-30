@@ -95,6 +95,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //data binding library will also automatically convert view ids like "@+id/add_page" to "addPage" for easier usage in java code
     private ActivityMapsBinding binding;
 
+    public void launchSettings(View view)
+    {
+        //open settings activity
+    }
+
 
     //receive Geocoder fetch address result
     private class AddressResultReceiver extends ResultReceiver
