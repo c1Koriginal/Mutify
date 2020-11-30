@@ -1,7 +1,5 @@
 package com.digitalsmart.mutify;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Insets;
@@ -30,17 +28,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
+import com.digitalsmart.mutify.Services.FetchAddressJobIntentService;
 import com.digitalsmart.mutify.Services.LocationWorker;
 import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.model.UserLocation;
 import com.digitalsmart.mutify.uihelper.BlurController;
-import com.digitalsmart.mutify.Services.FetchAddressJobIntentService;
 import com.digitalsmart.mutify.util.PermissionManager;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.GeofencingClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.*;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -55,6 +50,7 @@ import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -141,7 +137,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //register Geocoder intent listener
         addressResultReceiver = new AddressResultReceiver(new Handler(Looper.getMainLooper()));
-        createNotificationChannel();
 
         //initialize geofence client
         geofencingClient = LocationServices.getGeofencingClient(this);
@@ -211,6 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.radiusSlider.setPosition(80f/500);
         binding.delaySlider.setPosition(0.5f);
         binding.addName.setText("Location " + (userDataManager.getAdapter().getItemCount() + 1));
+        binding.transitionType.selectButton(R.id.entering);
         permissionManager.checkPermission();
     }
 
@@ -221,13 +217,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //retrieve radius from the UI controls
         //do nothing if there is no marked user location
         permissionManager.checkPermission();
-        if (markerUserLocation != null) {
+        if (markerUserLocation != null)
+        {
             markerUserLocation.setRadius(Float.parseFloat(String.valueOf(binding.radius.getText())));
-            markerUserLocation.setDelay(Integer.parseInt(Objects.requireNonNull(binding.delaySlider.getBubbleText())));
             if (String.valueOf(binding.addName.getText()).isEmpty())
                 markerUserLocation.setName("Location " + (userDataManager.getAdapter().getItemCount() + 1));
             else
                 markerUserLocation.setName(String.valueOf(binding.addName.getText()));
+
+            //set transition type
+            if (binding.dwelling.isSelected())
+            {
+                markerUserLocation.setTransition(Geofence.GEOFENCE_TRANSITION_DWELL);
+                int delay = Integer.parseInt(Objects.requireNonNull(binding.delaySlider.getBubbleText()));
+                markerUserLocation.setDelay(delay * 60000);
+            }
+            else if (binding.entering.isSelected())
+            {
+                markerUserLocation.setTransition(Geofence.GEOFENCE_TRANSITION_ENTER);
+            }
+
+
 
             userDataManager.add(markerUserLocation);
             binding.homePager.setCurrentItem(1, true);
@@ -257,7 +267,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onStart();
         permissionManager.checkPermission();
         binding.blurLayer.disable();
-        createNotificationChannel();
+        binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
     }
 
     @Override
@@ -266,7 +276,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
         permissionManager.checkPermission();
         binding.blurLayer.disable();
-        createNotificationChannel();
+        binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
     }
 
 
@@ -327,8 +337,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+    public boolean dispatchTouchEvent(MotionEvent event)
+    {
+        if (event.getAction() == MotionEvent.ACTION_DOWN)
+        {
             View v = getCurrentFocus();
             if ( v instanceof EditText) {
                 Rect outRect = new Rect();
@@ -343,6 +355,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return super.dispatchTouchEvent( event );
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        if (binding.drawer.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED)
+            binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        else
+            super.onBackPressed();
+    }
 
     //add other methods here
     //*********************************************************************************************************************
@@ -367,7 +387,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.i("places_error", "An error occurred: " + status);
             }
         });
-
 
 
         //setup address info balloon
@@ -471,31 +490,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //initialize delay slider
         binding.delaySlider.setPositionListener(aFloat -> {
             //do not update UI here
-            delaySliderPosition[0] = (int) (20 * aFloat);
+            delaySliderPosition[0] = (int) (4 * aFloat + 1);
             binding.delaySlider.setBubbleText(String.valueOf((int) delaySliderPosition[0]));
-            binding.delayText.setText( (int) delaySliderPosition[0] + " seconds delay");
+            binding.delayText.setText( (int) delaySliderPosition[0] + " min delay");
             checkCanConfirm();
             return null;
         });
         binding.delaySlider.setEndTrackingListener(() -> {
-            binding.delaySlider.setPosition(delaySliderPosition[0] /20);
+            binding.delaySlider.setPosition((delaySliderPosition[0]-1)/4);
             //update UI here
             binding.delaySlider.setBubbleText(String.valueOf((int) delaySliderPosition[0]));
-            binding.delayText.setText( (int) delaySliderPosition[0] + " seconds delay");
+            binding.delayText.setText( (int) delaySliderPosition[0] + " min delay");
             checkCanConfirm();
             return null;
         });
         binding.delaySlider.setPosition(0.5f);
+
+        binding.transitionType.setOnSelectListener((ThemedButton btn) -> {
+            if (btn.getSelectedText().equals("Entering"))
+            {
+                binding.transitionInfo.setText(R.string.entering_info);
+                binding.delaySlider.setVisibility(View.INVISIBLE);
+                binding.delayText.setVisibility(View.INVISIBLE);
+            }
+            else if (btn.getSelectedText().equals("Dwelling"))
+            {
+                binding.transitionInfo.setText(R.string.dwelling_info);
+                binding.delaySlider.setVisibility(View.VISIBLE);
+                binding.delayText.setVisibility(View.VISIBLE);
+            }
+
+            checkCanConfirm();
+            return null;
+        });
     }
 
+    //show or hide the confirm button
     private void checkCanConfirm()
     {
-        if (delaySliderPosition[0] > 0 && radiusSliderPosition[0] > 0 && radiusHasText)
+        if (radiusSliderPosition[0] > 0 && radiusHasText && binding.transitionType.getSelectedButtons().size() > 0)
             binding.addConfirmButton.setVisibility(View.VISIBLE);
         else
             binding.addConfirmButton.setVisibility(View.INVISIBLE);
     }
-
 
     //get the device's screen width in pixels
     @SuppressWarnings("deprecation")
@@ -515,26 +552,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return displayMetrics.widthPixels;
         }
     }
-
-
-    //register Mutify's notification channel with the system
-    private void createNotificationChannel()
-    {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            String description = "Mutify app";
-            int importance = NotificationManager.IMPORTANCE_MAX;
-            NotificationChannel channel = new NotificationChannel(PACKAGE_NAME, PACKAGE_NAME, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
 
 
     //enable the app to retrieve the marker's location
@@ -573,7 +590,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         map.setOnCameraIdleListener(onCameraIdleListener);
         map.setOnCameraMoveStartedListener(onCameraMoveStartedListener);
     }
-
 
     //update the information displayed in the balloon based on the Geocoder fetching result
     private void updateBalloon(String message, boolean isSuccessful)

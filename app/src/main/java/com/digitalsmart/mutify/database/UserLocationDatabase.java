@@ -6,7 +6,7 @@ import com.digitalsmart.mutify.model.UserLocation;
 
 
 
-@Database(entities = {UserLocation.class}, version = 3)
+@Database(entities = {UserLocation.class}, version = 4)
 public abstract class UserLocationDatabase extends RoomDatabase
 {
     public abstract UserLocationDAO userLocationDAO();

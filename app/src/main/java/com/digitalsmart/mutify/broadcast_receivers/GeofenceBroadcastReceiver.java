@@ -10,21 +10,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.SystemClock;
-import android.util.Log;
+import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import com.digitalsmart.mutify.R;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingEvent;
 
-import java.util.List;
-
 import static com.digitalsmart.mutify.util.Constants.NOTIFICATION_ID;
 import static com.digitalsmart.mutify.util.Constants.PACKAGE_NAME;
 
 public class GeofenceBroadcastReceiver extends BroadcastReceiver
 {
-    private static final String TAG = "broadcast";
     private SharedPreferences mutifySharedPreferences;
     private Context context;
     private NotificationCompat.Builder builder;
@@ -42,7 +39,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                 .setSmallIcon(R.drawable.location_icon)
                 .setContentTitle("Mutify")
-                .setContentText("In progress")
+                .setContentText("Turning on do not disturb")
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
 
@@ -50,47 +47,34 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
         if (geofencingEvent.hasError())
         {
             String errorMessage = GeofenceStatusCodes.getStatusCodeString(geofencingEvent.getErrorCode());
-            Log.e(TAG, errorMessage);
+            Toast.makeText(context, "An error has occurred, " + errorMessage, Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Get the transition type.
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
 
-        // Get the geo fences that were triggered. A single event can trigger
-        // multiple geo fences.
-        List<Geofence> triggeringFences = geofencingEvent.getTriggeringGeofences();
-        int count = triggeringFences.size();
-        String message;
-
 
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL)
         {
-            //todo: change to dwelling
-            message = " geo fences, dwelling detected";
-            Log.d(TAG, count + message);
-            turnOnDND();
+            turnOnDND("Dwelling");
         }
         else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER)
         {
-            message = " geo fences, entering detected";
-            Log.d(TAG, count + message);
-            turnOnDND();
+            turnOnDND("Entering");
 
         }
         else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT)
         {
-            message = " geo fences, exiting detected";
-            Log.d(TAG, count + message);
             restoreAudioSettings();
         }
-        Log.d(TAG, "pass");
     }
 
 
 
-    //turn on vibrate - "mutify"
-    private void turnOnDND()
+    //turn on do not disturb
+    //todo: add option to choose which DND policy to use
+    private void turnOnDND(String type)
     {
         createNotificationChannel();
         //save the previous audio settings
@@ -137,14 +121,13 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
 
                     builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                             .setSmallIcon(R.drawable.location_icon)
-                            .setContentTitle("Mutify")
+                            .setContentTitle(type + " detected.")
                             .setContentText("Phone mutified.")
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
                     notificationManager.notify(NOTIFICATION_ID, builder.setPriority(2).build());
                     editor.putString(PACKAGE_NAME+"_CHANGED", "true");
                     editor.apply();
-                    Log.d(TAG, "settings changed: " + mutifySharedPreferences.getString(PACKAGE_NAME+"_CHANGED", "unknown"));
                 });
                 counterThread.start();
 
@@ -176,7 +159,6 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
             if (audioCode != -99)
             {
                 notificationManager.setInterruptionFilter(audioCode);
-                Log.d(TAG, "settings restored to: " + audioCode);
                 builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                         .setSmallIcon(R.drawable.location_icon)
                         .setContentTitle("Mutify")

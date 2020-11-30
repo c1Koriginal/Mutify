@@ -91,6 +91,8 @@ attr alertDialogButtonGroupStyle
 attr alertDialogCenterButtons
 attr alertDialogStyle
 attr alertDialogTheme
+attr alignContent
+attr alignItems
 attr allowStacking
 attr alpha
 attr alphabeticModifiers
@@ -327,6 +329,9 @@ attr dialogPreferredPadding
 attr dialogTheme
 attr displayOptions
 attr divider
+attr dividerDrawable
+attr dividerDrawableHorizontal
+attr dividerDrawableVertical
 attr dividerHorizontal
 attr dividerPadding
 attr dividerVertical
@@ -413,6 +418,8 @@ attr fastScrollHorizontalTrackDrawable
 attr fastScrollVerticalThumbDrawable
 attr fastScrollVerticalTrackDrawable
 attr firstBaselineToTopHeight
+attr flexDirection
+attr flexWrap
 attr floatingActionButtonStyle
 attr flow_firstHorizontalBias
 attr flow_firstHorizontalStyle
@@ -506,6 +513,7 @@ attr itemTextAppearance
 attr itemTextAppearanceActive
 attr itemTextAppearanceInactive
 attr itemTextColor
+attr justifyContent
 attr keyPositionType
 attr keylines
 attr labelVisibilityMode
@@ -518,6 +526,7 @@ attr layout
 attr layoutDescription
 attr layoutDuringTransition
 attr layoutManager
+attr layout_alignSelf
 attr layout_anchor
 attr layout_anchorGravity
 attr layout_behavior
@@ -568,6 +577,9 @@ attr layout_constraintWidth_percent
 attr layout_dodgeInsetEdges
 attr layout_editor_absoluteX
 attr layout_editor_absoluteY
+attr layout_flexBasisPercent
+attr layout_flexGrow
+attr layout_flexShrink
 attr layout_goneMarginBottom
 attr layout_goneMarginEnd
 attr layout_goneMarginLeft
@@ -576,9 +588,15 @@ attr layout_goneMarginStart
 attr layout_goneMarginTop
 attr layout_insetEdge
 attr layout_keyline
+attr layout_maxHeight
+attr layout_maxWidth
+attr layout_minHeight
+attr layout_minWidth
 attr layout_optimizationLevel
+attr layout_order
 attr layout_scrollFlags
 attr layout_scrollInterpolator
+attr layout_wrapBefore
 attr liftOnScroll
 attr liftOnScrollTargetViewId
 attr limitBoundsTo
@@ -629,6 +647,7 @@ attr maxButtonHeight
 attr maxCharacterCount
 attr maxHeight
 attr maxImageSize
+attr maxLine
 attr maxVelocity
 attr maxWidth
 attr measureWithLargestChild
@@ -729,6 +748,9 @@ attr shapeAppearanceMediumComponent
 attr shapeAppearanceOverlay
 attr shapeAppearanceSmallComponent
 attr showAsAction
+attr showDivider
+attr showDividerHorizontal
+attr showDividerVertical
 attr showDividers
 attr showMotionSpec
 attr showPaths
@@ -860,6 +882,51 @@ attr titleMargins
 attr titleTextAppearance
 attr titleTextColor
 attr titleTextStyle
+attr toggle_backgroundColor
+attr toggle_borderColor
+attr toggle_borderWidth
+attr toggle_btnCornerRadius
+attr toggle_circularCornerRadius
+attr toggle_fontFamily
+attr toggle_horizontalSpacing
+attr toggle_icon
+attr toggle_iconColor
+attr toggle_iconGravity
+attr toggle_iconPadding
+attr toggle_iconPaddingBottom
+attr toggle_iconPaddingHorizontal
+attr toggle_iconPaddingLeft
+attr toggle_iconPaddingRight
+attr toggle_iconPaddingTop
+attr toggle_iconPaddingVertical
+attr toggle_padding
+attr toggle_paddingBottom
+attr toggle_paddingHorizontal
+attr toggle_paddingLeft
+attr toggle_paddingRight
+attr toggle_paddingTop
+attr toggle_paddingVertical
+attr toggle_requiredAmount
+attr toggle_selectAnimation
+attr toggle_selectableAmount
+attr toggle_selectedBackgroundColor
+attr toggle_selectedBorderColor
+attr toggle_selectedBorderWidth
+attr toggle_selectedIcon
+attr toggle_selectedText
+attr toggle_selectedTextColor
+attr toggle_text
+attr toggle_textAlignment
+attr toggle_textColor
+attr toggle_textGravity
+attr toggle_textPadding
+attr toggle_textPaddingBottom
+attr toggle_textPaddingHorizontal
+attr toggle_textPaddingLeft
+attr toggle_textPaddingRight
+attr toggle_textPaddingTop
+attr toggle_textPaddingVertical
+attr toggle_textSize
 attr toolbarId
 attr toolbarNavigationButtonStyle
 attr toolbarStyle
@@ -1122,6 +1189,7 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
+color mutify_icon_background
 color notification_action_color_filter
 color notification_icon_bg_color
 color notification_material_background_media_default_color
@@ -2177,11 +2245,14 @@ id chip
 id chip_group
 id chronometer
 id circle
+id circular_reveal
 id clear_text
 id clip_horizontal
 id clip_vertical
 id collapseActionView
 id collapsed
+id column
+id column_reverse
 id confirm_button
 id container
 id content
@@ -2223,6 +2294,7 @@ id dragStart
 id dragUp
 id drawer
 id dropdown_menu
+id dwelling
 id easeIn
 id easeInOut
 id easeOut
@@ -2231,6 +2303,7 @@ id end
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
+id entering
 id exitUntilCollapsed
 id expand_activities_button
 id expanded
@@ -2243,6 +2316,8 @@ id filled
 id filter_chip
 id fitToContents
 id fixed
+id flex_end
+id flex_start
 id flip
 id forever
 id ghost_view
@@ -2250,6 +2325,7 @@ id ghost_view_holder
 id gone
 id graph
 id graph_wrap
+id gravity
 id group_divider
 id grouping
 id groups
@@ -2259,6 +2335,8 @@ id home
 id homeAsUp
 id homePager
 id honorRequest
+id horizontal_slide
+id horizontal_window
 id hybrid
 id icon
 id icon_group
@@ -2268,6 +2346,7 @@ id ignore
 id ignoreRequest
 id image
 id info
+id inherit
 id invisible
 id italic
 id item_address
@@ -2337,6 +2416,7 @@ id normal
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id nowrap
 id off
 id on
 id onAttachStateChangeListener
@@ -2393,6 +2473,8 @@ id right_icon
 id right_side
 id rounded
 id roundedSquare
+id row
+id row_reverse
 id satellite
 id save_non_transition_alpha
 id save_overlay_view
@@ -2429,6 +2511,9 @@ id snackbar_action
 id snackbar_text
 id snap
 id snapMargins
+id space_around
+id space_between
+id space_evenly
 id spacer
 id spline
 id split_action_bar
@@ -2485,22 +2570,30 @@ id touch_outside
 id transitionToEnd
 id transitionToStart
 id transition_current_scene
+id transition_info
 id transition_layout_save
 id transition_position
 id transition_scene_layoutid_cache
+id transition_text
 id transition_transform
+id transition_type
 id triangle
 id unchecked
 id uniform
 id unlabeled
 id up
 id useLogo
+id vertical_slide
+id vertical_window
+id viewEnd
+id viewStart
 id view_offset_helper
 id visible
 id wide
 id withText
 id wrap
 id wrap_content
+id wrap_reverse
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -2653,6 +2746,9 @@ layout text_view_without_line_height
 layout userlocation_list_item
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap mutify_icon
+mipmap mutify_icon_foreground
+mipmap mutify_icon_round
 plurals mtrl_badge_content_description
 raw gauss_2_pass_horizontal
 raw gauss_2_pass_vertical
@@ -2716,6 +2812,8 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string confirm_add_location
+string dwelling_info
+string entering_info
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
@@ -2785,6 +2883,8 @@ string search_menu_title
 string set_radius
 string status_bar_notification_info_overflow
 string title_activity_maps
+string transition_type
+string transition_type_placeholder
 string unit_meter
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
@@ -3514,6 +3614,8 @@ styleable CustomAttribute attributeName customBoolean customColorDrawableValue c
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
 styleable ExtendedFloatingActionButton elevation extendMotionSpec hideMotionSpec showMotionSpec shrinkMotionSpec
 styleable ExtendedFloatingActionButton_Behavior_Layout behavior_autoHide behavior_autoShrink
+styleable FlexboxLayout alignContent alignItems dividerDrawable dividerDrawableHorizontal dividerDrawableVertical flexDirection flexWrap justifyContent maxLine showDivider showDividerHorizontal showDividerVertical
+styleable FlexboxLayout_Layout layout_alignSelf layout_flexBasisPercent layout_flexGrow layout_flexShrink layout_maxHeight layout_maxWidth layout_minHeight layout_minWidth layout_order layout_wrapBefore
 styleable FloatingActionButton android_gravity backgroundTint backgroundTintMode borderWidth elevation ensureMinTouchTargetSize fabAnimateDuration fabAnimateMenu fabColor fabCustomSize fabElevation fabIcon fabIconColor fabIconPosition fabMenuStyle fabRippleColor fabSize fabSizes fabType hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec useCompatPadding
 styleable FloatingActionButton_Behavior_Layout behavior_autoHide
 styleable FlowLayout itemSpacing lineSpacing
@@ -3587,6 +3689,8 @@ styleable TabLayout tabBackground tabContentStart tabGravity tabIconTint tabIcon
 styleable TextAppearance android_textSize android_typeface android_textStyle android_textColor android_textColorHint android_textColorLink android_shadowColor android_shadowDx android_shadowDy android_shadowRadius android_fontFamily android_textFontWeight fontFamily fontVariationSettings textAllCaps textLocale
 styleable TextInputLayout android_textColorHint android_hint boxBackgroundColor boxBackgroundMode boxCollapsedPaddingTop boxCornerRadiusBottomEnd boxCornerRadiusBottomStart boxCornerRadiusTopEnd boxCornerRadiusTopStart boxStrokeColor boxStrokeWidth boxStrokeWidthFocused counterEnabled counterMaxLength counterOverflowTextAppearance counterOverflowTextColor counterTextAppearance counterTextColor endIconCheckable endIconContentDescription endIconDrawable endIconMode endIconTint endIconTintMode errorEnabled errorIconDrawable errorIconTint errorIconTintMode errorTextAppearance errorTextColor helperText helperTextEnabled helperTextTextAppearance helperTextTextColor hintAnimationEnabled hintEnabled hintTextAppearance hintTextColor passwordToggleContentDescription passwordToggleDrawable passwordToggleEnabled passwordToggleTint passwordToggleTintMode shapeAppearance shapeAppearanceOverlay startIconCheckable startIconContentDescription startIconDrawable startIconTint startIconTintMode
 styleable ThemeEnforcement android_textAppearance enforceMaterialTheme enforceTextAppearance
+styleable ThemedButton android_layout_width android_text toggle_backgroundColor toggle_borderColor toggle_borderWidth toggle_btnCornerRadius toggle_circularCornerRadius toggle_fontFamily toggle_icon toggle_iconColor toggle_iconGravity toggle_iconPadding toggle_iconPaddingBottom toggle_iconPaddingHorizontal toggle_iconPaddingLeft toggle_iconPaddingRight toggle_iconPaddingTop toggle_iconPaddingVertical toggle_padding toggle_paddingBottom toggle_paddingHorizontal toggle_paddingLeft toggle_paddingRight toggle_paddingTop toggle_paddingVertical toggle_selectedBackgroundColor toggle_selectedBorderColor toggle_selectedBorderWidth toggle_selectedIcon toggle_selectedText toggle_selectedTextColor toggle_text toggle_textAlignment toggle_textColor toggle_textGravity toggle_textPadding toggle_textPaddingBottom toggle_textPaddingHorizontal toggle_textPaddingLeft toggle_textPaddingRight toggle_textPaddingTop toggle_textPaddingVertical toggle_textSize
+styleable ThemedToggleButtonGroup toggle_horizontalSpacing toggle_requiredAmount toggle_selectAnimation toggle_selectableAmount
 styleable Toolbar android_gravity android_minHeight buttonGravity collapseContentDescription collapseIcon contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation logo logoDescription maxButtonHeight menu navigationContentDescription navigationIcon popupTheme subtitle subtitleTextAppearance subtitleTextColor title titleMargin titleMarginBottom titleMarginEnd titleMarginStart titleMarginTop titleMargins titleTextAppearance titleTextColor
 styleable Transform android_transformPivotX android_transformPivotY android_translationX android_translationY android_scaleX android_scaleY android_rotation android_rotationX android_rotationY android_translationZ android_elevation
 styleable Transition android_id autoTransition constraintSetEnd constraintSetStart duration layoutDuringTransition motionInterpolator pathMotionArc staggered transitionDisable transitionFlags

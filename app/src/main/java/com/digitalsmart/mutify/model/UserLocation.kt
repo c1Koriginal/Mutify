@@ -32,6 +32,9 @@ class UserLocation
     @ColumnInfo(name = "longitude")
     var longitude: Double
 
+    @ColumnInfo(name = "transition")
+    var transition: Int = Geofence.GEOFENCE_TRANSITION_EXIT
+
     @ColumnInfo(name = "address_line", defaultValue = "no address info")
     var addressLine = "address info not available"
 
@@ -48,9 +51,10 @@ class UserLocation
         Geofence.Builder()
                 .setRequestId(id)
                 .setCircularRegion(latitude, longitude, radius)
-                .setLoiteringDelay(delay)
+                .setLoiteringDelay(5) //delay for entering transition
+                .setLoiteringDelay(delay) //delay for dwelling transition
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT or Geofence.GEOFENCE_TRANSITION_DWELL)
+                .setTransitionTypes(transition or Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build()
 
 
@@ -85,7 +89,9 @@ class UserLocation
     fun updateAddress(a: Address)
     {
         addressLine = a.getAddressLine(0)
-        country = a.countryName
-        postalCode = a.postalCode
+        if (a.countryName != null)
+            country = a.countryName
+        if (a.postalCode != null)
+            postalCode = a.postalCode
     }
 }

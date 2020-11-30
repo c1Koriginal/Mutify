@@ -5,178 +5,168 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         tools:context=".MapsActivity">
 
-<data>
-    <!--binding layout data to MapsActivity-->
-    <variable name="layout_data_binding" type="com.digitalsmart.mutify.MapsActivity"/>
-</data>
+    <data>
+        <!--binding layout data to MapsActivity-->
+        <variable name="layout_data_binding" type="com.digitalsmart.mutify.MapsActivity"/>
+    </data>
 
-<com.sothree.slidinguppanel.SlidingUpPanelLayout
-        android:id="@+id/drawer"
-        android:fitsSystemWindows="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        app:umanoPanelHeight="100dp"
-        app:umanoOverlay="true"
-        app:umanoShadowHeight="0dp"
-        app:umanoFadeColor="#B3000000"
-        app:umanoScrollableView="@id/locationList"
-        app:umanoClipPanel="false">
-
-
-    <!--hosts the Google Maps fragment and search bar-->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+            android:id="@+id/drawer"
+            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            app:umanoPanelHeight="100dp"
+            app:umanoOverlay="true"
+            app:umanoShadowHeight="0dp"
+            app:umanoFadeColor="#B3000000"
+            app:umanoScrollableView="@id/locationList"
+            app:umanoClipPanel="false">
 
 
-
-        <!--blur the entire background when the drawer is open-->
-        <no.danielzeller.blurbehindlib.BlurBehindLayout
-                android:id="@+id/blurLayer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:translationZ="100dp"
-                android:alpha="0"
-                app:blurRadius="50.0"
-                app:updateMode="manually"
-                app:useTextureView="false"
-                app:blurTextureScale="0.1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <!--all child views (search bar, Google Map, map marker) will be blurred-->
+        <!--hosts the Google Maps fragment and search bar-->
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <!--invisible view for the pop-up balloon to reference as an anchor-->
-            <RelativeLayout
-                    android:id="@+id/spriteOutline"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="40dp"
-                    app:layout_constraintTop_toTopOf="parent"
+
+            <!--blur the entire background when the drawer is open-->
+            <no.danielzeller.blurbehindlib.BlurBehindLayout
+                    android:id="@+id/blurLayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:translationZ="100dp"
+                    android:alpha="0"
+                    app:blurRadius="50.0"
+                    app:updateMode="manually"
+                    app:useTextureView="false"
+                    app:blurTextureScale="0.1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <!--map marker sprite-->
-            <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/markerSprite"
-                    android:src="@drawable/marker"
-                    android:paddingBottom="40dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:translationZ="100dp"
-                    android:contentDescription="@string/map_marker"/>
+            <!--all child views (search bar, Google Map, map marker) will be blurred-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <!--shadow below marker sprite-->
-            <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/marker_focus"
-                    android:src="@drawable/shadow"
-                    android:layout_width="20dp"
-                    android:layout_height="25dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:adjustViewBounds="true"
-                    android:translationZ="90dp"
-                    android:contentDescription="@string/map_marker"/>
+                <!--invisible view for the pop-up balloon to reference as an anchor-->
+                <RelativeLayout
+                        android:id="@+id/spriteOutline"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="40dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <!--map marker sprite-->
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/markerSprite"
+                        android:src="@drawable/marker"
+                        android:paddingBottom="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:translationZ="100dp"
+                        android:contentDescription="@string/map_marker"/>
+
+                <!--shadow below marker sprite-->
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/marker_focus"
+                        android:src="@drawable/shadow"
+                        android:layout_width="20dp"
+                        android:layout_height="25dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:adjustViewBounds="true"
+                        android:translationZ="90dp"
+                        android:contentDescription="@string/map_marker"/>
 
 
+                <!--reset camera to current location-->
+                <androidx.cardview.widget.CardView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginVertical="120dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:translationZ="50dp">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#393939">
+                        <androidx.appcompat.widget.AppCompatImageButton
+                                android:background="#00000000"
+                                android:src="@drawable/location_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:onClick="getCurrentLocation"
+                                android:contentDescription="@string/reset_camera"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-            <!--reset camera to current location-->
-            <androidx.cardview.widget.CardView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginVertical="120dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:translationZ="50dp">
-                <androidx.constraintlayout.widget.ConstraintLayout
+
+                <!--Place search-->
+                <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:translationZ="100dp"
+                        app:cardElevation="5dp"
+                        android:minHeight="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="40dp"
+                        card_view:cardCornerRadius="10dp">
+                    <fragment android:id="@+id/autocomplete_fragment"
+                              android:background="#99FFFFFF"
+                              app:layout_constraintStart_toStartOf="parent"
+                              app:layout_constraintEnd_toEndOf="parent"
+                              app:layout_constraintTop_toTopOf="parent"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
+                </androidx.cardview.widget.CardView>
+
+
+                <!--This is the Maps fragment-->
+                <fragment
+                        android:id="@+id/map"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#393939">
-                    <androidx.appcompat.widget.AppCompatImageButton
-                            android:background="#00000000"
-                            android:src="@drawable/location_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:onClick="getCurrentLocation"
-                            android:contentDescription="@string/reset_camera"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        tools:context=".MapsActivity"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
-        <!--Place search-->
-        <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:translationZ="100dp"
-                app:cardElevation="5dp"
-                android:minHeight="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="40dp"
-                card_view:cardCornerRadius="10dp">
-            <fragment android:id="@+id/autocomplete_fragment"
-                      android:background="#99FFFFFF"
-                      app:layout_constraintStart_toStartOf="parent"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintTop_toTopOf="parent"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
-        </androidx.cardview.widget.CardView>
-
-
-
-
-        <!--This is the Maps fragment-->
-        <fragment
-                android:id="@+id/map"
+        <!--Bottom drawer, consists of drawer handle and drawer content-->
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".MapsActivity"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-    <!--Bottom drawer, consists of drawer handle and drawer content-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00FFFFFF"
-            android:gravity="center|top">
+                android:background="#00FFFFFF"
+                android:gravity="center|top">
 
 
             <!--drawer handle-->
@@ -204,7 +194,6 @@
                         android:clickable="true"
                         android:onClick="addButtonClicked">
 
-                    <!--todo: add some style to this TextView-->
                     <TextView android:layout_width="wrap_content"
                               android:text="@string/confirm_add_location"
                               android:layout_gravity="center"
@@ -240,8 +229,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
             <!--drawer content-->
             <!--hosts everything that will be displayed when the drawer is open (expanded)-->
             <com.valkriaine.factor.HomePager
@@ -265,7 +252,7 @@
                             android:id="@+id/add_confirm_button"
                             android:text="@string/add_new_location"
                             android:layout_marginBottom="30dp"
-                            app:fabColor="@color/quantum_lightblue"
+                            app:fabColor="@color/quantum_lightblue300"
                             android:layout_width="100dp"
                             android:layout_height="50dp"
                             android:onClick="confirmButtonClicked"/>
@@ -279,113 +266,149 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
+                        <ScrollView android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
 
-                        <!--todo: edit all the views under the CardView-->
-                        <!--todo: re-organize the views below to display meaningful information-->
-                        <!--todo: add a ScrollView here-->
-                            <ScrollView android:layout_width="match_parent"
-                                        android:layout_height="match_parent">
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/add_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/location_name"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginHorizontal="20dp"
-                                android:textSize="25sp"/>
-
-
-
-                            <!--set up radius-->
-                            <com.ramotion.fluidslider.FluidSlider
-                                    android:id="@+id/radiusSlider"
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    app:size="normal"
-                                    app:start_text="0m"
-                                    app:end_text="500m"
-                                    app:bar_color="@color/cardview_dark_background"
-                                    app:bubble_color="@color/cardview_light_background"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/add_name"
-                                    android:layout_marginHorizontal="20dp"/>
+                                    android:paddingBottom="200dp">
 
-                            <androidx.appcompat.widget.LinearLayoutCompat
-                                    android:id="@+id/radius_setup"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/radiusSlider"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginHorizontal="20dp">
-
-                                <androidx.appcompat.widget.AppCompatTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/radius_hint"
-                                        android:layout_marginEnd="5dp"
-                                        android:textSize="20sp" tools:ignore="TooDeepLayout"/>
                                 <androidx.appcompat.widget.AppCompatEditText
-                                        android:id="@+id/radius"
+                                        android:id="@+id/add_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/set_radius"
-                                        android:inputType="number"
-                                        android:textSize="20sp"/>
+                                        android:hint="@string/location_name"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginHorizontal="20dp"
+                                        android:textSize="25sp"/>
+
+                                <!--set up radius-->
+                                <com.ramotion.fluidslider.FluidSlider
+                                        android:id="@+id/radiusSlider"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:size="normal"
+                                        app:start_text="0m"
+                                        app:end_text="500m"
+                                        app:bar_color="@color/cardview_dark_background"
+                                        app:bubble_color="@color/cardview_light_background"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@id/add_name"
+                                        android:layout_marginHorizontal="20dp"/>
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                        android:id="@+id/radius_setup"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@id/radiusSlider"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginHorizontal="20dp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/radius_hint"
+                                            android:layout_marginEnd="5dp"
+                                            android:textSize="20sp" tools:ignore="TooDeepLayout"/>
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                            android:id="@+id/radius"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@string/set_radius"
+                                            android:inputType="number"
+                                            android:textSize="20sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/unit_meter"
+                                            android:layout_marginStart="5dp"
+                                            android:textSize="20sp"/>
+
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+
                                 <androidx.appcompat.widget.AppCompatTextView
+                                        android:text="@string/transition_type"
+                                        android:id="@+id/transition_text"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="@string/unit_meter"
-                                        android:layout_marginStart="5dp"
-                                        android:textSize="20sp"/>
+                                        android:layout_marginTop="30dp"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@id/radius_setup"/>
 
-                            </androidx.appcompat.widget.LinearLayoutCompat>
+                                <!--set up transition type-->
+                                <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+                                        android:id="@+id/transition_type"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="15dp"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@id/transition_text"
+                                        android:layout_marginHorizontal="20dp"
+                                        app:justifyContent="center">
 
+                                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                                            android:id="@+id/dwelling"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="50dp"
+                                            app:toggle_selectedBackgroundColor="@color/quantum_lightblue300"
+                                            app:toggle_selectedTextColor="@color/quantum_black_100"
+                                            app:toggle_text="Dwelling"/>
 
+                                    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                                            android:id="@+id/entering"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="50dp"
+                                            app:toggle_selectedBackgroundColor="@color/quantum_lightblue300"
+                                            app:toggle_selectedTextColor="@color/quantum_black_100"
+                                            app:toggle_text="Entering"/>
+                                </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
+                                <androidx.appcompat.widget.AppCompatTextView
+                                        android:text="@string/transition_type_placeholder"
+                                        android:id="@+id/transition_info"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="15dp"
+                                        android:paddingHorizontal="20dp"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@id/transition_type"/>
 
+                                <!--set up delay for dwelling-->
+                                <com.ramotion.fluidslider.FluidSlider
+                                        android:id="@+id/delaySlider"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:size="small"
+                                        app:start_text="1 min"
+                                        app:end_text="5 min"
+                                        app:bar_color="@color/cardview_dark_background"
+                                        app:bubble_color="@color/cardview_light_background"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@id/transition_info"
+                                        android:layout_marginHorizontal="20dp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/delay_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginStart="20dp"
+                                        android:textSize="16sp"
+                                        app:layout_constraintTop_toBottomOf="@id/delaySlider"
+                                        app:layout_constraintStart_toStartOf="parent"/>
 
-                            <com.ramotion.fluidslider.FluidSlider
-                                    android:id="@+id/delaySlider"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    app:size="small"
-                                    app:start_text="0s"
-                                    app:end_text="20s"
-                                    app:bar_color="@color/cardview_dark_background"
-                                    app:bubble_color="@color/cardview_light_background"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/radius_setup"
-                                    android:layout_marginHorizontal="20dp"/>
-
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/delay_text"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginStart="20dp"
-                                    android:textSize="20sp"
-                                    android:paddingBottom="200dp"
-                                    app:layout_constraintTop_toBottomOf="@id/delaySlider"
-                                    app:layout_constraintStart_toStartOf="parent"/>
-
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            </ScrollView>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </ScrollView>
                     </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
                 <!--open this page when the user clicks "Menu" button-->
@@ -412,5 +435,5 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.valkriaine.factor.HomePager>
         </androidx.constraintlayout.widget.ConstraintLayout>
-</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 </layout>
