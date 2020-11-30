@@ -89,10 +89,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //data binding object from activity_maps.xml
-    //to access any View/layout from activity_maps.xml, simply call binding.'layout id'
-    //for example, to access the ImageView "@+id/markerSprite", call binding.markerSprite
-    //instead of using findViewById()
-    //data binding library will also automatically convert view ids like "@+id/add_page" to "addPage" for easier usage in java code
     private ActivityMapsBinding binding;
 
     public void launchSettings(View view)
@@ -117,7 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 Address a = resultData.getParcelable(ADDRESS);
                 if (a != null)
-                    markerUserLocation.updateAddress(a);
+                    markerUserLocation.setAddress(a);
                 updateBalloon(null, true);
             }
             else if (resultCode == FAILURE_RESULT)
