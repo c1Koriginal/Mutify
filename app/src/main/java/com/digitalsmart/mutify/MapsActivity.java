@@ -2,6 +2,7 @@ package com.digitalsmart.mutify;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.location.Address;
@@ -25,7 +26,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import com.digitalsmart.mutify.Services.FetchAddressJobIntentService;
@@ -50,6 +50,10 @@ import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
+import com.yanzhenjie.recyclerview.SwipeMenuCreator;
+import com.yanzhenjie.recyclerview.SwipeMenuItem;
+import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 import org.jetbrains.annotations.NotNull;
 
@@ -90,12 +94,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //data binding object from activity_maps.xml
     private ActivityMapsBinding binding;
-
-    public void launchSettings(View view)
-    {
-        //open settings activity
-    }
-
 
     //receive Geocoder fetch address result
     private class AddressResultReceiver extends ResultReceiver
@@ -190,7 +188,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
     //open the bottom drawer and slide to the RecyclerView page
     public void menuButtonClicked(View view)
     {
@@ -245,7 +242,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
+    //launch settings_icon activity
+    public void launchSettings(View view)
+    {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
 
 
 
@@ -258,7 +260,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         map = googleMap;
         configureCamera();
-        userDataManager = new UserDataManager(map, geofencingClient, this, binding.locationList);
+        userDataManager = new UserDataManager(map, geofencingClient, this);
         binding.locationList.setAdapter(userDataManager.getAdapter());
     }
 
@@ -407,7 +409,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //initialize views
         binding.homePager.addView(binding.addPage, 0);
         binding.homePager.addView(binding.listPage, 1);
-        binding.locationList.setLayoutManager(new LinearLayoutManager(this));
 
 
         //set up blur effect and transition animations
@@ -524,6 +525,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             checkCanConfirm();
             return null;
         });
+
+        // create swipe menu
+        SwipeMenuCreator menuCreator = (leftMenu, rightMenu, position) -> {
+            SwipeMenuItem deleteItem = new SwipeMenuItem(MapsActivity.this)
+                    .setBackground(R.drawable.background_red)
+                    .setText("Delete")
+                    .setTextColor(Color.WHITE);
+            rightMenu.addMenuItem(deleteItem);
+        };
+
+
+        OnItemMenuClickListener mItemMenuClickListener = (menuBridge, position) -> {
+            menuBridge.closeMenu();
+            int direction = menuBridge.getDirection();
+            int menuPosition = menuBridge.getPosition();
+            if (direction == SwipeRecyclerView.RIGHT_DIRECTION && menuPosition == 0)
+            {
+                userDataManager.remove(position);
+            }
+        };
+
+        binding.locationList.setSwipeMenuCreator(menuCreator);
+        binding.locationList.setOnItemMenuClickListener(mItemMenuClickListener);
     }
 
     //show or hide the confirm button

@@ -419,7 +419,7 @@
                         android:layout_height="match_parent">
 
 
-                    <!--settings-->
+                    <!--settings_icon-->
                     <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/settings"
                             android:orientation="horizontal"
@@ -430,7 +430,7 @@
                             android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatImageButton
-                                android:src="@drawable/settings"
+                                android:src="@drawable/settings_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="#00FFFFFF"
@@ -453,12 +453,13 @@
                     <!--todo: add a toggle for each recommendation and user-saved locations to enable/disable routine-->
 
                     <!--display the list of user-saved locations (routines)-->
-                    <androidx.recyclerview.widget.RecyclerView
+                    <com.yanzhenjie.recyclerview.SwipeRecyclerView
                             android:id="@+id/locationList"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:clipToPadding="false"
-                            android:layout_marginBottom="10dp"/>
+                            android:layout_marginBottom="10dp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </com.valkriaine.factor.HomePager>

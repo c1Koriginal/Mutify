@@ -22,12 +22,29 @@
     <string name="radius_hint">Radius:</string>
     <string name="transition_type_placeholder">Choose a transition type</string>
     <string name="transition_type">Transition Type:</string>
-    <string name="entering_info">Mutify will trigger as soon as you enter the area. Choose Dwelling to avoid notification spam.
-        \nPlease be noted that even if you choose Entering, there may still be a delay due to the way the Android system handles Geofencing transitions.
+    <string name="entering_info">Mutify will trigger as soon as you enter the area. Choose Dwelling to avoid
+        notification spam.
+        \nPlease be noted that even if you choose Entering, there may still be a delay due to the way the Android system
+        handles Geofencing transitions.
         \nNew options will be added in a future update.
     </string>
     <string name="dwelling_info">Mutify will trigger when the Android system detects that you have stayed in the area
         for a short while. You can set up the delay below:
     </string>
     <string name="settings">settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.preference:preference:1.1.1'
     def work_version = "2.4.0"
     def room_version = "2.2.5"
     def dynamic_animation_version = '1.0.0'
@@ -62,7 +63,7 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:2.4.0'
     implementation 'com.github.Valkriaine:Factor:1.1'
     implementation "com.github.skydoves:balloon:1.2.4"
-    implementation 'nz.co.trademe.covert:covert:2.0.0'
+    implementation 'com.yanzhenjie.recyclerview:x:1.3.2'
     implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
     implementation 'com.robertlevonyan.view:CustomFloatingActionButton:3.0.1'
     implementation 'nl.bryanderidder:themed-toggle-button-group:1.3.1'

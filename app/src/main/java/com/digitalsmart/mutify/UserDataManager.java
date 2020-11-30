@@ -19,7 +19,6 @@ import androidx.room.Room;
 import com.digitalsmart.mutify.broadcast_receivers.GeofenceBroadcastReceiver;
 import com.digitalsmart.mutify.database.UserLocationDatabase;
 import com.digitalsmart.mutify.model.UserLocation;
-import com.digitalsmart.mutify.uihelper.CovertManager;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
@@ -47,18 +46,16 @@ public class UserDataManager
     private final GeofencingClient geofencingClient;
     private PendingIntent geofencePendingIntent;
     private Activity activity;
-    private CovertManager covertManager;
     private final UserLocationDatabase db;
 
 
     //constructor of the view model
     //add anything in the constructor to be initialized when the view model is created
-    public UserDataManager(GoogleMap map, GeofencingClient client, Activity activity, RecyclerView rc)
+    public UserDataManager(GoogleMap map, GeofencingClient client, Activity activity)
     {
         this.map = map;
         this.activity = activity;
         this.geofencingClient = client;
-        covertManager = new CovertManager(rc, this);
         adapter = new LocationsAdapter();
 
         db = Room.databaseBuilder(activity.getApplicationContext(), UserLocationDatabase.class, "user-locations").build();
@@ -112,11 +109,6 @@ public class UserDataManager
                     });
     }
 
-    public boolean contains(int position)
-    {
-        return locations.get(position) == null;
-    }
-
 
     //call this method to add a location to the list
     @SuppressLint("MissingPermission")
@@ -153,10 +145,7 @@ public class UserDataManager
                             activity.runOnUiThread(adapter::notifyDataSetChanged);
                         });
                         insert.setUncaughtExceptionHandler((t, e) ->
-                        {
-                            Toast.makeText(activity, "Location already added.", Toast.LENGTH_SHORT).show();
-                            Log.d("fences", e.getMessage() + fences.size());
-                        });
+                                Toast.makeText(activity, "Location already added.", Toast.LENGTH_SHORT).show());
                         insert.start();
                     })
                     .addOnFailureListener(e -> Toast
@@ -179,9 +168,8 @@ public class UserDataManager
                     locationsToRemove.clear();
                     new Thread(() -> db.userLocationDAO().delete(location)).start();
                     locations.remove(adapterPosition);
-                    Toast.makeText(activity, location.getName() + " removed, remaining " + locations.size(), Toast.LENGTH_SHORT).show();
-                    adapter.notifyDataSetChanged();
-
+                    Toast.makeText(activity, location.getName() + " removed", Toast.LENGTH_SHORT).show();
+                    adapter.notifyItemRemoved(adapterPosition);
                     updateMap();
                 } );
     }
@@ -254,7 +242,6 @@ public class UserDataManager
         {
             UserLocation l = locations.get(position);
             LocationViewHolder locationViewHolder = (LocationViewHolder)holder;
-            covertManager.getCovert().drawCornerFlag(holder, true);
 
 
             if (l != null)

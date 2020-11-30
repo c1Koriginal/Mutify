@@ -77,7 +77,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     private void turnOnDND(String type)
     {
         createNotificationChannel();
-        //save the previous audio settings
+        //save the previous audio settings_icon
         mutifySharedPreferences = context.getSharedPreferences(PACKAGE_NAME + "_AUDIO_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mutifySharedPreferences.edit();
         editor.putInt(PACKAGE_NAME + "_AUDIO_SETTINGS", notificationManager.getCurrentInterruptionFilter());
@@ -140,7 +140,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
     }
 
 
-    //restore the audio settings from before the phone is muted
+    //restore the audio settings_icon from before the phone is muted
     private void restoreAudioSettings()
     {
         createNotificationChannel();
@@ -162,7 +162,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver
                 builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
                         .setSmallIcon(R.drawable.location_icon)
                         .setContentTitle("Mutify")
-                        .setContentText("Audio settings restored.")
+                        .setContentText("Audio settings_icon restored.")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
                 notificationManager.notify(NOTIFICATION_ID, builder.build());

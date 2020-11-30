@@ -51,7 +51,6 @@ class UserLocation
         Geofence.Builder()
                 .setRequestId(id)
                 .setCircularRegion(latitude, longitude, radius)
-                .setLoiteringDelay(5) //delay for entering transition
                 .setLoiteringDelay(delay) //delay for dwelling transition
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
                 .setTransitionTypes(transition or Geofence.GEOFENCE_TRANSITION_EXIT)
