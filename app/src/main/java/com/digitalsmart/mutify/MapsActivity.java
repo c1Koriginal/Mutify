@@ -75,6 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private AddressResultReceiver addressResultReceiver;
     private GeofencingClient geofencingClient;
     private PeriodicWorkRequest periodicWorkRequest;
+    private BlurController blurController;
 
 
     private PermissionManager permissionManager;
@@ -246,6 +247,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void launchSettings(View view)
     {
         Intent intent = new Intent(this, SettingsActivity.class);
+        binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
         startActivity(intent);
     }
 
@@ -348,23 +350,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if ( v instanceof EditText) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY()))
+                {
                     v.clearFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
             }
         }
-        return super.dispatchTouchEvent( event );
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
     public void onBackPressed()
     {
+        blurController.setFromBackPress(true);
         if (binding.drawer.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED)
             binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
         else
             super.onBackPressed();
+
+        blurController.setFromBackPress(false);
     }
 
     //add other methods here
@@ -412,7 +418,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //set up blur effect and transition animations
-        BlurController blurController = new BlurController(
+        blurController = new BlurController(
                 binding.background,
                 binding.blurLayer,
                 binding.addTile,

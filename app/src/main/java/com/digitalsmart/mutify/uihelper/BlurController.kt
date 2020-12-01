@@ -22,17 +22,21 @@ class BlurController(view: View?,
                      private val offset: Int)
     : SlidingUpPanelLayout.PanelSlideListener, ViewPager.OnPageChangeListener
 {
-    init
+    var isFromBackPress : Boolean = false
+
+    override fun onPanelSlide(view: View, v: Float)
     {
-
-    }
-
-    override fun onPanelSlide(view: View, v: Float) {
-        blurLayout.enable()
-        if (v > 0.0f) {
-            blurLayout.updateForMilliSeconds(0.001.toLong())
-            blurLayout.alpha = v * 5
+        if (!isFromBackPress)
+        {
+            blurLayout.enable()
+            if (v > 0.0f)
+            {
+                blurLayout.updateForMilliSeconds(0.001.toLong())
+                blurLayout.alpha = v * 5
+            }
         }
+        else
+            blurLayout.disable()
     }
 
     override fun onPanelStateChanged(view: View, panelState: PanelState, panelState1: PanelState)
@@ -96,6 +100,7 @@ class BlurController(view: View?,
                     .setInterpolator(AccelerateDecelerateInterpolator())
                     .start()
         }
+
     }
 
     init {
