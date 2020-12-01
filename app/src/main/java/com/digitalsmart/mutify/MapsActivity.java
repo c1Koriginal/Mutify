@@ -315,7 +315,8 @@ public class MapsActivity extends FragmentActivity implements
         super.onStart();
         binding.blurLayer.disable();
         binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-        new PermissionManager(this, locationPermissions).checkDNDAccess();
+        if (isDNDAccessRequested())
+            new PermissionManager(this, locationPermissions).checkDNDAccess();
     }
 
     @Override
@@ -324,7 +325,8 @@ public class MapsActivity extends FragmentActivity implements
         super.onResume();
         binding.blurLayer.disable();
         binding.drawer.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-        new PermissionManager(this, locationPermissions).checkDNDAccess();
+        if (isDNDAccessRequested())
+            new PermissionManager(this, locationPermissions).checkDNDAccess();
 
     }
 
@@ -729,6 +731,7 @@ public class MapsActivity extends FragmentActivity implements
         }
     }
 
+    //check if first time launch
     private boolean isFirstTime()
     {
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
@@ -741,6 +744,13 @@ public class MapsActivity extends FragmentActivity implements
             editor.commit();
         }
         return !ranBefore;
+    }
+
+    //check if DND access has been requested
+    private boolean isDNDAccessRequested()
+    {
+        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+        return preferences.getBoolean(PACKAGE_NAME + "_DND_Requested", false);
     }
 
 

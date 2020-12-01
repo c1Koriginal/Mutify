@@ -3,6 +3,7 @@ package com.digitalsmart.mutify.util;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Build;
 import android.provider.Settings;
@@ -16,6 +17,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;
 
 import static com.digitalsmart.mutify.util.Constants.LOCATION_REQUEST_CODE;
+import static com.digitalsmart.mutify.util.Constants.PACKAGE_NAME;
 
 
 //manages all location related operations, including permission requests
@@ -121,10 +123,12 @@ public class PermissionManager
                 dndDialog.show();
                 dndDialog.setCanceledOnTouchOutside(false);
 
-
                 dndDialog.setOnCancelListener(dialog -> {
                     if(!canAccessDND())
                     {
+                        SharedPreferences.Editor editor = mapsActivity.getPreferences(Context.MODE_PRIVATE).edit();
+                        editor.putBoolean(PACKAGE_NAME + "_DND_Requested", true);
+                        editor.commit();
                         mapsActivity.startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS));
                     }
                     else
@@ -134,6 +138,11 @@ public class PermissionManager
                 });
             }
         }
+        else
+        {
+            if (dndDialog != null)
+                dndDialog.cancel();
+        }
 
         return canAccessDND();
     }
@@ -141,6 +150,17 @@ public class PermissionManager
     private boolean canAccessDND()
     {
         NotificationManager n = (NotificationManager) mapsActivity.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (n.isNotificationPolicyAccessGranted())
+        {
+            SharedPreferences.Editor editor = mapsActivity.getPreferences(Context.MODE_PRIVATE).edit();
+            editor.putBoolean(PACKAGE_NAME + "_DND_Requested", false);
+            editor.commit();
+            if (dndDialog != null)
+                dndDialog.cancel();
+
+        }
+
         return n.isNotificationPolicyAccessGranted();
     }
 }
