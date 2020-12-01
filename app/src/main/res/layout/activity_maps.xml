@@ -142,7 +142,8 @@
                               app:layout_constraintTop_toTopOf="parent"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
+                              android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                              tools:ignore="FragmentTagUsage"/>
                 </androidx.cardview.widget.CardView>
 
 
@@ -156,7 +157,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent" tools:ignore="FragmentTagUsage"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -449,6 +450,18 @@
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
+                    <com.google.android.gms.ads.AdView
+                            xmlns:ads="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/adView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            ads:adSize="LARGE_BANNER"
+                            ads:adUnitId="ca-app-pub-2969376446904699/3430756199">
+                    </com.google.android.gms.ads.AdView>
+
+                    <!--ca-app-pub-3940256099942544/6300978111 for testing ad-->
+                    <!--ca-app-pub-2969376446904699/3430756199 for production-->
                     <!--todo: design idea: add an extra section here to display recommended locations-->
                     <!--todo: add a toggle for each recommendation and user-saved locations to enable/disable routine-->
 

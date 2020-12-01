@@ -23,6 +23,7 @@ class BlurController(view: View?,
     : SlidingUpPanelLayout.PanelSlideListener, ViewPager.OnPageChangeListener
 {
     var isFromBackPress : Boolean = false
+    var isAddButtonClicked : Boolean = false
 
     override fun onPanelSlide(view: View, v: Float)
     {
@@ -41,6 +42,18 @@ class BlurController(view: View?,
 
     override fun onPanelStateChanged(view: View, panelState: PanelState, panelState1: PanelState)
     {
+
+        if (!isAddButtonClicked)
+        {
+            homePager.currentItem = 1
+            homePager.setSwipeAllowed(false)
+        }
+        else
+        {
+            homePager.setSwipeAllowed(true)
+        }
+
+
         balloon.dismiss()
         if (panelState1 == PanelState.EXPANDED && panelState == PanelState.DRAGGING)
         {

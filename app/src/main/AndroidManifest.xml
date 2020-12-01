@@ -34,6 +34,10 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/maps_api_key"/>
 
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-2969376446904699~8598504151"/>
+
         <activity
                 android:name=".MapsActivity"
                 android:label="@string/title_activity_maps"

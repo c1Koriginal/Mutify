@@ -34,6 +34,8 @@ import com.digitalsmart.mutify.databinding.ActivityMapsBinding;
 import com.digitalsmart.mutify.model.UserLocation;
 import com.digitalsmart.mutify.uihelper.BlurController;
 import com.digitalsmart.mutify.util.PermissionManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.*;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -131,6 +133,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //initialize data binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_maps);
 
+        MobileAds.initialize(this, initializationStatus -> {});
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
+
         //check permission
         permissionManager = new PermissionManager(this);
         permissionManager.checkPermission();
@@ -207,6 +214,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.addName.setText("Location " + (userDataManager.getAdapter().getItemCount() + 1));
         binding.transitionType.selectButton(R.id.entering);
         permissionManager.checkPermission();
+        if (blurController != null)
+            blurController.setAddButtonClicked(true);
     }
 
     public void confirmButtonClicked(View view)
